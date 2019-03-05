@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            font-family: Arial;
+        }
+        #container{
+            background-color:#888888;
+            width: 1200px;
+            height: 620px;
+            position: relative;
+            overflow: hidden;
+        }
+        #skateMan{
+            width: 400px;
+            height: 300px;
+            position: absolute;
+            left: 0;
+            bottom: 5px;
+        }
+        #container .img{
+            list-style: none;
+            position: absolute;
+        }
+        #container .img li{
+            float: left;
+        }
+        .img{
+            width: 5000px;
+            height: 450px;
+            left:0;
+            top: 0;
+        }
+        #middle{
+            position: relative;
+            background-color: #888888;
+            width: 1200px;
+            height: 100px;
+            margin-top: -50px;
+        }
+        #btnBox{
+            position: absolute;
+            margin-top:-50px;
+            margin-left: 30px;
+        }
+        #btn1{
+            width: 100px;
+            height: 100px;
+        }
+        #btn2{
+            width: 80px;
+            height: 80px;
+        }
+        #btn3{
+            width: 120px;
+            height: 50px;
+        }
+        #btn3:hover{
+            background-color: limegreen;
+        }
+        #btnBox input{
+            background-color: lightgreen;
+            font-size: 20px;
+            border-radius: 30px;
+            border: 3px solid lightslategrey;
+        }
+        #btnBox .btnMove:hover{
+            transform: rotate(30deg);
+            -ms-transform: rotate(30deg);
+            -webkit-transform: rotate(30deg);
+            background-color: limegreen;
+        }
+        #timeBar{
+            position: absolute;
+            bottom: 80px;
+            left: 330px;
+            width: 900px;
+        }
+        .timePoints{
+            position: absolute;
+            top:-20px;
+        }
+        .timePoints li{
+            list-style: none;
+            background-color: steelblue;
+            border: 2px solid white;
+            width: 16px;
+            height: 16px;
+            float: left;
+            margin-right: 200px;
+            border-radius: 50%;
+            display: none;
+        }
+        #timeLine{
+            position: absolute;
+            background-color:white;
+            width: 8px;
+            height: 8px;
+            border-radius: 4px;
+            bottom:6px;
+            display: none;
+        }
+        .descriptionUp{
+            list-style: none;
+            position: absolute;
+            width: 1500px;
+            left: 340px;
+            bottom: 105px;
+
+        }
+        .descriptionUp li{
+            padding: 5px;
+            float: left;
+            margin-right: 180px;
+            width: 250px;
+            height: 100px;
+            border-radius: 40px 40px 40px 0;
+            opacity: 0;
+        }
+
+        .descriptionDown{
+            list-style: none;
+            position: absolute;
+            width: 1500px;
+            left: 560px;
+            bottom: -35px;
+        }
+        .descriptionDown li{
+            padding: 5px;
+            float: left;
+            margin-right: 180px;
+            width: 250px;
+            height: 100px;
+            border-radius: 0 40px 40px 40px;
+            opacity: 0;
+        }
+        .description li h4{
+            text-align: center;
+        }
+        #li1{
+            background-color: gold;
+        }
+        #li2{
+            background-color: darkcyan;
+        }
+        #li3{
+            background-color: darkred;
+        }
+        #li4{
+            background-color: olive;
+        }
+    </style>
+</head>
+<body>
+<div id="container">
+    <ul class="img">
+        <li><img src="img/Guangzhou.jpg" alt=""></li>
+        <li><img src="img/Santiago.jpg" alt=""></li>
+        <li><img src="img/Bogota.jpg" alt=""></li>
+        <li><img src="img/Porto.jpg" alt=""></li>
+    </ul>
+    <img src="img/transparent/skateMan0.jpg" alt="" id="skateMan">
+</div>
+<div id="middle">
+    <ul class="description descriptionUp">
+        <li id="li1"><h4>Origem:</h4><p>Guangzhou, China.</br>Licenciado em Língua e Literatura.
+            Espanhola em Jilin International Studies University.</p></li>
+        <li id="li3"><h4>2014:</h4><p>China United Engineering Corporation.</br>Interpretação CN-ES e ES-CN.</p></li>
+    </ul>
+    <div id="timeBar">
+        <div id="timeLine"></div>
+        <ul class="timePoints">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+    <ul class="description descriptionDown">
+        <li id="li2"><h4>2012:</h4><p>Universidade de Santiago de Compostela.</br>Mobilidade de Estudo.</p></li>
+        <li id="li4"><h4>2015:</h4><p>Universidade do Porto.</br>Mestrado em PLE na FLUP.</p></li>
+    </ul>
+</div>
+<div id="btnBox">
+    <input type="button" value="Começar" id="btn1" class="btnMove">
+    <input type="button" value="Pausar" id="btn2" class="btnMove">
+    <input type="button" value="Recomeçar" id="btn3">
+</div>
+
+<script src="JS/Packed.js"></script>
+<script src="JS/Animation.js"></script>
+<script>
+    getId("btn3").onclick=function(){
+        location.reload();
+    };
+    skateAnimation(0,29,50,"btn1","click","btn2","click");
+    bgAnimation(1,1,"btn1","click","btn2","click");
+    //时间点和时间标签动画
+        var counter;
+        function setPointsTags() {
+            var liPoints=getId("timeBar").getElementsByTagName("li");
+            //时间点1和时间标签1出现
+            liPoints[0].style.display="block";
+            pointTagAnimation("li1",150);
+            var counter=setInterval(function () {
+                //读取时间轴长
+                var lineWidth=getId("timeLine").offsetWidth;
+                switch (lineWidth) {
+                    //时间点2和时间标签2出现
+                    case 235:
+                        liPoints[1].style.display="block";
+                        pointTagAnimation("li2",150);
+                        break;
+                    //时间点3和时间标签3出现
+                    case 465:
+                        liPoints[2].style.display="block";
+                        pointTagAnimation("li3",150);
+                        break;
+                    //时间点4和时间标签4出现
+                    case 695:
+                        liPoints[3].style.display="block";
+                        pointTagAnimation("li4",150);
+                        break;
+                    case 820:
+                        clearInterval(counter);
+                        break;
+                }
+            },10)
+        }
+        //停止读取时间轴长
+        function stopCounting (){
+            clearInterval(counter);
+        }
+    //绑定时时间点动画起止事件
+    getId("btn1").addEventListener("click",setPointsTags,false);
+    getId("btn2").addEventListener("click",stopCounting,false);
+
+    //时间轴动画
+    var timer;
+    function timeLine() {
+        var lineWidth = getId("timeLine").offsetWidth;
+        getId("timeLine").style.display="block";
+        timer = setInterval(function () {
+            lineWidth += 1;
+            if (lineWidth <= 820) {
+                getId("timeLine").style.width = lineWidth + "px";
+            } else {
+                clearInterval(timer);
+            }
+            // console.log(lineWidth);
+        }, 20);
+    }
+    //停止时间轴动画
+    function stopLine(){
+        clearInterval(timer);
+    }
+    //绑定时间轴动画起止事件
+    getId("btn1").addEventListener("click",timeLine,false);
+    getId("btn2").addEventListener("click",stopLine,false);
+
+</script>
+</body>
+</html>
