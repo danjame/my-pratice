@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>选项卡</title>
+	<style>
+	*{
+		margin:0;
+		padding: 0;
+		list-style: none;
+	}
+
+	#container{
+		width: 327px; 
+		position: relative;
+		margin: 0 auto;
+		top: 50px;
+	}
+
+	#countryNames{
+		line-height: 38px;
+		height: 38px;
+		background-color: #fdffdc;
+		text-align: center;
+	}
+
+	li{
+		margin-left: 7.3px;
+		margin-right: 7.3px;
+		float: left;
+		cursor: pointer;
+	}
+
+	#contents div{
+		display: none;
+	}
+
+	.selected{
+		background-color: #f8eeb4;
+	}
+
+	.actived{
+		padding: 5px;
+		background-color: #f8eeb4;
+		width: 317px;
+		height: 350px;
+		display: block !important;
+	}
+
+	h1{
+		text-align: center;
+	}
+
+	h2{
+		text-align: center;
+	}
+
+</style>
+</head>
+<body>
+	<div id="container">
+		<div>
+			<h1>Sur Moi</h1>
+		</div>
+		<ul id="countryNames">
+			<li class="selected">Chine</li>
+			<li>Espagne</li>
+			<li>Columbia</li>
+			<li>Portugal</li>
+			<li>France</li>
+		</ul>
+		<div id="contents">
+			<div class="actived" ">
+				<h2>Venu de Chine</h2>
+				<p>这是内容</p>
+			</div>
+			<div>
+				<h2>Espagne 2012-2013</h2>
+				<p>Éste es el texto</p>
+			</div>
+			<div>
+				<h2>Columbia 2014-2015</h2>
+				<p>Éste es el texto</p>
+			</div>
+			<div>
+				<h2>Portugal 2015 au présent</h2>
+				<p>Este é o texto</p>
+			</div>
+			<div>
+				<h2>France Futur</h2>
+				<p>C´est le texte ici</p>
+			</div>
+		</div>	
+	</div>
+
+	<script>
+		var counName=document.getElementsByTagName("li");
+		var counContent=document.getElementById("contents").getElementsByTagName("div");
+		function selection(){
+			for(var i=0;i<counName.length;i++){
+				counName[i].index=i;
+				counName[i].onclick=function () {
+					for(var j=0;j<counName.length;j++){
+						counName[j].className=" ";
+						counContent[j].className=" ";
+					};
+					this.className="selected";
+					counContent[this.index].className="actived";
+				}
+			}
+		};
+		selection();
+
+	</script>
+</body>
+
+</html>
