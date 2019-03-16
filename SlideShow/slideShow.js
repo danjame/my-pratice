@@ -22,7 +22,7 @@ function slideTimer(){//设置定时器
 		};
 		current-=500;//1.直接进行计算,移动一张图距离;2.若焦点于第四张图片,仍然进行计算,则回到零位移点;
 		switchImgDot();//更变图片和圆点样式
-	},1000)
+	},1000);
 };
 
 preSlide.onclick=function(){//前一张图事件绑定
