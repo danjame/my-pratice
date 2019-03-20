@@ -17,8 +17,6 @@
 #banner{
 	width: 800px; 
 	height: 304px;
-	margin-left: auto;
-	margin-right: auto;
 	position: relative;
 	overflow: hidden;
 }

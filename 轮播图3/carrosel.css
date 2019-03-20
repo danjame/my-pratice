@@ -17,6 +17,8 @@
 #banner {
     overflow: hidden;
     position: relative;
+    margin-left: auto;
+    margin-right: auto;
     width: 800px;
     height: 304px;
 }
@@ -25,7 +27,7 @@
     position: absolute;
     margin-left: -350px;
     height: 304px;
-
+    /*left: -350px;*/
 }
 
 #slideBar>li {
@@ -77,4 +79,3 @@
 #nextSlide {
     right: 0;
 }
-
