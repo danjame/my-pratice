@@ -44,16 +44,11 @@ function playAnimation() { //自动轮播
 
 playAnimation(); //开启轮播
 
-slideBar.addEventListener("transitionend", function() { //监听动画结束事件, 伪图一变真图一
+slideBar.addEventListener("transitionend", () => { //监听动画结束事件, 伪图一换成真图一
     if (imgIndex >= barChildren.length - 3) {
         imgIndex = 0;
         animation();
     }
-    // else if(imgIndex==0){ //可以使用prevButton但是有bug
-    //     imgIndex=4;
-    //     slideBar.style.transform = `translate3d(${imgIndex*-imgWidth}px,0px,0px)`;
-    //     slideBar.style.transition = `none`;
-    // } 
 });
 
 container.onmouseover = () => { //鼠标进入事件
@@ -64,9 +59,6 @@ container.onmouseover = () => { //鼠标进入事件
 };
 
 container.onmouseout = () => { //鼠标离开事件
-    // if(imgIndex==4){ //可以使用prevButton但是有bug
-    //     imgIndex=-1;
-    // }; 
     playAnimation();
     for (let i = 0; i < buttons.length; i++) {
         buttons[i].style.visibility = "hidden";
@@ -77,6 +69,7 @@ nextButton.onclick = () => { //下一张
     imgIndex++;
     animation(700);
 };
+
 
 prevButton.onclick = () => { //上一张
     imgIndex--;

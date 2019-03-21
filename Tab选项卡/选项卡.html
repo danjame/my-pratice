@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>选项卡</title>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    #container {
+        position: relative;
+        top: 50px;
+        margin: 0 auto;
+        width: 352px;
+    }
+
+    #names {
+        height: 38px;
+        line-height: 38px;
+        border-style: solid;
+        border-width: 1px 1px 0 1px;
+        background-color: #fdffdc;
+        text-align: center;
+    }
+
+    #names>li {
+        float: left;
+        width: 70px;
+        cursor: pointer;
+    }
+
+    .selected {
+        background-color: #f8eeb4;
+    }
+
+    #barContainer {
+        border-style: solid;
+        border-width: 0 1px;
+        background-color: #fdffdc;
+    }
+
+    #barContainer>span {
+        display: block;
+        height: 2px;
+        background-color: #df4d19;
+    }
+
+    #contents>div {
+        display: none;
+    }
+
+    #contents .actived {
+        padding: 5px;
+        border-width: 0 1px 1px 1px;
+        border-style: solid;
+        background-color: #f8eeb4;
+        height: 350px;
+        display: block;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    h2 {
+        text-align: center;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <ul id="names">
+            <li class="selected">Chine</li>
+            <li>Espagne</li>
+            <li>Columbia</li>
+            <li>Portugal</li>
+            <li>France</li>
+        </ul>
+        <div id="barContainer">
+            <span></span>
+        </div>
+        <div id="contents">
+            <div class="actived">
+                <h2>Venu de Chine</h2>
+                <p>这是内容</p>
+            </div>
+            <div>
+                <h2>Espagne 2012-2013</h2>
+                <p>Éste es el texto</p>
+            </div>
+            <div>
+                <h2>Columbia 2014-2015</h2>
+                <p>Éste es el texto</p>
+            </div>
+            <div>
+                <h2>Portugal 2015 au présent</h2>
+                <p>Este é o texto</p>
+            </div>
+            <div>
+                <h2>France Futur</h2>
+                <p>C´est le texte ici</p>
+            </div>
+        </div>
+    </div>
+    <script>
+    const names = document.querySelectorAll("#names>li");
+    const contents = document.querySelectorAll("#contents>div");
+    const bar = document.querySelector("#barContainer>span");
+
+    bar.style.width = `${names[0].offsetWidth}px`;
+    bar.style.marginLeft = `${names[0].offsetLeft-1}px`;
+
+    for (let i = 0; i < names.length; i++) {
+        names[i].onmouseover = () => {
+            for (var j = 0; j < contents.length; j++) {
+                names[j].className = "";
+                contents[j].className = "";
+            }
+            names[i].className = "selected";
+            contents[i].className = "actived";
+            bar.style.transform = `translateX(${names[i].offsetLeft-1}px)`;
+            bar.style.transition = `500ms`;
+        }
+    };
+    </script>
+</body>
+
+</html>
