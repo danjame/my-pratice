@@ -1,0 +1,58 @@
+*{
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+#top{
+    
+	margin-left: auto;
+	margin-right: auto;
+	height: 30px;
+	width: 98%;
+	background-color: #dadddf;
+	
+}
+
+.topLeft{
+	float:left;
+	height: 100%;
+}
+.topLeft, .topRight{
+	/*display: inline-block;*/
+	/*display: flex;*/
+
+	/*align-items: center;*/
+}
+.topLeft>ul{
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.topLeft>ul>li{
+	display: inline;
+	background-color: white;
+	border: solid 1px grey;
+}
+
+.topLeft>input{
+	vertical-align: middle;
+	width:70px;
+	height: 20px;
+}
+.firstInput{
+/*	margin-left: 25px;
+	margin-right: 5px;*/
+}
+
+.secondInput{
+/*	margin-left: 5px;*/
+}
+
+.topRight{
+	float: right;
+}
+
+.topRight>span{
+	display: inline-block;
+}

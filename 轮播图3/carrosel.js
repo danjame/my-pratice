@@ -19,7 +19,7 @@ function animation() { //轮播动画
         () => {
             let targetPosition = (imgIndex * -imgWidth);
             let currentPosition = slideBar.offsetLeft - iniPosition;
-            let step = (targetPosition - currentPosition) / 150;
+            let step = (targetPosition - currentPosition) / 50;
             if (!step) {
                 clearInterval(aniTimer);
             }
@@ -61,7 +61,7 @@ container.onmouseover = () => { //鼠标进入事件
     }
 };
 
-container.onmouseout = () => {  //鼠标离开事件
+container.onmouseout = () => { //鼠标离开事件
     for (var i = 0; i < buttons.length; i++) {
         buttons[i].style.visibility = "hidden";
     };

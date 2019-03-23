@@ -8,8 +8,7 @@
 #container {
     position: relative;
     top: 50px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto;
     width: 800px;
     height: 304px;
 }
@@ -39,8 +38,7 @@
 
 #dots {
     position: absolute;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto;
     margin-top: -28px;
     left: 338px;
 }
@@ -77,4 +75,3 @@
 #nextSlide {
     right: 0;
 }
-

@@ -1,0 +1,13 @@
+#content{
+	margin: 0 auto;
+	width: 1000px;
+}
+
+#content>span{
+	margin:0 auto;
+	float: left;
+	display: block;
+	width: 200px;
+	height:300px;
+	background-color: grey;
+}
