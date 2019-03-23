@@ -12,13 +12,25 @@ const dotsChildren = document.querySelectorAll("#dots>span");
 let imgIndex = 0;
 let timer;
 
-function animation(duration) { //轮播动画
-    let offset = imgIndex * -imgWidth;
-    slideBar.style.transform = `translate3d(${offset}px,0px,0px)`;
+function transform(node, offsetX, offsetY, offsetZ) { //封装变形属性
+    node.style.transform = `translate3d(${offsetX}px, ${offsetY}px, ${offsetZ}px)`
+}
+
+function transition(node, time) { //封装过度属性
+    node.style.transition = `${time}ms`
+}
+
+function bothTrans(){
+    transform(slideBar, imgIndex * -imgWidth, 0, 0);
+    transition(slideBar, 700);
+}
+
+function animation() { //轮播动画
+    transform(slideBar, imgIndex * -imgWidth, 0, 0);
     if (!imgIndex) {
-        slideBar.style.transition = `none`;
+        transition(slideBar, 0);
     } else {
-        slideBar.style.transition = `${duration}ms`;
+        transition(slideBar, 700);
     }
     dotsAni();
 };
@@ -36,10 +48,11 @@ function dotsAni() { //圆点动画
 };
 
 function playAnimation() { //自动轮播
-    timer = setInterval(() => {
+    timer = setTimeout(() => {
         imgIndex++;
-        animation(700);
-    }, 1500);
+        animation();
+        playAnimation();
+    }, 1500)
 };
 
 playAnimation(); //开启轮播
@@ -52,7 +65,7 @@ slideBar.addEventListener("transitionend", () => { //监听动画结束事件, �
 });
 
 container.onmouseover = () => { //鼠标进入事件
-    clearInterval(timer);
+    clearTimeout(timer);
     for (let i = 0; i < buttons.length; i++) {
         buttons[i].style.visibility = "visible";
     }
@@ -67,24 +80,30 @@ container.onmouseout = () => { //鼠标离开事件
 
 nextButton.onclick = () => { //下一张
     imgIndex++;
-    animation(700);
+    animation();
 };
 
+// function cancelEvent() {
+//     if (imgIndex < 1) {
+//         imgIndex = 4;
+//         transform(slideBar, imgIndex * -imgWidth, 0, 0);
+//         transition(slideBar, 0);
+//     }
+    // slideBar.removeEventListener("transitionend",cancelEvent())
+// };
 
 prevButton.onclick = () => { //上一张
     imgIndex--;
-    slideBar.style.transform = `translate3d(${imgIndex*-imgWidth}px,0px,0px)`;
-    slideBar.style.transition = `700ms`;
+    bothTrans();
     dotsAni();
+    // slideBar.addEventListener("transitionend", cancelEvent());
 };
 
 (function clickDots() { //点击圆点事件
     for (let i = 0; i < dotsChildren.length; i++) {
         dotsChildren[i].onclick = () => {
             imgIndex = i;
-            let offset = imgIndex * -imgWidth;
-            slideBar.style.transform = `translate3d(${offset}px,0px,0px)`;
-            slideBar.style.transition = `700ms`;
+            bothTrans();
             dotsAni();
         }
     }

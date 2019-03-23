@@ -2,7 +2,6 @@
     margin: 0;
     padding: 0;
     list-style: none;
-    border: 0;
 }
 
 #container {
@@ -24,7 +23,6 @@
     position: absolute;
     margin-left: -350px;
     height: 304px;
-
 }
 
 #slideBar>li {
@@ -48,9 +46,9 @@
     margin-right: 10px;
     box-shadow: 0 0 0 2px #FF8B00 inset;
     border-radius: 50%;
-    background-color: #FFC60B;
     width: 18px;
     height: 18px;
+    background-color: #FFC60B;
     cursor: pointer;
 }
 
@@ -62,10 +60,10 @@
     position: absolute;
     margin-top: -177px;
     border-radius: 30px 30px 30px 30px;
-    opacity: 0.85;
-    visibility: hidden;
     width: 100px;
     height: 50px;
+    opacity: 0.85;
+    visibility: hidden;
 }
 
 #prevSlide {
