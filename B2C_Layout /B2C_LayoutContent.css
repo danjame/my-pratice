@@ -7,7 +7,7 @@
 .itemBox {
     float: left;
     width: 200px;
-    padding: 20px;
+    margin: 20px 30px 50px 30px;
 }
 
 .imgBox {

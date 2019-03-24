@@ -5,7 +5,8 @@
 }
 
 #container {
-    min-width: 960px;
+    width: 1040px;
+    margin: 0 auto;
 }
 
 #top {
@@ -38,7 +39,6 @@
 
 .topLeft>input {
     width: 70px;
-    */
 }
 
 .firstInput {

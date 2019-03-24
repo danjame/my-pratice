@@ -130,9 +130,8 @@
         //     }
         // }
 
-        ul.onmouseover=(event)=>{ //方法二, 利用事件委托
-            var event=event||window.event;
-            var target=event.target||event.srcElement;
+        ul.onmouseover=()=>{ //方法二, 利用事件委托
+            var target=event.target;
             if(target.nodeName.toLowerCase()=="li"){
                 for(var i=0;i<names.length;i++){
                     var index;
