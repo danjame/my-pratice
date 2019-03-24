@@ -1,13 +1,73 @@
-#content{
-	margin: 0 auto;
-	width: 1000px;
+#content {
+    margin: 0 auto;
+    margin-top: 35px;
+    overflow: hidden;
 }
 
-#content>span{
-	margin:0 auto;
-	float: left;
-	display: block;
-	width: 200px;
-	height:300px;
-	background-color: grey;
+.itemBox {
+    float: left;
+    width: 200px;
+    padding: 20px;
+}
+
+.imgBox {
+    text-align: center;
+}
+
+.itemText {
+    line-height: 26px;
+    font-size: 12px;
+}
+
+.currency {
+    font-size: 18px;
+    color: #df4d19;
+}
+
+.price {
+    font-size: 30px;
+    color: #df4d19;
+}
+
+.itemName {
+    color: #df4d19;
+}
+
+.itemDomain {
+    color: #fabc60;
+}
+
+.commentNum {
+    color: #38598b;
+}
+
+.comment,
+.publisher {
+    color: grey;
+}
+
+.selfSupport {
+    border: solid 1px red;
+    background-color: red;
+    border-radius: 20%;
+}
+
+.secureBuy {
+    border: solid 1px #82acff;
+    border-radius: 20%;
+    color: #82acff;
+}
+
+.itemButtons {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 2px 9px;
+    border: solid 1px #dadddf;
+    color: grey;
+    font-size: 12px;
+}
+
+.button1,
+.button2 {
+    margin-left: -1px;
 }
