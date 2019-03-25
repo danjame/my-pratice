@@ -5,35 +5,39 @@
     background-color: #eeeeee;
 }
 
-.midLeft {
+#middle .midLeft {
     float: left;
     margin-left: 6px;
     margin-top: 5px;
     font-size: 12px;
 }
 
-.midRight {
+.midLeft .deliverTo {
+    color: grey;
+}
+
+.midLeft select {
+    margin-right: 10px;
+}
+
+.midLeft .checkBox {
+    font-weight: bold;
+}
+
+#middle .midRight {
     float: right;
     margin-right: 6px;
     margin-top: 5px;
 }
 
-.deliverTo {
-    color: grey;
-}
-
-.search {
+.midRight .search {
     height: 19px;
     border: solid 1px grey;
 }
 
-.confirm {
+.midRight .confirm {
     margin-left: -1px;
-    padding: 2px 10px;
     border: solid 1px grey;
+    padding: 2px 10px;
     font-size: 13px;
-}
-
-.checkBox {
-    font-weight: bold;
 }

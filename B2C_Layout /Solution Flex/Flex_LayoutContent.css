@@ -1,0 +1,71 @@
+#content {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.itemBox {
+    width: 200px;
+    margin: 50px 30px 50px 30px;
+}
+
+.itemBox .imgBox {
+    text-align: center;
+}
+
+.itemBox .itemText {
+    line-height: 26px;
+    font-size: 12px;
+}
+
+.itemText .currency {
+    font-size: 18px;
+    color: #df4d19;
+}
+
+.itemText .price {
+    font-size: 30px;
+    color: #df4d19;
+}
+
+.itemText .itemName {
+    color: #df4d19;
+}
+
+.itemText .itemDomain {
+    color: #fabc60;
+}
+
+.itemText .commentNum {
+    color: #38598b;
+}
+
+.itemText .comment,
+.itemText .publisher {
+    color: grey;
+}
+
+.itemText .selfSupport {
+    border: solid 1px red;
+    background-color: red;
+    border-radius: 20%;
+}
+
+.itemText .secureBuy {
+    border: solid 1px #82acff;
+    border-radius: 20%;
+    color: #82acff;
+}
+
+.itemText .itemButtons {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 2px 9px;
+    border: solid 1px #dadddf;
+    color: grey;
+    font-size: 12px;
+}
+
+.itemText .button1,
+.itemText .button2 {
+    margin-left: -1px;
+}

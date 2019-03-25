@@ -1,73 +1,73 @@
 #content {
     margin: 0 auto;
-    margin-top: 35px;
+    margin-top: 30px;
     overflow: hidden;
 }
 
-.itemBox {
+#content .itemBox {
     float: left;
     width: 200px;
     margin: 20px 30px 50px 30px;
 }
 
-.imgBox {
+.itemBox .imgBox {
     text-align: center;
 }
 
-.itemText {
+.itemBox .itemText {
     line-height: 26px;
     font-size: 12px;
 }
 
-.currency {
+.itemText .currency {
     font-size: 18px;
     color: #df4d19;
 }
 
-.price {
+.itemText .price {
     font-size: 30px;
     color: #df4d19;
 }
 
-.itemName {
+.itemText .itemName {
     color: #df4d19;
 }
 
-.itemDomain {
+.itemText .itemDomain {
     color: #fabc60;
 }
 
-.commentNum {
+.itemText .commentNum {
     color: #38598b;
 }
 
-.comment,
-.publisher {
+.itemText .comment,
+.itemText .publisher {
     color: grey;
 }
 
-.selfSupport {
+.itemText .selfSupport {
     border: solid 1px red;
-    background-color: red;
     border-radius: 20%;
+    background-color: red;
 }
 
-.secureBuy {
+.itemText .secureBuy {
     border: solid 1px #82acff;
     border-radius: 20%;
     color: #82acff;
 }
 
-.itemButtons {
+.itemText .itemButtons {
     display: inline-block;
     margin-top: 8px;
-    padding: 2px 9px;
     border: solid 1px #dadddf;
+    padding: 2px 9px;
     color: grey;
     font-size: 12px;
 }
 
-.button1,
-.button2 {
+.itemText .button1,
+.itemText .button2 {
     margin-left: -1px;
 }

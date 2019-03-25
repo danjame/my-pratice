@@ -1,0 +1,38 @@
+#middle {
+    height: 30px;
+    background-color: #eeeeee;
+}
+
+#middle .midLeft {
+    font-size: 12px;
+}
+
+.midLeft .deliverTo {
+    margin-left: 6px;
+    color: grey;
+}
+
+.midLeft>select {
+    margin-right: 10px;
+}
+
+.midLeft .checkBox {
+    font-weight: bold;
+}
+
+#middle .midRight {
+    text-align: right;
+}
+
+.midRight .search {
+    height: 19px;
+    border: solid 1px grey;
+}
+
+.midRight .confirm {
+    margin-right: 6px;
+    margin-left: -1px;
+    border: solid 1px grey;
+    padding: 2px 10px;
+    font-size: 13px;
+}

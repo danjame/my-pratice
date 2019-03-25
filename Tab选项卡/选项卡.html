@@ -54,12 +54,11 @@
     }
 
     #contents .actived {
-        padding: 5px;
+        display: block;
+        height: 350px;
         border-width: 0 1px 1px 1px;
         border-style: solid;
-        background-color: #f8eeb4;
-        height: 350px;
-        display: block;
+        padding: 5px;
     }
 
     h1 {
@@ -110,7 +109,7 @@
     <script>
     (function tab() {
         const names = document.querySelectorAll("#names>li");
-        const ul=document.getElementById('names')
+        const ul = document.getElementById('names')
         const contents = document.querySelectorAll("#contents>div");
         const bar = document.querySelector("#barContainer>span");
 
@@ -130,15 +129,15 @@
         //     }
         // }
 
-        ul.onmouseover=()=>{ //方法二, 利用事件委托
-            var target=event.target;
-            if(target.nodeName.toLowerCase()=="li"){
-                for(var i=0;i<names.length;i++){
+        ul.onmouseover = () => { //方法二, 利用事件委托
+            var target = event.target;
+            if (target.nodeName.toLowerCase() == "li") {
+                for (var i = 0; i < names.length; i++) {
                     var index;
                     names[i].className = "";
                     contents[i].className = "";
-                    if(names[i]===target){
-                        index=i;
+                    if (names[i] === target) {
+                        index = i;
                     }
                 }
                 target.className = "selected";

@@ -1,0 +1,85 @@
+* {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+table {
+    width: 1040px;
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+
+#top {
+    height: 30px;
+    background-color: #dadddf;
+}
+
+#top .topLeft {
+    font-size: 12px;
+}
+
+.topLeft>ul {
+    display: inline-block;
+    margin-left: 10px;
+}
+
+.topLeft>ul>li {
+    margin-left: -4px;
+    padding: 3px 9px;
+    display: inline;
+    background-color: white;
+    border: solid 1px grey;
+    font-weight: bold;
+}
+
+.topLeft .firstInput {
+    margin-left: 10px;
+    width: 60px;
+    height: 18px;
+}
+
+.topLeft .secondInput {
+    width: 60px;
+    height: 18px;
+}
+
+#top .topRight {
+    text-align: right;
+    font-size: 12px;
+}
+
+.topRight>span {
+    display: inline-block;
+}
+
+.topRight .sum {
+    color: grey;
+}
+
+.topRight .page {
+    color: #df4d19;
+}
+
+.topRight .pages {
+    font-weight: bold;
+}
+
+.topRight .arrows {
+    width: 50px;
+    height: 22px;
+    border: solid 1px grey;
+    background-color: white;
+    line-height: 22px;
+    text-align: center;
+    color: grey;
+}
+
+.topRight .arrow1 {
+    margin-left: 10px;
+    margin-right: -4px;
+}
+
+.topRight .arrow2 {
+    margin-right: 6px;
+}

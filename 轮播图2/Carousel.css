@@ -13,10 +13,10 @@
 }
 
 #banner {
-    overflow: hidden;
     position: relative;
     width: 800px;
     height: 304px;
+    overflow: hidden;
 }
 
 #slideBar {

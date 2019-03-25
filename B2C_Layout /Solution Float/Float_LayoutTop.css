@@ -1,0 +1,86 @@
+* {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+#container {
+    width: 1040px;
+    margin: 0 auto;
+}
+
+#top {
+    margin: 0 auto;
+    height: 30px;
+    width: 98%;
+    background-color: #dadddf;
+    overflow: hidden;
+}
+
+#top .topLeft {
+    float: left;
+    margin-top: 3px;
+    margin-left: 10px;
+    font-size: 12px;
+}
+
+.topLeft>ul {
+    display: inline-block;
+}
+
+.topLeft>ul>li {
+    padding: 3px 9px;
+    margin-left: -4px;
+    display: inline;
+    background-color: white;
+    border: solid 1px grey;
+    font-weight: bold;
+}
+
+.topLeft .firstInput,
+.topLeft .secondInput {
+    width: 60px;
+    height: 18px;
+}
+
+.topLeft .firstInput {
+    margin-left: 10px;
+}
+
+#top .topRight {
+    float: right;
+    margin-right: 6px;
+    font-size: 12px;
+}
+
+.topRight>span {
+    margin-top: 2px;
+    display: inline-block;
+}
+
+.topRight .sum {
+    color: grey;
+}
+
+.topRight .page {
+    color: #df4d19;
+}
+
+.topRight .pages {
+    font-weight: bold;
+}
+
+.topRight .arrows {
+    width: 50px;
+    height: 22px;
+    border: solid 1px grey;
+    background-color: white;
+    line-height: 22px;
+    text-align: center;
+    color: grey;
+}
+
+.topRight .arrow1 {
+    margin-left: 10px;
+    margin-right: -4px;
+}
