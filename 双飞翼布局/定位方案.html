@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Position双飞翼</title>
+    <style>
+    #container {
+        position: relative;
+    }
+
+    .left,
+    .right {
+        position: absolute;
+        width: 200px;
+        height: 300px;
+    }
+
+    .left {
+        top: 0;
+        left: 0;
+        background-color: #dfe38e;
+    }
+
+    .right {
+        top: 0;
+        right: 0;
+        background-color: #efca8c;
+    }
+
+    .middle {
+        margin: 0 200px;
+        background-color: #f17e7e;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <div class="left">Le développeur Front-End</div>
+        <div class="middle">Le "développeur Front-end" c'est le nouveau qualificatif qui est apposé aux anciens intégrateurs HTML, les réalisateurs des pages web. Ce sont eux qui depuis la naissance d'Internet créent les pages web consultées par les internautes d'après les chartes graphiques créés par les infographistes.</div>
+        <div class="right">Le développeur Back-End</div>
+    </div>
+</body>
+
+</html>
