@@ -1,0 +1,180 @@
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-family: Arial;
+}
+
+#container {
+    width: 800px;
+    margin: 0 auto;
+}
+
+#bgBox {
+    width: 800px;
+    height: 350px;
+    position: relative;
+    overflow: hidden;
+}
+
+#bgBox #imgGroup {
+    width: 3200px;
+    height: 350px;
+    position: absolute;
+}
+
+#imgGroup>li {
+    float: left;
+}
+
+#imgGroup img {
+    width: 800px;
+    height: 350px;
+}
+
+#main {
+    height: 160px;
+    position: relative;
+    background-color: #fabc60;
+}
+
+#main #mainLeft {
+    width: 300px;
+    height: 250px;
+    position: absolute;
+    margin-left: -50px;
+    margin-top: -80px;
+}
+
+#mainLeft #skateMan {
+    width: 300px;
+    height: 250px;
+}
+
+#mainRight {
+    position: absolute;
+    margin-left: 230px;
+}
+
+#mainRight .descriptionUp {
+    height: 80px;
+    margin-top: -15px;
+    margin-left: 10px;
+
+}
+
+.descriptionUp>li {
+    width: 180px;
+    height: 70px;
+    float: left;
+    margin-right: 20px;
+    border-radius: 40px 40px 40px 0;
+    padding: 5px;
+    font-size: 12px;
+    opacity: 0;
+}
+
+
+#mainRight #timeBar {
+    height: 10px;
+    margin-top: 10px;
+}
+
+#timeBar #timeLine {
+    width: 7px;
+    height: 7px;
+    border-radius: 20px;
+    background-color: white;
+    display: none;
+}
+
+#timeBar .timeDots {
+    margin-top: -11px;
+}
+
+.timeDots>li {
+    width: 13px;
+    height: 13px;
+    float: left;
+    margin-right: 90px;
+    border: 1px solid white;
+    border-radius: 50%;
+    background-color: steelblue;
+    display: none;
+}
+
+.descriptionDown {
+    height: 80px;
+    margin-top: 10px;
+    margin-left: 110px;
+}
+
+.descriptionDown>li {
+    width: 180px;
+    height: 70px;
+    float: left;
+    margin-right: 20px;
+    border-radius: 0 40px 40px 40px;
+    padding: 5px;
+    font-size: 12px;
+    opacity: 0;
+}
+
+.description .year {
+    text-align: center;
+}
+
+#text1 {
+    background-color: grey;
+}
+
+#text2 {
+    background-color: darkcyan;
+}
+
+#text3 {
+    background-color: darkred;
+}
+
+#text4 {
+    background-color: olive;
+}
+
+#container #btnBox {
+    position: absolute;
+    margin-top: -40px;
+}
+
+#btnBox>input {
+    border-radius: 30px;
+    border: 1px solid lightslategrey;
+    background-color: lightgreen;
+    font-size: 13px;
+}
+
+#btnBox #btn1 {
+    width: 80px;
+    height: 80px;
+}
+
+#btnBox #btn2 {
+    width: 60px;
+    height: 60px;
+}
+
+#btnBox #btn3 {
+    width: 80px;
+    height: 30px;
+}
+
+#btnBox #btn3:hover {
+    background-color: limegreen;
+}
+
+#btnBox .btnMove:hover {
+    transform: rotate(30deg);
+    -ms-transform: rotate(30deg);
+    -webkit-transform: rotate(30deg);
+    background-color: limegreen;
+    opacity: 1;
+}

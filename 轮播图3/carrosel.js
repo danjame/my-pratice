@@ -37,11 +37,11 @@ function changeImg(speed, time) { //轮播动画
 
 function changeDots() { //圆点变化
     for (let i = 0; i < dotsChildren.length; i++) {
-        dotsChildren[i].style.background = "#FFC60B";
+        dotsChildren[i].style.background = `#FFC60B`;
         if (imgIndex == dotsChildren.length) {
-            dotsChildren[0].style.background = "#FF8B00";
+            dotsChildren[0].style.background = `#FF8B00`;
         } else {
-            dotsChildren[imgIndex].style.background = "#FF8B00";
+            dotsChildren[imgIndex].style.background = `#FF8B00`;
         }
     }
 };
@@ -49,7 +49,7 @@ function changeDots() { //圆点变化
 function restore() { //最后一张回到第一张
     imgIndex++;
     if (imgIndex >= barChildren.length - 2) {
-        slideBar.style.left = "0px";
+        slideBar.style.left = `0px`;
         imgIndex = 1;
     }
 };
@@ -69,13 +69,13 @@ autoTimer();
 container.onmouseover = () => { //鼠标进入事件
     clearInterval(autoSlide);
     for (var i = 0; i < buttons.length; i++) {
-        buttons[i].style.visibility = "visible";
+        buttons[i].style.visibility = `visible`;
     }
 };
 
 container.onmouseout = () => { //鼠标离开事件
     for (var i = 0; i < buttons.length; i++) {
-        buttons[i].style.visibility = "hidden";
+        buttons[i].style.visibility = `hidden`;
     };
     autoTimer();
 };
