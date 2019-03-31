@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="Carousel_Object-oriented.css">
+</head>
+
+<body>
+    <div id="container">
+        <div id="banner">
+            <ul id="slideBar">
+                <li><img src="img/Porto.jpg" alt=""></li>
+                <li><img src="img/Guangzhou.jpg" alt=""></li>
+                <li><img src="img/Santiago.jpg" alt=""></li>
+                <li><img src="img/Bogota.jpg" alt=""></li>
+                <li><img src="img/Porto.jpg" alt=""></li>
+                <li><img src="img/Guangzhou.jpg" alt=""></li>
+                <li><img src="img/Santiago.jpg" alt=""></li>
+            </ul>
+        </div>
+        <a href="javascript:void(0)"><img id="prevSlide" class="button" src="img/IMG_0001.JPG" alt=""></a>
+        <a href="javascript:void(0)"><img id="nextSlide" class="button" src="img/IMG_0001.JPG" alt=""></a>
+        <div id="dots">
+            <span class="visualDot"></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+    <script type="text/javascript" src="Carousel_Object-oriented.js"></script>
+    <script type="text/javascript">
+    const slideObj = { //实例化对象
+        containerNode: "#container",
+        ulNode: "#slideBar",
+        dotsFather: "#dots",
+        dotNodes:"#dots>span",
+        buttons: ".button",
+        nextButton: "#nextSlide",
+        prevButton: "#prevSlide",
+        eachWidth: 500,
+        iniPosition: -350,
+        imgsNum: 4,
+        stopEvent: "mouseover",
+        startEvent: "mouseout",
+        colorForActivedDot: "#FF8B00",
+        colorForUnactivedDot: "#FFC60B"
+    };
+
+    var obj = new SlideImg(slideObj); //创建构造函数
+    </script>
+</body>
+
+</html>

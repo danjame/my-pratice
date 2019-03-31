@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     list-style: none;
+    border: 0;
 }
 
 #container {
@@ -13,16 +14,18 @@
 }
 
 #banner {
+    overflow: hidden;
     position: relative;
+    margin: 0 auto;
     width: 800px;
     height: 304px;
-    overflow: hidden;
 }
 
 #slideBar {
     position: absolute;
-    margin-left: -350px;
+    left: -350px;
     height: 304px;
+    width: 3500px;
 }
 
 #slideBar>li {

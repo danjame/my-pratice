@@ -1,15 +1,14 @@
 const container = document.getElementById("container");
 const slideBar = document.getElementById("slideBar");
 const imgWidth = slideBar.children[0].offsetWidth;
-const barChildren = slideBar.querySelectorAll("#slideBar li");
+const barChildren = slideBar.querySelectorAll("#slideBar>li");
 slideBar.style.width = barChildren.length * imgWidth + "px";
 
-const dotsChildren = document.querySelectorAll("#dots span");
+const dotsChildren = document.querySelectorAll("#dots>span");
 const iniPosition = slideBar.offsetLeft;
 const buttons = document.querySelectorAll(".button");
 const prevButton = document.getElementById("prevSlide");
 const nextButton = document.getElementById("nextSlide");
-const clickDots = document.querySelectorAll("#dots>span");
 
 let imgIndex = 0;
 let aniTimer = null;
@@ -23,11 +22,12 @@ function changeImg(speed, time) { //轮播动画
     clearInterval(aniTimer);
     aniTimer = setInterval( //轮播一张的动画定时器
         () => {
-            let targetPosition = (imgIndex * -imgWidth);
-            let currentPosition = slideBar.offsetLeft - iniPosition;
+            let targetPosition = imgIndex * -imgWidth + iniPosition;
+            let currentPosition = slideBar.offsetLeft;
             let step = (targetPosition - currentPosition) / speed;
             if (!step) {
                 clearInterval(aniTimer);
+                return;
             }
             step > 0 ? step = Math.ceil(step) : step = Math.floor(step);
             currentPosition += step;
@@ -49,7 +49,7 @@ function changeDots() { //圆点变化
 function restore() { //最后一张回到第一张
     imgIndex++;
     if (imgIndex >= barChildren.length - 2) {
-        slideBar.style.left = `0px`;
+        slideBar.style.left = `${iniPosition}px`;
         imgIndex = 1;
     }
 };
@@ -88,15 +88,15 @@ nextButton.onclick = () => { //下一张图片
 prevButton.onclick = () => { //上一张图片
     imgIndex--;
     if (imgIndex < 0) {
-        imgIndex = barChildren.length - 4;
-        slideBar.style.left = `${imgIndex * -imgWidth-150}px`;
+        imgIndex = barChildren.length-4;
+        slideBar.style.left = `${(imgIndex+1) * -imgWidth + iniPosition}px`;
     }
     animation();
 }
 
 (function activeDots() { //点击圆点事件函数
-    for (let i = 0; i < clickDots.length; i++) {
-        clickDots[i].onclick = () => {
+    for (let i = 0; i < dotsChildren.length; i++) {
+        dotsChildren[i].onclick = () => {
             imgIndex = i;
             animation();
         }

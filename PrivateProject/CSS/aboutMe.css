@@ -42,8 +42,8 @@
     width: 300px;
     height: 250px;
     position: absolute;
-    margin-left: -50px;
-    margin-top: -80px;
+    top: -80px;
+    left: -50px;
 }
 
 #mainLeft #skateMan {
@@ -53,7 +53,7 @@
 
 #mainRight {
     position: absolute;
-    margin-left: 230px;
+    left: 230px;
 }
 
 #mainRight .descriptionUp {

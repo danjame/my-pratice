@@ -1,7 +1,7 @@
 const container = document.getElementById("container");
 const slideBar = document.getElementById("slideBar");
 const imgWidth = slideBar.children[0].offsetWidth;
-const barChildren = slideBar.querySelectorAll("#slideBar li");
+const barChildren = slideBar.querySelectorAll("#slideBar>li");
 slideBar.style.width = barChildren.length * imgWidth + "px";
 
 const buttons = document.querySelectorAll(".button");
@@ -20,7 +20,7 @@ function transition(node, time) { //封装过度属性
     node.style.transition = `${time}ms`
 }
 
-function bothTrans(){
+function bothTrans() {
     transform(slideBar, imgIndex * -imgWidth, 0, 0);
     transition(slideBar, 700);
 }
@@ -61,6 +61,7 @@ slideBar.addEventListener("transitionend", () => { //监听动画结束事件, �
     if (imgIndex >= barChildren.length - 3) {
         imgIndex = 0;
         animation();
+        return;
     }
 });
 
@@ -83,20 +84,16 @@ nextButton.onclick = () => { //下一张
     animation();
 };
 
-// function cancelEvent() {
-//     if (imgIndex < 1) {
-//         imgIndex = 4;
-//         transform(slideBar, imgIndex * -imgWidth, 0, 0);
-//         transition(slideBar, 0);
-//     }
-    // slideBar.removeEventListener("transitionend",cancelEvent())
-// };
 
 prevButton.onclick = () => { //上一张
     imgIndex--;
+    if (imgIndex < 0) {
+        imgIndex = barChildren.length - 4;
+        transform(slideBar, -2000, 0, 0);
+        transition(slideBar, 0); //第一张切回最后一张 待实现
+    }
     bothTrans();
     dotsAni();
-    // slideBar.addEventListener("transitionend", cancelEvent());
 };
 
 (function clickDots() { //点击圆点事件

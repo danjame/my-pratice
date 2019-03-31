@@ -1,13 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Document</title>
-	<style>
-	
-	</style>
-</head>
-<body>
 
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+    let timer = setInterval(function(){
+        console.log("window")
+        }, 2000)
+
+    var obj = {
+        timer: setInterval(()=>{
+            
+        console.log("obj")
+        clearInterval(obj.timer);
+    }, 3000)
+    }
+    
+
+    </script>
+</head>
+
+<body>
+    <div class="ye">
+        <div class="fu">
+            <div class="zi">
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>
