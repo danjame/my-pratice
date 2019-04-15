@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Layout_tableFreezing</title>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+        border-collapse: collapse;
+    }
+
+    #container {     
+        width: 1800px;
+    }
+
+    #head,
+    #left {
+        position: relative;
+    }
+
+    .firstCell {
+        position: relative;
+        border-style: solid;
+        border-width: 1px 0 0 1px;
+        z-index: 1;
+        width: 300px;
+        height: 100px;
+    }
+
+    .headTable td {
+        width: 300px;
+        height: 100px;
+        border-style: solid;
+        border-width: 1px 1px 0 1px;
+    }
+
+    .leftTable td {
+        width: 300px;
+        height: 100px;
+        border-style: solid;
+        border-width: 1px 0 1px 1px;
+
+    }
+
+    .contentTable td {
+        width: 300px;
+        height: 100px;
+        border: solid 1px;
+    }
+
+    </style>
+</head>
+<script>
+window.onload = () => {
+
+
+    window.onscroll = () => {
+        const head = document.querySelector("#head");
+        const left = document.querySelector("#left");
+        const firstCell = document.querySelector(".firstCell");
+
+        head.style.top = pageYOffset + "px";
+        left.style.left = pageXOffset + "px";
+
+        firstCell.style.top = pageYOffset + "px";
+        firstCell.style.left = pageXOffset + "px";
+    }
+};
+</script>
+
+<body>
+    <table id="container">
+        <tr>
+            <td>
+                <div class="firstCell">FirstCell</div>
+            </td>
+            <td>
+                <div id="head">
+                    <table class="headTable">
+                        <tr>
+                            <td>Title 1</td>
+                            <td>Title 2</td>
+                            <td>Title 3</td>
+                            <td>Title 4</td>
+                            <td>Title 5</td>
+                        </tr>
+                    </table>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div id="left">
+                    <table class="leftTable">
+                        <tr>
+                            <td>Item1</td>
+                        </tr>
+                        <tr>
+                            <td>Item2</td>
+                        </tr>
+                        <tr>
+                            <td>Item3</td>
+                        </tr>
+                        <tr>
+                            <td>Item4</td>
+                        </tr>
+                        <tr>
+                            <td>Item5</td>
+                        </tr>
+                    </table>
+                </div>
+            </td>
+            <td>
+                <div>
+                    <table class="contentTable">
+                        <tr>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>2</td>
+                            <td>2</td>
+                            <td>2</td>
+                            <td>2</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>3</td>
+                            <td>3</td>
+                            <td>3</td>
+                            <td>3</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>4</td>
+                            <td>4</td>
+                            <td>4</td>
+                            <td>4</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>5</td>
+                            <td>5</td>
+                            <td>5</td>
+                            <td>5</td>
+                        </tr>
+                    </table>
+                </div>
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>
