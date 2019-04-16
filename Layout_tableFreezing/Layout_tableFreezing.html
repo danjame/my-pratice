@@ -11,10 +11,6 @@
         border-collapse: collapse;
     }
 
-    #container {     
-        width: 1800px;
-    }
-
     #head,
     #left {
         position: relative;
@@ -22,40 +18,39 @@
 
     .firstCell {
         position: relative;
-        border-style: solid;
-        border-width: 1px 0 0 1px;
+        border: solid 1px;
         z-index: 1;
-        width: 300px;
-        height: 100px;
+        line-height: 48px;
+        background-color: #f7e0a3;
     }
 
-    .headTable td {
-        width: 300px;
-        height: 100px;
-        border-style: solid;
-        border-width: 1px 1px 0 1px;
+    .headTable {
+        width: 1500px;
+        height: 50px;
+        background-color: #f7e0a3;
     }
 
-    .leftTable td {
-        width: 300px;
-        height: 100px;
-        border-style: solid;
-        border-width: 1px 0 1px 1px;
-
+    .leftTable {
+        width: 100px;
+        height: 800px;
+        background-color: #f7e0a3;
     }
 
+    .contentTable {
+        width: 1500px;
+        height: 800px;
+        background-color: #f2eee0;
+    }
+
+    .headTable td,
+    .leftTable td,
     .contentTable td {
-        width: 300px;
-        height: 100px;
         border: solid 1px;
     }
-
     </style>
 </head>
 <script>
 window.onload = () => {
-
-
     window.onscroll = () => {
         const head = document.querySelector("#head");
         const left = document.querySelector("#left");
@@ -85,6 +80,7 @@ window.onload = () => {
                             <td>Title 3</td>
                             <td>Title 4</td>
                             <td>Title 5</td>
+                            <td>Title 6</td>
                         </tr>
                     </table>
                 </div>
@@ -109,46 +105,106 @@ window.onload = () => {
                         <tr>
                             <td>Item5</td>
                         </tr>
+                        <tr>
+                            <td>Item6</td>
+                        </tr>
+                        <tr>
+                            <td>Item7</td>
+                        </tr>
+                        <tr>
+                            <td>Item8</td>
+                        </tr>
+                        <tr>
+                            <td>Item9</td>
+                        </tr>
+                        <tr>
+                            <td>Item10</td>
+                        </tr>
                     </table>
                 </div>
             </td>
             <td>
-                <div>
+                <div id="content">
                     <table class="contentTable">
                         <tr>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>1</td>
+                            <td>Item1Title1</td>
+                            <td>Item1Title2</td>
+                            <td>Item1Title3</td>
+                            <td>Item1Title4</td>
+                            <td>Item1Title5</td>
+                            <td>Item1Title6</td>
                         </tr>
                         <tr>
-                            <td>2</td>
-                            <td>2</td>
-                            <td>2</td>
-                            <td>2</td>
-                            <td>2</td>
+                            <td>Item2Title1</td>
+                            <td>Item2Title2</td>
+                            <td>Item2Title3</td>
+                            <td>Item2Title4</td>
+                            <td>Item2Title5</td>
+                            <td>Item2Title6</td>
                         </tr>
                         <tr>
-                            <td>3</td>
-                            <td>3</td>
-                            <td>3</td>
-                            <td>3</td>
-                            <td>3</td>
+                            <td>Item3Title1</td>
+                            <td>Item3Title2</td>
+                            <td>Item3Title3</td>
+                            <td>Item3Title4</td>
+                            <td>Item3Title5</td>
+                            <td>Item3Title6</td>
                         </tr>
                         <tr>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
+                            <td>Item4Title1</td>
+                            <td>Item4Title2</td>
+                            <td>Item4Title3</td>
+                            <td>Item4Title4</td>
+                            <td>Item4Title5</td>
+                            <td>Item4Title6</td>
                         </tr>
                         <tr>
-                            <td>5</td>
-                            <td>5</td>
-                            <td>5</td>
-                            <td>5</td>
-                            <td>5</td>
+                            <td>Item5Title1</td>
+                            <td>Item5Title2</td>
+                            <td>Item5Title3</td>
+                            <td>Item5Title4</td>
+                            <td>Item5Title5</td>
+                            <td>Item5Title6</td>
+                        </tr>
+                        <tr>
+                            <td>Item6Title1</td>
+                            <td>Item6Title2</td>
+                            <td>Item6Title3</td>
+                            <td>Item6Title4</td>
+                            <td>Item6Title5</td>
+                            <td>Item6Title6</td>
+                        </tr>
+                        <tr>
+                            <td>Item7Title1</td>
+                            <td>Item7Title2</td>
+                            <td>Item7Title3</td>
+                            <td>Item7Title4</td>
+                            <td>Item7Title5</td>
+                            <td>Item7Title6</td>
+                        </tr>
+                        <tr>
+                            <td>Item8Title1</td>
+                            <td>Item8Title2</td>
+                            <td>Item8Title3</td>
+                            <td>Item8Title4</td>
+                            <td>Item8Title5</td>
+                            <td>Item8Title6</td>
+                        </tr>
+                        <tr>
+                            <td>Item9Title1</td>
+                            <td>Item9Title2</td>
+                            <td>Item9Title3</td>
+                            <td>Item9Title4</td>
+                            <td>Item9Title5</td>
+                            <td>Item9Title6</td>
+                        </tr>
+                        <tr>
+                            <td>Item10Title1</td>
+                            <td>Item10Title2</td>
+                            <td>Item10Title3</td>
+                            <td>Item10Title4</td>
+                            <td>Item10Title5</td>
+                            <td>Item10Title6</td>
                         </tr>
                     </table>
                 </div>
