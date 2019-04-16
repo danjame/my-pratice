@@ -51,7 +51,8 @@
 </head>
 <script>
 window.onload = () => {
-    window.onscroll = () => {
+    window.addEventListener("scroll",
+        () => {
         const head = document.querySelector("#head");
         const left = document.querySelector("#left");
         const firstCell = document.querySelector(".firstCell");
@@ -61,7 +62,7 @@ window.onload = () => {
 
         firstCell.style.top = pageYOffset + "px";
         firstCell.style.left = pageXOffset + "px";
-    }
+    }); 
 };
 </script>
 
