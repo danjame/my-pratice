@@ -9,6 +9,13 @@
         margin: 0;
         padding: 0;
         border-collapse: collapse;
+        box-sizing: border-box;
+    }
+
+    #container {
+        width: 500px;
+        height: 300px;
+        overflow: scroll;
     }
 
     #head,
@@ -19,199 +26,421 @@
     .firstCell {
         position: relative;
         border: solid 1px;
-        z-index: 1;
-        line-height: 48px;
         background-color: #f7e0a3;
+        z-index: 1;
     }
 
     .headTable {
-        width: 1500px;
-        height: 50px;
+        width: 800px;
+        border-style: solid;
+        border-width: 1px 0 0 0;
+        border-color: black;
         background-color: #f7e0a3;
+    }
+
+    .headTable .title td {
+        border-style: solid;
+        border-width: 0 1px 1px 0;
     }
 
     .leftTable {
-        width: 100px;
-        height: 800px;
+        border-style: solid;
+        border-width: 0 0 0 1px;
+        border-color: black;
         background-color: #f7e0a3;
     }
 
-    .contentTable {
-        width: 1500px;
-        height: 800px;
-        background-color: #f2eee0;
+    .leftTable div table td {
+        width: 100px;
+        height: 50px;
+        border-style: solid;
+        border-width: 0 1px 1px 0;
+        border-color: black;
     }
 
-    .headTable td,
-    .leftTable td,
+    .contentTable {
+        width: 600px;
+        background-color: #f2eee0;
+        border-color: black;
+    }
+
     .contentTable td {
-        border: solid 1px;
+        border-style: solid;
+        border-width: 0 1px 1px 0;
     }
     </style>
 </head>
 <script>
 window.onload = () => {
-    window.addEventListener("scroll",
+    //冻结表头和左栏
+    const container = document.querySelector("#container");
+    const head = document.querySelector("#head");
+    const left = document.querySelector("#left");
+
+    container.addEventListener("scroll",
         () => {
-        const head = document.querySelector("#head");
-        const left = document.querySelector("#left");
-        const firstCell = document.querySelector(".firstCell");
+            head.style.top = container.scrollTop + "px"; //冻结表头
+            left.style.left = container.scrollLeft + "px"; //冻结左栏
 
-        head.style.top = pageYOffset + "px";
-        left.style.left = pageXOffset + "px";
+            firstCell.style.top = container.scrollTop + "px"; //冻结顶格
+            firstCell.style.left = container.scrollLeft + "px"; //冻结顶格
+        })
 
-        firstCell.style.top = pageYOffset + "px";
-        firstCell.style.left = pageXOffset + "px";
-    }); 
+    const firstCell = document.querySelector(".firstCell"); //顶格宽度对齐左栏，高度对齐表头
+    firstCell.style.height = head.offsetHeight + "px";
+    firstCell.style.lineHeight = firstCell.offsetHeight + "px";
+    firstCell.style.width = left.offsetWidth + "px";
+
+    const headCells = document.querySelectorAll(".title div table td"); //表头宽度对齐内容
+    for (let i = 0; i < headCells.length; i++) {
+        headCells[i].style.width = document.querySelector(".contentCell").offsetWidth + "px";
+    };
+
+    const contentCells = document.querySelectorAll(".contentTable td"); //内容高度对齐左栏
+    for (let i = 0; i < contentCells.length; i++) {
+        contentCells[i].style.height = document.querySelector(".leftCell").offsetHeight + "px";
+    };
 };
 </script>
 
 <body>
-    <table id="container">
-        <tr>
-            <td>
-                <div class="firstCell">FirstCell</div>
-            </td>
-            <td>
-                <div id="head">
-                    <table class="headTable">
-                        <tr>
-                            <td>Title 1</td>
-                            <td>Title 2</td>
-                            <td>Title 3</td>
-                            <td>Title 4</td>
-                            <td>Title 5</td>
-                            <td>Title 6</td>
-                        </tr>
-                    </table>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <div id="left">
-                    <table class="leftTable">
-                        <tr>
-                            <td>Item1</td>
-                        </tr>
-                        <tr>
-                            <td>Item2</td>
-                        </tr>
-                        <tr>
-                            <td>Item3</td>
-                        </tr>
-                        <tr>
-                            <td>Item4</td>
-                        </tr>
-                        <tr>
-                            <td>Item5</td>
-                        </tr>
-                        <tr>
-                            <td>Item6</td>
-                        </tr>
-                        <tr>
-                            <td>Item7</td>
-                        </tr>
-                        <tr>
-                            <td>Item8</td>
-                        </tr>
-                        <tr>
-                            <td>Item9</td>
-                        </tr>
-                        <tr>
-                            <td>Item10</td>
-                        </tr>
-                    </table>
-                </div>
-            </td>
-            <td>
-                <div id="content">
-                    <table class="contentTable">
-                        <tr>
-                            <td>Item1Title1</td>
-                            <td>Item1Title2</td>
-                            <td>Item1Title3</td>
-                            <td>Item1Title4</td>
-                            <td>Item1Title5</td>
-                            <td>Item1Title6</td>
-                        </tr>
-                        <tr>
-                            <td>Item2Title1</td>
-                            <td>Item2Title2</td>
-                            <td>Item2Title3</td>
-                            <td>Item2Title4</td>
-                            <td>Item2Title5</td>
-                            <td>Item2Title6</td>
-                        </tr>
-                        <tr>
-                            <td>Item3Title1</td>
-                            <td>Item3Title2</td>
-                            <td>Item3Title3</td>
-                            <td>Item3Title4</td>
-                            <td>Item3Title5</td>
-                            <td>Item3Title6</td>
-                        </tr>
-                        <tr>
-                            <td>Item4Title1</td>
-                            <td>Item4Title2</td>
-                            <td>Item4Title3</td>
-                            <td>Item4Title4</td>
-                            <td>Item4Title5</td>
-                            <td>Item4Title6</td>
-                        </tr>
-                        <tr>
-                            <td>Item5Title1</td>
-                            <td>Item5Title2</td>
-                            <td>Item5Title3</td>
-                            <td>Item5Title4</td>
-                            <td>Item5Title5</td>
-                            <td>Item5Title6</td>
-                        </tr>
-                        <tr>
-                            <td>Item6Title1</td>
-                            <td>Item6Title2</td>
-                            <td>Item6Title3</td>
-                            <td>Item6Title4</td>
-                            <td>Item6Title5</td>
-                            <td>Item6Title6</td>
-                        </tr>
-                        <tr>
-                            <td>Item7Title1</td>
-                            <td>Item7Title2</td>
-                            <td>Item7Title3</td>
-                            <td>Item7Title4</td>
-                            <td>Item7Title5</td>
-                            <td>Item7Title6</td>
-                        </tr>
-                        <tr>
-                            <td>Item8Title1</td>
-                            <td>Item8Title2</td>
-                            <td>Item8Title3</td>
-                            <td>Item8Title4</td>
-                            <td>Item8Title5</td>
-                            <td>Item8Title6</td>
-                        </tr>
-                        <tr>
-                            <td>Item9Title1</td>
-                            <td>Item9Title2</td>
-                            <td>Item9Title3</td>
-                            <td>Item9Title4</td>
-                            <td>Item9Title5</td>
-                            <td>Item9Title6</td>
-                        </tr>
-                        <tr>
-                            <td>Item10Title1</td>
-                            <td>Item10Title2</td>
-                            <td>Item10Title3</td>
-                            <td>Item10Title4</td>
-                            <td>Item10Title5</td>
-                            <td>Item10Title6</td>
-                        </tr>
-                    </table>
-                </div>
-            </td>
-        </tr>
-    </table>
+    <div id="container">
+        <table>
+            <tr>
+                <td class="header">
+                    <div class="firstCell">FirstCell</div>
+                </td>
+                <td>
+                    <div id="head">
+                        <table class="headTable">
+                            <tr>
+                                <td class="title">
+                                    <div>
+                                        <table>
+                                            <tr>
+                                                <td>Title 1</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Title 1</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Title 1</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </td>
+                                <td class="title">
+                                    <div>
+                                        <table>
+                                            <tr>
+                                                <td>Title 2</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Title 2</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Title 2</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </td>
+                                <td class="title">
+                                    <div>
+                                        <table>
+                                            <tr>
+                                                <td>Title 3</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Title 3</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Title 3</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </td>
+                                <td class="title">
+                                    <div>
+                                        <table>
+                                            <tr>
+                                                <td>Title 4</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Title 4</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Title 4</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </td>
+                                <td class="title">
+                                    <div>
+                                        <table>
+                                            <tr>
+                                                <td>Title 5</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Title 5</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Title 5</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </td>
+                                <td class="title">
+                                    <div>
+                                        <table>
+                                            <tr>
+                                                <td>Title 6</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Title 6</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Title 6</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </td>
+                                <td class="title">
+                                    <div>
+                                        <table>
+                                            <tr>
+                                                <td>Title 7</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Title 7</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Title 7</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </td>
+                                <td class="title">
+                                    <div>
+                                        <table>
+                                            <tr>
+                                                <td>Title 8</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Title 8</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Title 8</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td>
+                    <div id="left">
+                        <table class="leftTable">
+                            <tr>
+                                <td class="leftCell">
+                                    <div>
+                                        <table>
+                                            <tr>
+                                                <td>Item1</td>
+                                                <td>Item1</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div>
+                                        <table>
+                                            <tr>
+                                                <td>Item2</td>
+                                                <td>Item2</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div>
+                                        <table>
+                                            <tr>
+                                                <td>Item3</td>
+                                                <td>Item3</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div>
+                                        <table>
+                                            <tr>
+                                                <td>Item4</td>
+                                                <td>Item4</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div>
+                                        <table>
+                                            <tr>
+                                                <td>Item5</td>
+                                                <td>Item5</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div>
+                                        <table>
+                                            <tr>
+                                                <td>Item6</td>
+                                                <td>Item6</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div>
+                                        <table>
+                                            <tr>
+                                                <td>Item7</td>
+                                                <td>Item7</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div>
+                                        <table>
+                                            <tr>
+                                                <td>Item8</td>
+                                                <td>Item8</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div>
+                                        <table>
+                                            <tr>
+                                                <td>Item9</td>
+                                                <td>Item9</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div>
+                                        <table>
+                                            <tr>
+                                                <td>Item10</td>
+                                                <td>Item10</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </td>
+                <td valign="top">
+                    <div id="content">
+                        <table class="contentTable">
+                            <tr>
+                                <td class="contentCell">Item1Title1</td>
+                                <td>Item1Title2</td>
+                                <td>Item1Title3</td>
+                                <td>Item1Title4</td>
+                                <td>Item1Title5</td>
+                                <td>Item1Title6</td>
+                            </tr>
+                            <tr>
+                                <td>Item2Title1</td>
+                                <td>Item2Title2</td>
+                                <td>Item2Title3</td>
+                                <td>Item2Title4</td>
+                                <td>Item2Title5</td>
+                                <td>Item2Title6</td>
+                            </tr>
+                            <tr>
+                                <td>Item3Title1</td>
+                                <td>Item3Title2</td>
+                                <td>Item3Title3</td>
+                                <td>Item3Title4</td>
+                                <td>Item3Title5</td>
+                                <td>Item3Title6</td>
+                            </tr>
+                            <tr>
+                                <td>Item4Title1</td>
+                                <td>Item4Title2</td>
+                                <td>Item4Title3</td>
+                                <td>Item4Title4</td>
+                                <td>Item4Title5</td>
+                                <td>Item4Title6</td>
+                            </tr>
+                            <tr>
+                                <td>Item5Title1</td>
+                                <td>Item5Title2</td>
+                                <td>Item5Title3</td>
+                                <td>Item5Title4</td>
+                                <td>Item5Title5</td>
+                                <td>Item5Title6</td>
+                            </tr>
+                            <tr>
+                                <td>Item6Title1</td>
+                                <td>Item6Title2</td>
+                                <td>Item6Title3</td>
+                                <td>Item6Title4</td>
+                                <td>Item6Title5</td>
+                                <td>Item6Title6</td>
+                            </tr>
+                            <tr>
+                                <td>Item7Title1</td>
+                                <td>Item7Title2</td>
+                                <td>Item7Title3</td>
+                                <td>Item7Title4</td>
+                                <td>Item7Title5</td>
+                                <td>Item7Title6</td>
+                            </tr>
+                            <tr>
+                                <td>Item8Title1</td>
+                                <td>Item8Title2</td>
+                                <td>Item8Title3</td>
+                                <td>Item8Title4</td>
+                                <td>Item8Title5</td>
+                                <td>Item8Title6</td>
+                            </tr>
+                        </table>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
 </body>
 
 </html>
