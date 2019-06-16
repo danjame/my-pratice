@@ -1,0 +1,147 @@
+#slideBox {
+    height: 700px;
+    position: relative;
+    overflow: hidden;
+}
+
+.navBox {
+    width: 8%;
+    height: 700px;
+    position: absolute;
+    margin-left: 92%;
+    background-color: rgba(222, 222, 222, 0.2);
+    z-index: 1;
+}
+
+.contentNav {
+    width: 100%;
+    position: absolute;
+}
+
+.contentNav>li {
+    height: 70px;
+    line-height: 70px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.navBox>ul:last-child {
+    width: 100%;
+    position: absolute;
+    margin-left: 100%;
+}
+
+.navBox>ul:last-child>li {
+    height: 70px;
+    line-height: 70px;
+    background-color: black;
+    opacity: 0.4;
+}
+
+@keyframes navDotAhead {
+    0% {
+        margin-left: 0%;
+    }
+
+    100% {
+        margin-left: -100%;
+    }
+}
+
+@keyframes navDotBack {
+    0% {
+        margin-left: -100%;
+    }
+
+    100% {
+        margin-left: 0%;
+    }
+}
+
+.actived {
+    animation-name: navDotAhead;
+    animation-timing-function: ease-out;
+    animation-duration: 0.6s;
+    animation-fill-mode: forwards;
+}
+
+.unactived {
+    animation-name: navDotBack;
+    animation-timing-function: ease-out;
+    animation-duration: 0.6s;
+    animation-fill-mode: forwards;
+}
+
+#slideBar {
+    width: 100%;
+    position: absolute;
+}
+
+.slideOne,
+.slideTwo,
+.slideThree {
+    height: 700px;
+}
+
+.slideOne {
+    background-color: #f1f4df;
+}
+
+.meText {
+    height: 700px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    font-size: 1.5em;
+    color: #666666;
+}
+
+.signature {
+    position: absolute;
+    margin-left: -25%;
+    margin-top: -8%;
+}
+
+.signature p, .signature div{
+    text-align: center;
+}
+
+.slideOne .meText button {
+    width: 95px;
+    height: 35px;
+    margin-top: 10%;
+    background-color: #1989C0;
+    border-radius: 5px;
+    outline: none;
+    font-size: 18px;
+    color: white;
+    cursor: pointer;
+}
+
+.slideOne .meText button:hover {
+    background-color: #226089;
+}
+
+.slideTwo {
+    background-color: #87c0cd;
+}
+
+.slideTwo .meText{
+    color: white;
+}
+
+.slideTwo .meText>div:last-child{
+    height: 700px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.slideThree {
+    background-color: #a2a8d3;
+}
+
+.slideThree a {
+    text-decoration: none;
+    color: #666666;
+}

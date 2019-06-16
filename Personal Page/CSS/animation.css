@@ -1,0 +1,217 @@
+#content {
+    background-color: #fabc60;
+}
+
+#container {
+    margin: 0 auto;
+}
+
+#bgBox {
+    position: relative;
+    overflow: hidden;
+}
+
+@media only screen and (min-width: 500px) {
+ 
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1024px){
+    
+}
+
+#bgBox #imgGroup {
+    position: absolute;
+}
+
+#imgGroup>li {
+    float: left;
+}
+
+#imgGroup img {
+    height: 360px;
+}
+
+@media only screen and (max-width: 1300px){
+    #imgGroup img{
+        height: 300px;
+    }
+}
+
+@media only screen and (max-width: 910px){
+    #imgGroup img{
+        height: 240px;
+    }
+}
+
+
+#main {
+    height: 160px;
+    position: relative;
+    background-color: #fabc60;
+}
+
+#main #mainLeft {
+    position: absolute;
+    top: -120px;
+    left: -50px;
+}
+
+#mainLeft #skateMan {
+    height: 250px;
+}
+
+@media only screen and (max-width: 1300px){
+    #main #mainLeft {
+    position: absolute;
+    top: -130px;
+    left: -50px;
+}
+#mainLeft #skateMan {
+    height: 230px;
+}
+
+}
+
+
+#mainRight {
+    position: absolute;
+    left: 230px;
+}
+
+#mainRight .descriptionUp {
+    height: 80px;
+    margin-top: -15px;
+    margin-left: 10px;
+
+}
+
+.descriptionUp>li {
+    width: 180px;
+    height: 70px;
+    float: left;
+    margin-right: 20px;
+    border-radius: 30px 30px 30px 0;
+    padding: 5px;
+    font-size: 12px;
+    opacity: 0;
+}
+
+#mainRight #timeBar {
+    height: 10px;
+    margin-top: 10px;
+}
+
+#timeBar #timeLine {
+    width: 7px;
+    height: 7px;
+    border-radius: 20px;
+    background-color: white;
+    display: none;
+}
+
+#timeBar .timeDots {
+    margin-top: -11px;
+}
+
+.timeDots>li {
+    width: 13px;
+    height: 13px;
+    float: left;
+    margin-right: 90px;
+    border: 1px solid white;
+    border-radius: 50%;
+    background-color: steelblue;
+    display: none;
+}
+
+.descriptionDown {
+    height: 80px;
+    margin-top: 10px;
+    margin-left: 110px;
+}
+
+.descriptionDown>li {
+    width: 180px;
+    height: 70px;
+    float: left;
+    margin-right: 20px;
+    border-radius: 0 30px 30px 30px;
+    padding: 5px;
+    font-size: 12px;
+    opacity: 0;
+}
+
+.description .year {
+    text-align: center;
+}
+
+#text1 {
+    background-color: #d25959;
+}
+
+#text2 {
+    background-color: #b0e0a8;
+}
+
+#text3 {
+    background-color: #f0f69f;
+}
+
+#text4 {
+    background-color: #a773c3;
+}
+
+#text1,
+#text2,
+#text3,
+#text4 {
+    color: #545454;
+}
+
+.year{
+    font-weight: bold;
+}
+
+#container #btnBox {
+    position: absolute;
+    margin-top: -40px;
+}
+
+#btnBox>input {
+    background-color: white;
+    border: 2px solid #1989C0;
+    outline: none;
+    font-size: 14px;
+    color: #1989C0;
+    cursor: pointer;
+}
+
+#btnBox #btn1 {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+
+#btnBox #btn2 {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+#btnBox #btn3 {
+    width: 80px;
+    height: 30px;
+    border-radius: 30px;
+}
+
+#btnBox .btnMove:hover {
+    background-color: #1989C0;
+    color: white;
+    opacity: 1;
+    transform: rotate(10deg);
+    -ms-transform: rotate(10deg);
+    -webkit-transform: rotate(10deg);
+    transition: background-color 0.5s;
+    -ms-transition: background-color 0.5s;
+    -webkit-transition: background-color 0.5s;
+}

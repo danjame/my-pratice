@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Danjun Xie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" media="screen and (max-device-width: 414px)" href="CSS/mobile/commonMobile.css" type="text/css" />
+    <link rel="stylesheet" media="screen and (max-device-width: 414px)" href="CSS/mobile/animationMobile.css" type="text/css" />
+    <link rel="stylesheet" media="screen and (max-device-width: 414px)" href="CSS/mobile/myLanMobile.css" type="text/css" />
+    <link rel="stylesheet" media="screen and (min-width: 415px)" href="CSS/common.css" type="text/css" />
+    <link rel="stylesheet" media="screen and (min-width: 415px)" href="CSS/animation.css" type="text/css" />
+    <link rel="stylesheet" media="screen and (min-width: 415px)" href="CSS/myLan.css" type="text/css" />
+</head>
+
+<body>
+    <div id="page">
+        <div id="header">
+            <div class="logo" onclick="window.location.href=('index.html')">
+                <div class="logoTop">Dan</div>
+                <div class="logoDown">Jun</div>
+            </div>
+            <div>
+                <div>
+                    <ul class="headNav">
+                        <li><a href="index.html">
+                                <div>关于</div>
+                            </a></li>
+                        <li><a href="note.html">
+                                <div>笔记</div>
+                            </a></li>
+                        <li><a href="https://github.com/Danjame/MonGit" target="_blank">
+                                <div>作品</div>
+                            </a></li>
+                    </ul>
+                </div>
+                <span id="menu" class="unclickMenu">
+                    <em></em>
+                    <span class="menuBarsOff"></span>
+                    <span class="menuBarsOff"></span>
+                    <span class="menuBarsOff"></span>
+                    <em></em>
+                </span>
+            </div>
+        </div>
+        <div id="content">
+            <div id="container">
+                <div id="bgBox">
+                    <ul id="imgGroup">
+                        <li><img src="img/Guangzhou.jpg" alt=""></li>
+                        <li><img src="img/Santiago.jpg" alt=""></li>
+                        <li><img src="img/Bogota.jpg" alt=""></li>
+                        <li><img src="img/Porto.jpg" alt=""></li>
+                    </ul>
+                </div>
+                <div id="main">
+                    <div id="mainLeft">
+                    </div>
+                    <div id="mainRight">
+                        <ul class="description descriptionUp">
+                            <li id="text1">
+                                <p class="year">2014</p>
+                                <p>Graduated in Spanish Language and Literature from Jilin International Studies University.</p>
+                            </li>
+                            <li id="text3">
+                                <p class="year">2014 - 2015</p>
+                                <p>China United Engineering Corporation.</br>Interpretation and translation.</p>
+                            </li>
+                        </ul>
+                        <div id="timeBar">
+                            <div id="timeLine"></div>
+                            <ul class="timeDots">
+                                <li class="dot1"></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                            </ul>
+                        </div>
+                        <ul class="description descriptionDown">
+                            <li id="text2">
+                                <p class="year">2012 - 2013</p>
+                                <p>University of Santiago de Compostela.</br>Study Mobility Program.</p>
+                            </li>
+                            <li id="text4">
+                                <p class="year">2015 - 2017</p>
+                                <p>University of Porto.</br>Master in PLE of FLUP.</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="btnBox">
+                    <input type="button" value="Lan" id="btn0">
+                    <input type="button" value="Start" id="btn1">
+                    <input type="button" value="Pause" id="btn2" class="btnMove">
+                    <input type="button" value="Review" id="btn3" class="btnMove">
+                    <input type="button" value="Reload" id="btn4" class="btnMove">
+                </div>
+            </div>
+            <div id="myLanguage">
+                <div class="language">
+                    <img src="img/EN.png" alt="">
+                    <div>
+                        <p>Hello, I am Danjun,</p>
+                        <p>a junior Front End engineer.</p>
+                        <p>I love computer languages,</p>
+                        <p>and natural languages.</p>
+                    </div>
+                </div>
+                <div>
+                    <img src="img/ES.png" alt="">
+                    <div>
+                        <p>Hola, soy Danjun, </p>
+                        <p>un programador web novato.</p>
+                        <p>Me gustan lenguajes de programación,</p>
+                        <p>y lenguajes naturales.</p>
+                    </div>
+                </div>
+                <div>
+                    <img src="img/PT.png" alt="">
+                    <div>
+                        <p>Olá, sou Danjun, </p>
+                        <p>um programador web iniciante.</p>
+                        <p>Adoro linguagens de programação,</p>
+                        <p>e linguagens naturais.</p>
+                    </div>
+                </div>
+                <div>
+                    <img src="img/FR.png" alt="">
+                    <div>
+                        <p>Bonjour, je suis Danjun, </p>
+                        <p>un programmeur web junior. </p>
+                        <p>J'aime des langages informatiques,</p>
+                        <p>et des langages naturels.</p>
+                    </div>
+                </div>
+            </div>
+            <div id="floatText">
+                <p class="floatTextAni">Becoming a</br>
+                    Web Programmer.</p>
+            </div>
+            <ul class="floatTitle">
+                <li class="floatTitleAni">Me</li>
+                <li>Mi</li>
+                <li>Mim</li>
+                <li>Moi</li>
+            </ul>
+        </div>
+    </div>
+    <script>
+    function getEle(el) {
+        return document.querySelector(el);
+    };
+
+    //     const imgGroup = document.querySelector("#imgGroup");
+    //     const eachImg = document.querySelector("#imgGroup li:first-child img");
+    //     const imgNum = document.querySelectorAll("#imgGroup li").length;
+    //     imgGroup.style.width = `${eachImg.offsetWidth * imgNum}px`;
+
+    //     const bgBox = getEle("#bgBox");
+
+    // bgBox.style.height = eachImg.offsetHeight + "px";
+    // const imgBarWidth = eachWidth * imgNum;
+
+    // const imgNum = document.querySelectorAll(this.imgLis).length;
+    // const eachWidth = document.querySelector(this.anyImg).offsetWidth;
+    </script>
+    <script src="JS/mobile/animationMobile.js"></script>
+    <!-- <script src="JS/animation.js"></script> -->
+    <script src="JS/mobile/animationLanMobile.js"></script>
+    <!-- <script src="JS/animationLan.js"></script> -->
+    　<script>
+    const animationObj = {
+        imgBar: "#imgGroup",
+        imgBarWidth: "2560",
+        man: "#mainLeft",
+        manEachWidth: "20",
+        manTotalWidth: "600",
+    };
+
+    var aboutMeObj = new Animation(animationObj);
+    </script>
+    <script>
+        const lanDivs = document.querySelectorAll("#myLanguage>div");
+        const floatTitle = document.querySelector(".floatTitle");
+
+
+    getEle("#btn3").addEventListener("click", () => { //绑定重载事件
+        aboutMeObj.initialization();
+    }, false);
+
+
+    getEle("#btn0").addEventListener("click", () => { //绑定重载事件
+        const minFloatTitle = getEle(".floatTitleMin");
+        if (minFloatTitle.className == "floatTitleMin" || minFloatTitle.className == "floatTitleMin ftHidden") {
+            minFloatTitle.className = "floatTitleMin ftDisplay";
+        }else{
+            minFloatTitle.className = "floatTitleMin ftHidden";
+        }
+    }, false);
+
+
+    getEle("#btn4").addEventListener("click", () => { //绑定重载事件
+        location.reload()
+    }, false);
+
+    getEle("#btn1").addEventListener("click", () => { //监听点击事件, 开启动画
+
+        if (window.matchMedia("(max-width:414px)").matches) {
+            aboutMeObj.manAnimation();
+            aboutMeObj.bgAnimation();
+            timeLineAnimationMobile();
+                for(let i=0;i<lanDivs.length;i++){
+                    lanDivs[i].style.left = "5%";
+                    lanDivs[i].style.textAlign = "left";
+                }
+            floatTitle.className = "floatTitleMin";
+            getEle("#btn0").style.display = "block";
+            // contentAnimationMobile();      
+
+        } else {
+            // skateAnimation(1, 29, 50);
+            // bgAnimation();
+            // timeLineAnimation();
+            // contentAnimation();
+        };
+
+    }, false);
+
+    getEle("#btn2").addEventListener("click", () => { //监听点击事件, 停止动画
+        var result = window.matchMedia("(max-width:414px)");
+        if (result.matches) {
+            clearTimeout(aboutMeObj.manTimer);
+            clearTimeout(aboutMeObj.bgTimer);
+        } else {
+            clearTimeout(skateTimer);
+            clearTimeout(bgTimer);
+        };
+        clearTimeout(timeLineTimer);
+        clearInterval(contentTimer);
+    }, false);
+    </script>
+</body>
+
+</html>

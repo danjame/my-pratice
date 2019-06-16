@@ -1,0 +1,148 @@
+a {
+    text-decoration: none;
+}
+
+#container {
+    min-width: 640px;
+}
+
+#content>div:first-child {
+    height: 10px;
+    border-top: 2px solid #e8e8e8;
+}
+
+#content .textBox {
+    width: 65%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#content .titleBox {
+    position: fixed;
+    right: 60px;
+    margin-top: 100px;
+    background-color: white;
+}
+
+.titleBox>ul>li {
+    box-sizing: border-box;
+    width: 51px;
+    height: 51px;
+    border-style: solid;
+    border-width: 1px 1px 0 1px;
+    border-color: grey;
+}
+
+.titleBox>ul>li:hover {
+    background-color: #eeeeee;
+}
+
+.titleBox>ul>li:first-child {
+    cursor: pointer;
+}
+
+.titleBox>ul>li:nth-child(2) {
+    height: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.titleBox>ul>li:last-child {
+    border-bottom: 1px solid grey;
+    cursor: pointer;
+}
+
+.titleBox>ul>li:first-child div:first-child {
+    width: 0;
+    height: 0;
+    margin-left: 9px;
+    margin-top: 1px;
+    border: 16px solid transparent;
+    border-bottom: 16px solid #1989C0;
+}
+
+.titleBox>ul>li:first-child div:last-child {
+    width: 0;
+    height: 0;
+    margin-left: 9px;
+    margin-top: -29px;
+    border: 16px solid transparent;
+    border-bottom: 16px solid white;
+}
+
+.titleBox>ul>li:last-child div:first-child {
+    width: 0;
+    height: 0;
+    margin-left: 9px;
+    margin-top: 17px;
+    border: 16px solid transparent;
+    border-top: 16px solid #1989C0;
+}
+
+.titleBox>ul>li:last-child div:last-child {
+    width: 0;
+    height: 0;
+    margin-left: 9px;
+    margin-top: -35px;
+    border: 16px solid transparent;
+    border-top: 16px solid white;  
+}
+
+.titleBox>ul>li:nth-child(2) div {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #1989C0;
+}
+
+.titleBox>ul>li:nth-child(2) .blank {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: transparent;
+}
+
+#artiSelection {
+    position: fixed;
+    right: 110px;
+    margin-top: 151px;
+    border: 1px solid grey;
+    padding: 15px;
+    background-color: #eeeeee;
+    display: none;
+    cursor: pointer;
+}
+
+#artiSelection>ul>li {
+    color: #666666;
+}
+
+#artiSelection>ul>li:hover {
+    color: #1989C0;
+}
+
+#bottom {
+    height: 80px;
+}
+
+.line {
+    height: 30px;
+    border-top: 1px solid #e8e8e8;
+}
+
+.textBox {
+    line-height: 1.7;
+    font-weight: 400;
+    color: #606060;
+    text-align: justify;
+}
+
+.title {
+    margin-top: 50px;
+}
+
+.time {
+    text-align: right;
+}

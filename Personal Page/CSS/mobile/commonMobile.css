@@ -1,0 +1,148 @@
+* {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    font-family: Arial;
+}
+
+#header {
+    height: 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 5%;
+    margin-right: 2%;
+}
+
+#header .logo {
+    height: 3.2rem;
+    border-radius: 5px 20px 5px 20px;
+    background-color: #87c0cd;
+    font-size: 1.5rem;
+    color: white;
+}
+
+.logo .logoDown {
+    margin-top: -8px;
+    margin-left: 1.2rem;
+}
+
+#header #menu {
+    /* border-radius: 0.5rem; */
+    height: 3rem;
+    width: 4rem;
+    border-style: solid;
+    color: #aaaaaa;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+#header #menu>span {
+    display: block;
+    width: 2rem;
+    height: 0.1rem;
+    border-radius: 1px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.menuBarsOn {
+    background-color: white;
+}
+
+.menuBarsOff {
+    background-color: #888;
+}
+
+.clickMenu {
+    background-color: #aaaaaa;
+    border-radius: 0.5rem 0.5rem 0 0;
+}
+
+.unclickMenu {
+    border-radius: 0.5rem;
+}
+
+.headNav {
+    /*     position: absolute;
+    background-color: #f2f4d1;
+    z-index: 1;
+    top: 3.5rem; */
+    width: 100%;
+    /*     text-align: center;
+    font-size: 1.3rem;
+    left: 0; */
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+}
+
+#header>div:last-child>div:first-child {
+    height: 0;
+    overflow: hidden;
+    position: absolute;
+    background-color: #aaaaaa;
+    z-index: 1;
+    top: 3.68rem;
+    width: 100%;
+    font-size: 1.3rem;
+    left: 0;
+    opacity: 0.9;
+}
+
+@keyframes headNav {
+    0% {
+        height: 0;
+    }
+
+    100% {
+        height: 9.5rem;
+    }
+}
+
+@keyframes unheadNav {
+    0% {
+        height: 9.5rem;
+    }
+
+    100% {
+        height: 0;
+    }
+}
+
+.activedMenu {
+    animation-name: headNav;
+    animation-timing-function: ease-out;
+    animation-duration: 0.3s;
+    animation-fill-mode: forwards;
+}
+
+.unactivedMenu {
+    animation-name: unheadNav;
+    animation-timing-function: ease-out;
+    animation-duration: 0.3s;
+    animation-fill-mode: forwards;
+}
+
+.headNav li {
+    width: 100%;
+    line-height: 3rem;
+}
+
+.headNav>li>a>div {
+    margin-right: auto;
+    margin-left: auto;
+    width: 80%;
+    height: 3rem;
+    border-bottom: 1px solid #dddddd;
+}
+
+.headNav li:hover {
+    background-color: #dddddd;
+}
+
+.headNav a {
+    text-decoration: none;
+    color: white;
+}

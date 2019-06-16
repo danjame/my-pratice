@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    div {
+        width: 320px;
+        height: 240px;
+        background-image: url('skateMan.jpg');
+        background-size: auto 240px;
+        background-repeat: no-repeat;
+    }
+
+    .ani{
+        animation-name: animation;
+        animation-duration: 5s;
+        animation-timing-function:cubic-bezier(0,0,0,0);
+        animation-fill-mode: forwards;
+    }
+    @keyframes animation{
+        7%{
+            background-position: 0 0;
+        }
+        14%{
+            background-position: -320px 0;
+        }
+        21%{
+            background-position: -640px 0;
+        }
+        28%{
+            background-position: -960px 0;
+        }
+        35%{
+            background-position: -1280px 0;
+        }
+        42%{
+            background-position: -1600px 0;
+        }
+        49%{
+            background-position: -1920px 0;
+        }
+        56%{
+            background-position: -2240px 0;
+        }
+        63%{
+            background-position: -2560px 0;
+        }
+        70%{
+            background-position: -2880px 0;
+        }
+        77%{
+            background-position: -3200px 0;
+        }
+        84%{
+            background-position: -3520px 0;
+        }
+        91%{
+            background-position: -3840px 0;
+        }
+        100%{
+            background-position: -4160px 0;
+        }
+    }
+
+
+
+
+
+
+
+    </style>
+</head>
+
+<body>
+    <div></div>
+    <button>点击</button>
+</body>
+<script>
+const bgImg = document.querySelector("div");
+let offset = 0;
+let mainTimerbgTimer = null;
+const btn =document.querySelector("button");
+
+btn.addEventListener("click",()=>{
+    if(bgImg.className == "ani"){
+       bgImg.className = "";
+ }else{
+    bgImg.className = "ani";
+ }
+},false)
+
+
+function mainAni() {
+	// clearTimeout(mainTimerbgTimer);
+ //    mainTimerbgTimer = setTimeout(() => {
+ //    	offset-=320;
+ //         if(offset > -9600)
+ //             bgImg.style.backgroundPositionX = offset +"px";
+ //         else{
+ //         	offset = 0
+ //            bgImg.style.backgroundPositionX = offset +"px";
+ //         }
+ //         mainAni();
+ //     }, 50);
+ 
+}
+</script>
+
+</html>

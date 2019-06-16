@@ -1,0 +1,89 @@
+#myLanguage {
+    min-width: 800px;
+    height: 140px;
+    display: flex;
+    justify-content: space-around;
+    padding-top: 50px;
+    background-color: #f1f4df;
+}
+
+#myLanguage img {
+    width: 20%;
+}
+
+#myLanguage>div {
+    text-align: center;
+    color: #666666;
+    opacity: 0.1;
+}
+
+#myLanguage>.language {
+    opacity: 1;
+    transform: scale(1.05);
+    -ms-transform: scale(1.05);
+    -webkit-transform: scale(1.05);
+    transition: all 1s;
+    -ms-transition: all 1s;
+    -webkit-transition: all 1s;
+}
+
+#floatText {
+    position: absolute;
+    right: 6%;
+    bottom: 35%;
+    font-size: 36px;
+    color: #1989C0;
+}
+
+#floatTitle {
+    position: absolute;
+    left: 6%;
+    top: 25%;
+    font-size: 60px;
+    color: white;
+}
+
+@media only screen and (max-width: 1300px){
+    #floatTitle{
+        color: grey;
+    }
+}
+
+#floatTitle>li {
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+}
+
+#floatTitle>li:hover {
+    border-bottom: 2px solid #1989C0;
+}
+
+#floatTitle .floatTitleAni {
+    border-bottom: 2px solid #1989C0;
+    color: #1989C0;
+}
+
+@keyframes scaleAni {
+    0% {
+        transform: scale(1);
+    }
+
+    25% {
+        transform: scale(1.1);
+    }
+
+    50% {
+        transform: scale(1);
+    }
+
+    75% {
+        transform: scale(1.1);
+    }
+}
+
+.floatTextAni {
+    animation-name: scaleAni;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-duration: 4s;
+}
