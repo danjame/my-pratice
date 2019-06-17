@@ -204,7 +204,6 @@
     }, false);
 
     getEle("#btn1").addEventListener("click", () => { //监听点击事件, 开启动画
-
         if (window.matchMedia("(max-width:414px)").matches) {
             aboutMeObj.manAnimation();
             aboutMeObj.bgAnimation();
@@ -216,7 +215,6 @@
             floatTitle.className = "floatTitleMin";
             getEle("#btn0").style.display = "block";
             // contentAnimationMobile();      
-
         } else {
             // skateAnimation(1, 29, 50);
             // bgAnimation();
