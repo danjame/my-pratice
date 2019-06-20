@@ -1,7 +1,3 @@
-#content{
-
-}
-
 /* 背景 */
 #bgBox {
     width: 100%;
@@ -14,6 +10,7 @@
     width: 2560px;
     height: 100%;
     position: absolute;
+    -webkit-transition: all all 0s linear 0s;
     transition: all 0s linear 0s;
 }
 
@@ -25,29 +22,38 @@
     width: auto;
     height: 15rem;
 }
+
 /* 人物和文字 */
 #main {
     height: 3rem;
     position: relative;
     background-color: #fabc60;
 }
+
 /* 人物 */
 #main #mainLeft {
+    width: 20rem;
+    height: 15rem;
     position: absolute;
     margin-top: -9rem;
     margin-left: -5rem;
+    -webkit-background-image: url('../../img/skateMan.jpg');
     background-image: url('../../img/skateMan.jpg');
+    -webkit-background-size: auto 15rem;
     background-size: auto 15rem;
+    -webkit-background-repeat: no-repeat;
     background-repeat: no-repeat;
-    width: 20rem;
-    height: 15rem;
+    -webkit-transition: all 0s linear 0s;
+    transition: all 0s linear 0s;
 }
-/* 文字和时间线 */
+
+/* 文字和时间线*/
 #main #mainRight {
     height: 10rem;
     position: relative;
 }
 
+/* 文字 */
 #mainRight .descriptionUp {
     height: 100%;
     width: 50%;
@@ -65,9 +71,9 @@
     font-size: 12px;
 }
 
-.descriptionDown {   
+.descriptionDown {
     height: 100%;
-    width: 50%; 
+    width: 50%;
     position: absolute;
     right: 0;
     margin-top: 8rem;
@@ -117,6 +123,7 @@
     color: #545454;
 }
 
+/* 文字出现动画 */
 @keyframes textFrames {
     0% {
         opacity: 0;
@@ -133,6 +140,7 @@
     animation-duration: 1s;
     animation-fill-mode: forwards;
 }
+
 /* 时间 */
 #mainRight #timeBar {
     width: 0.9rem;
@@ -141,6 +149,7 @@
     margin-left: 46%;
 }
 
+/* 时间线 */
 #timeBar #timeLine {
     width: 0.5rem;
     position: absolute;
@@ -151,11 +160,12 @@
     transition: all 0s linear 0s;
 }
 
-#timeBar .timeDots {
+/* 时间点 */
+#timeBar #timeDot {
     margin-top: -11px;
 }
 
-#timeBar .timeDots>li {
+#timeBar #timeDot>li {
     width: 0.8rem;
     height: 0.8rem;
     position: relative;
@@ -165,7 +175,9 @@
     background-color: steelblue;
     display: none;
     z-index: 1;
+    transition: all 0s linear 0s;
 }
+
 /* 按钮 */
 #container #btnBox {
     width: 100%;
@@ -206,6 +218,7 @@
     border-radius: 1rem;
 }
 
+/* 按钮动画 */
 @keyframes btnFrames1 {
     0% {
         width: 3.2rem;
@@ -218,9 +231,9 @@
     }
 
     50% {
-        transform: rotate(360deg);
         -ms-transform: rotate(360deg);
         -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
     }
 
     100% {
@@ -242,9 +255,9 @@
     }
 
     50% {
-        transform: rotate(360deg);
         -ms-transform: rotate(360deg);
         -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
     }
 
     75% {
@@ -257,6 +270,11 @@
         height: 2.5rem;
         border-radius: 1rem;
     }
+}
+
+#btnBox #btn0:hover {
+    background-color: #1989C0;
+    color: white;
 }
 
 #btnBox #btn1:hover {
@@ -275,9 +293,4 @@
     animation-timing-function: ease;
     animation-duration: 1s;
     animation-fill-mode: forwards;
-}
-
-#btn0:hover {
-    background-color: #1989C0;
-    color: white;
 }

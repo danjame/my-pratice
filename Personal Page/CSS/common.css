@@ -5,15 +5,14 @@
     font-family: Arial;
 }
 
-#page {
-    min-width: 640px;
-}
-
 #header {
+    min-width: 640px;
     height: 100px;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
+    margin-left: 5%;
+    margin-right: 5%;
 }
 
 #header .logo {
@@ -30,23 +29,41 @@
     margin-left: 22px;
 }
 
-.headNav li {
+.headNav{
+    width: auto;
+}
+.headNav>li {
     float: left;
-    margin-right: 50px;
+    margin-left: 59px;
     font-size: 23px;
     border-bottom: 3px solid transparent;
 }
 
-.headNav li:hover {
+.headNav>li:hover {
     border-color: #87c0cd;
 }
 
-.headNav a {
+.headNav>li>a {
     text-decoration: none;
     color: #666666;
+    text-align: center;
 }
 
 #content {
     margin-left: 5%;
     margin-right: 5%;
+}
+
+@media only screen and (width: 768px) and (height: 1024px){
+    #content {
+    margin-left: 0;
+    margin-right: 0;
+}
+}
+
+@media only screen and (width: 1024px) and (height: 1366px){
+    #content {
+    margin-left: 0;
+    margin-right: 0;
+}
 }

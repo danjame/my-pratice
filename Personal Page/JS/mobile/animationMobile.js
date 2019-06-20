@@ -47,7 +47,7 @@ Animation.prototype.manAnimation = function() { //人物动画方法
     })();
 }
 
-Animation.prototype.initialization = function(){
+Animation.prototype.initialization = function() {
     clearTimeout(aboutMeObj.manTimer);
     clearTimeout(aboutMeObj.bgTimer);
     clearTimeout(timeLineTimer);
@@ -58,27 +58,36 @@ Animation.prototype.initialization = function(){
     man.style.backgroundPositionX = "0";
     imgBar.style.transform = `translate3d(${this.imgOffset}px, 0, 0)`;
     imgBar.style.transition = "all 1s ease 0s";
-    imgBar.addEventListener("transitionend",()=>{
+    imgBar.addEventListener("transitionend", () => {
         imgBar.style.transition = "all 0s linear 0s";
-    },false)
+    }, false)
 }
 
-let timeLineTimer = null; //时间线计时器
-let contentTimer = null;
-const timeLine = document.querySelector("#timeLine");
-let lineLength = timeLine.offsetHeight;
+menu.addEventListener("click", () => { //头部菜单动画
+    if (menuList.className === "activedMenu") {
+        for (let i = 0; i < menuBars.length; i++) {
+            menuBars[i].className = "menuBarsOff";
+        };
+        menuList.className = "unactivedMenu";
+        menu.className = "unclickMenu";
+    } else {
+        for (let i = 0; i < menuBars.length; i++) {
+            menuBars[i].className = "menuBarsOn";
+        };
+        menuList.className = "activedMenu";
+        menu.className = "clickMenu";
+    }
+}, false);
 
+
+let lineHeight = timeLine.offsetHeight;
 function timeLineAnimationMobile() { //时间线动画函数   
-    // const timeLine = document.querySelector("#timeLine");
-    // let lineLength = timeLine.offsetHeight;
-
     (function timeLineAni() { //时间轴动画函数
         clearTimeout(timeLineTimer);
-        timeLine.style.display = "block";
         timeLineTimer = setTimeout(() => {
-            lineLength += 1;
-            if (lineLength <= 239) {
-                timeLine.style.height = `${lineLength}px`;
+            lineHeight += 1;
+            if (lineHeight <= 239) {
+                timeLine.style.height = `${lineHeight}px`;
                 timeLineAni();
             } else {
                 clearTimeout(timeLineTimer);
@@ -87,24 +96,22 @@ function timeLineAnimationMobile() { //时间线动画函数
     })();
 
     (function contentAni() { //文本框和时间点根据时间轴长度分别淡出和显示
-        const dots = document.querySelectorAll(".timeDots>li");
         dots[0].style.display = "block";
-        document.querySelector("#text1").className = "text";
-
+        textDiv1.className = "text";
         contentTimer = setInterval(() => {
             lineLength = timeLine.offsetHeight;
             switch (lineLength) {
                 case 70:
                     dots[1].style.display = "block";
-                    getEle("#text2").className = "text";
+                    textDiv2.className = "text";
                     break;
                 case 150:
                     dots[2].style.display = "block";
-                    getEle("#text3").className = "text";
+                    textDiv3.className = "text";
                     break;
                 case 220:
                     dots[3].style.display = "block";
-                    getEle("#text4").className = "text";
+                    textDiv4.className = "text";
                     break;
                 case 239:
                     clearInterval(contentTimer);

@@ -1,6 +1,6 @@
 #myLanguage {
-    min-width: 800px;
-    height: 140px;
+min-width: 640px;
+    height: auto;
     display: flex;
     justify-content: space-around;
     padding-top: 50px;
@@ -17,7 +17,7 @@
     opacity: 0.1;
 }
 
-#myLanguage>.language {
+#myLanguage>.lan {
     opacity: 1;
     transform: scale(1.05);
     -ms-transform: scale(1.05);
@@ -33,35 +33,61 @@
     bottom: 35%;
     font-size: 36px;
     color: #1989C0;
+    display: none;
 }
 
-#floatTitle {
+.floatTitle {
     position: absolute;
-    left: 6%;
-    top: 25%;
-    font-size: 60px;
+    margin-left: 1%;
+    margin-top: -560px;
+    font-size: 56px;
     color: white;
 }
 
 @media only screen and (max-width: 1300px){
-    #floatTitle{
-        color: grey;
+    .floatTitle{
+    margin-top: -528px;
+    font-size: 48px;
     }
 }
 
-#floatTitle>li {
+@media only screen and (max-width: 1130px){
+    .floatTitle{
+    margin-top: -480px;
+    font-size: 40px;
+    }
+}
+
+@media only screen and (max-width: 1000px){
+.floatTitle {
+    margin-left: 370px;
+    top: 951px;
+    font-size: 28px;
+    color: white;
+    width: 260px;
+}
+
+.floatTitle>li{
+    float: left;
+    margin-left: 20px;
+}
+}
+
+.floatTitle>li {
     border-bottom: 2px solid transparent;
     cursor: pointer;
 }
 
-#floatTitle>li:hover {
+.floatTitle>li:hover {
     border-bottom: 2px solid #1989C0;
 }
 
-#floatTitle .floatTitleAni {
+.floatTitle .floatTitleAni {
     border-bottom: 2px solid #1989C0;
     color: #1989C0;
 }
+
+
 
 @keyframes scaleAni {
     0% {

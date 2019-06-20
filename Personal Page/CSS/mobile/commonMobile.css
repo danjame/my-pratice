@@ -5,6 +5,7 @@
     font-family: Arial;
 }
 
+/* 头部 */
 #header {
     height: 3rem;
     display: flex;
@@ -14,6 +15,7 @@
     margin-right: 3%;
 }
 
+/* logo */
 #header .logo {
     height: 2.8rem;
     border-radius: 5px 20px 5px 20px;
@@ -27,6 +29,7 @@
     margin-left: 1.1rem;
 }
 
+/* 菜单图标 */
 #header #menu {
     height: 2.5rem;
     width: 3rem;
@@ -63,77 +66,31 @@
     border-radius: 0.5rem;
 }
 
-.headNav {
-    /*     position: absolute;
-    background-color: #f2f4d1;
-    z-index: 1;
-    top: 3.5rem; */
-    width: 100%;
-    /*     text-align: center;
-    font-size: 1.3rem;
-    left: 0; */
-    margin-right: auto;
-    margin-left: auto;
-    text-align: center;
-}
-
+/* 菜单列表 */
 #header>div:last-child>div:first-child {
-    height: 0;
-    overflow: hidden;
-    position: absolute;
-    background-color: #aaaaaa;
-    z-index: 1;
-    top: 3rem;
     width: 100%;
-    font-size: 1.3rem;
+    height: 0;
+    position: absolute;
+    top: 3rem;
     left: 0;
+    background-color: #aaaaaa;
+    font-size: 1.3rem;
     opacity: 0.9;
-}
-
-@keyframes headNav {
-    0% {
-        height: 0;
-    }
-
-    100% {
-        height: 9.5rem;
-    }
-}
-
-@keyframes unheadNav {
-    0% {
-        height: 9.5rem;
-    }
-
-    100% {
-        height: 0;
-    }
-}
-
-.activedMenu {
-    animation-name: headNav;
-    animation-timing-function: ease-out;
-    animation-duration: 0.3s;
-    animation-fill-mode: forwards;
-}
-
-.unactivedMenu {
-    animation-name: unheadNav;
-    animation-timing-function: ease-out;
-    animation-duration: 0.3s;
-    animation-fill-mode: forwards;
+    overflow: hidden;
+    z-index: 1;
 }
 
 .headNav li {
     width: 100%;
     line-height: 3rem;
+    text-align: center;
 }
 
 .headNav>li>a>div {
-    margin-right: auto;
-    margin-left: auto;
     width: 80%;
     height: 3rem;
+    margin-right: auto;
+    margin-left: auto;
     border-bottom: 1px solid #dddddd;
 }
 
@@ -144,4 +101,39 @@
 .headNav a {
     text-decoration: none;
     color: white;
+}
+
+/* 菜单展开动画 */
+@keyframes headNavFrames {
+    0% {
+        height: 0;
+    }
+
+    100% {
+        height: 9.5rem;
+    }
+}
+
+@keyframes unheadNavFrames {
+    0% {
+        height: 9.5rem;
+    }
+
+    100% {
+        height: 0;
+    }
+}
+
+.activedMenu {
+    animation-name: headNavFrames;
+    animation-timing-function: ease-out;
+    animation-duration: 0.3s;
+    animation-fill-mode: forwards;
+}
+
+.unactivedMenu {
+    animation-name: unheadNavFrames;
+    animation-timing-function: ease-out;
+    animation-duration: 0.3s;
+    animation-fill-mode: forwards;
 }

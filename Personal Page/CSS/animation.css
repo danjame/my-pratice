@@ -8,27 +8,22 @@
 
 #bgBox {
     position: relative;
+    margin: 0 auto;
     overflow: hidden;
 }
 
-@media only screen and (min-width: 500px) {
- 
-}
-
-@media only screen and (min-width: 768px) and (max-width: 1024px){
-    
-}
-
 #bgBox #imgGroup {
+    height: auto;
     position: absolute;
-}
-
-#imgGroup>li {
-    float: left;
+    -webkit-transition: all 0s linear 0s;
+    -ms-transition: all 0s linear 0s;
+    -moz-transition: all 0s linear 0s;
+    transition: all 0s linear 0s;
 }
 
 #imgGroup img {
     height: 360px;
+    width: auto;
 }
 
 @media only screen and (max-width: 1300px){
@@ -37,12 +32,38 @@
     }
 }
 
-@media only screen and (max-width: 910px){
+@media only screen and (max-width: 1130px){
     #imgGroup img{
+        height: 270px;
+    }
+}
+
+@media only screen and (max-width: 1000px){
+#imgGroup img{
         height: 240px;
     }
 }
 
+
+#imgGroup>li {
+    float: left;
+}
+
+@media only screen and (min-width: 500px) {
+ 
+}
+
+@media only screen and (width: 768px) and (height: 1024px){
+    #imgGroup img{
+        height: 360px;
+    }
+}
+
+@media only screen and (width: 1024px) and (height: 1366px){
+    #imgGroup img{
+        height: 630px;
+    }
+}
 
 #main {
     height: 160px;
@@ -50,28 +71,21 @@
     background-color: #fabc60;
 }
 
+
+
 #main #mainLeft {
     position: absolute;
-    top: -120px;
-    left: -50px;
+    margin-left: -60px;
+    margin-top: -120px;
 }
 
-#mainLeft #skateMan {
-    height: 250px;
+#mainLeft img{
+    height: 240px;
 }
 
-@media only screen and (max-width: 1300px){
-    #main #mainLeft {
-    position: absolute;
-    top: -130px;
-    left: -50px;
-}
 #mainLeft #skateMan {
     height: 230px;
 }
-
-}
-
 
 #mainRight {
     position: absolute;
@@ -79,45 +93,45 @@
 }
 
 #mainRight .descriptionUp {
-    height: 80px;
-    margin-top: -15px;
-    margin-left: 10px;
-
+    height: 82px;
+    margin-top: -12px;
+    margin-left: 8px;
 }
 
-.descriptionUp>li {
-    width: 180px;
-    height: 70px;
+.descriptionUp>li{
+    width: 235px;
+    height: 82px;
     float: left;
-    margin-right: 20px;
+    margin-right: 105px;
     border-radius: 30px 30px 30px 0;
     padding: 5px;
-    font-size: 12px;
+    font-size: 16px;
     opacity: 0;
 }
 
+
 #mainRight #timeBar {
     height: 10px;
-    margin-top: 10px;
 }
 
 #timeBar #timeLine {
-    width: 7px;
+    width: 0;
     height: 7px;
     border-radius: 20px;
     background-color: white;
-    display: none;
+    margin-top: 16px;
 }
 
-#timeBar .timeDots {
+#timeBar #timeDot {
     margin-top: -11px;
+    height: 1px;
 }
 
-.timeDots>li {
+#timeDot>li {
     width: 13px;
     height: 13px;
     float: left;
-    margin-right: 90px;
+    margin-right: 160px;
     border: 1px solid white;
     border-radius: 50%;
     background-color: steelblue;
@@ -125,20 +139,106 @@
 }
 
 .descriptionDown {
-    height: 80px;
-    margin-top: 10px;
-    margin-left: 110px;
+    height: 82px;
+    margin-top: 3px;
 }
 
-.descriptionDown>li {
-    width: 180px;
-    height: 70px;
+.descriptionDown>li:first-child {
+    width: 230px;
+    height: 82px;
     float: left;
-    margin-right: 20px;
+    margin-left: 183px;
     border-radius: 0 30px 30px 30px;
     padding: 5px;
-    font-size: 12px;
+    font-size: 16px;
+    position: absolute;
     opacity: 0;
+}
+
+.descriptionDown>li:last-child {
+    width: 230px;
+    height: 82px;
+    float: left;
+    margin-left: 534px;
+    border-radius: 0 30px 30px 30px;
+    padding: 5px;
+    font-size: 16px;
+    position: absolute;
+    opacity: 0;
+}
+
+@media only screen and (max-width: 1300px){
+#mainRight .descriptionUp {
+    height: 80px;
+}
+
+.descriptionUp>li{
+    width: 150px;
+    height: 80px;
+    margin-right: 110px;
+    font-size: 13px;
+}
+
+#timeDot>li {
+    margin-right: 120px;
+}
+
+.descriptionDown {
+    margin-top: 4px;
+}
+
+.descriptionDown>li:first-child {
+    width: 150px;
+    height: 80px;   
+    margin-left: 143px;
+    font-size: 13px;
+
+}
+
+.descriptionDown>li:last-child {
+    width: 150px;
+    height: 80px;   
+    margin-left: 413px;
+    font-size: 13px;
+}
+
+}
+
+@media only screen and (max-width: 1130px){
+#mainRight {
+    left: 180px;
+    margin-top: -30px;
+}
+
+#mainRight .descriptionUp {
+    height: 60px;
+}
+
+.descriptionUp>li{
+    width: 150px;
+    height: 60px;
+    margin-right: 50px;
+    font-size: 11.5px;
+}
+
+#timeDot>li {
+    margin-right: 90px;
+}
+
+.descriptionDown>li:first-child {
+    width: 150px;
+    height: 60px;   
+    margin-left: 113px;
+    font-size: 11.5px;
+}
+
+.descriptionDown>li:last-child {
+    width: 150px;
+    height: 60px;   
+    margin-left: 324px;
+    font-size: 11.5px;
+}
+
 }
 
 .description .year {
@@ -168,13 +268,32 @@
     color: #545454;
 }
 
+/* 文字出现动画 */
+@keyframes textFrames {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 0.9;
+    }
+}
+
+.text {
+    animation-name: textFrames;
+    animation-timing-function: linear;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+
 .year{
     font-weight: bold;
 }
 
 #container #btnBox {
     position: absolute;
-    margin-top: -40px;
+    margin-top: -36px;
+    width: auto;
 }
 
 #btnBox>input {
@@ -186,25 +305,35 @@
     cursor: pointer;
 }
 
+#btn0{
+    display: none;
+}
+
 #btnBox #btn1 {
-    width: 80px;
-    height: 80px;
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
 }
 
 #btnBox #btn2 {
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
 }
 
 #btnBox #btn3 {
-    width: 80px;
-    height: 30px;
+    width: 60px;
+    height: 35px;
     border-radius: 30px;
 }
 
-#btnBox .btnMove:hover {
+#btnBox #btn4 {
+    width: 60px;
+    height: 35px;
+    border-radius: 30px;
+}
+
+#btnBox .btnMove:hover, #btn1:hover {
     background-color: #1989C0;
     color: white;
     opacity: 1;
