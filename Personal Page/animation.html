@@ -146,102 +146,24 @@
             </ul>
         </div>
     </div>
-    <script src="JS/common.js"></script>
-    <!-- <script src="JS/mobile/animationMobile.js"></script> -->
-    <script src="JS/animation.js"></script>
-    <!-- <script src="JS/mobile/animationLanMobile.js"></script> -->
-    <script src="JS/animationLan.js"></script>
-    　<script>
-    </script>
-    <script>
-    if (window.matchMedia("(max-width:414px)").matches) { //移动端浏览器
-        const animationObj = {
-            imgBar: "#imgGroup",
-            imgBarWidth: "2560",
-            man: "#mainLeft",
-            manEachWidth: "20",
-            manTotalWidth: "600",
-        };
-
-        var aboutMeObj = new Animation(animationObj);
-
-        btn0.addEventListener("click", () => { //绑定重载事件
-            if (floatTitle.className == "floatTitleMin" || floatTitle.className == "floatTitleMin ftHidden") {
-                floatTitle.className = "floatTitleMin ftDisplay";
-            } else {
-                floatTitle.className = "floatTitleMin ftHidden";
-            }
-        }, false);
-
-        btn1.addEventListener("click", () => { //监听点击事件, 开启动画
-            aboutMeObj.manAnimation();
-            aboutMeObj.bgAnimation();
-            timeLineAnimationMobile();
-            for (let i = 0; i < lanDivs.length; i++) {
-                lanDivs[i].style.left = "5%";
-                lanDivs[i].style.textAlign = "left";
-            };
-            floatTitle.className = "floatTitleMin";
-            btn0.style.display = "block";
-        }, false);
-
-        btn2.addEventListener("click", () => { //监听点击事件, 停止动画
-            clearTimeout(aboutMeObj.manTimer);
-            clearTimeout(aboutMeObj.bgTimer);
-        }, false);
-
-        btn3.addEventListener("click", () => { //绑定重载事件
-            aboutMeObj.initialization();
-        }, false);
-
-    } else if ((window.matchMedia("(width:768px)").matches & window.matchMedia("(height:1024px)").matches)||(window.matchMedia("(width:1024px)").matches & window.matchMedia("(height:1366px)").matches)) {
-        creatImg();
-        forTablet();
-        btn1.addEventListener("click", () => {
-            skateAnimation(1, 29, 50);
-            bgAnimationTablet(2,1);
-        }, false);
-
-        btn2.addEventListener("click", () => { //监听点击事件, 停止动画
-
-            clearTimeout(skateTimer);
-            clearTimeout(bgTimer);
-
-            clearTimeout(timeLineTimer);
-            clearInterval(contentTimer);
-        }, false);
-    } else { //桌面浏览器
-        creatImg();
-        forDeskTop();
-        btn1.addEventListener("click", () => {
-            skateAnimation(1, 29, 50);
-            bgAnimation(1,1);
-            if (window.matchMedia("(min-width:1301px)").matches) {
-                timeAnimation(180, 357, 532, 650, 25);
-                console.log("1");
-            } else if (window.matchMedia("(min-width:1131px)").matches) {
-                timeAnimation(143, 278, 413, 495, 27);
-                console.log("2");
-            } else if (window.matchMedia("(max-width:1130px)").matches) {
-                timeAnimation(113, 218, 323, 385, 30);
-                console.log("3");
-            }
-        }, false);
-
-        btn2.addEventListener("click", () => { //监听点击事件, 停止动画
-
-            clearTimeout(skateTimer);
-            clearTimeout(bgTimer);
-
-            clearTimeout(timeLineTimer);
-            clearInterval(contentTimer);
-        }, false);
+    <script id="script"></script>
+    <script type="text/javascript">
+    function getEle(el) {
+        return document.querySelector(el);
     };
 
-    btn4.addEventListener("click", () => { //绑定重载事件
-        location.reload()
-    }, false);
+    function getAll(el) {
+        return document.querySelectorAll(el);
+    }
+    const script = getEle("#script");
+    if (window.matchMedia("(max-width:414px)").matches) { //移动端浏览器 
+        script.src = "JS/mobile/animationMobile.js";
+    } else {
+        script.src = "JS/animation.js";
+    }
+    script.type = "text/javascript";
     </script>
+    <script type="text/javascript" src="JS/animationLan.js"></script>
 </body>
 
 </html>

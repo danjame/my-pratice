@@ -1,19 +1,90 @@
-function Animation(obj) { //背景人物动画对象
+// 头部菜单
+const menu = getEle("#header #menu");
+const menuList = getEle("#header div:last-child div:first-child");
+const menuBars = getAll("#header #menu>span");
+const menuItem1 = getEle(".headNav>li:first-child div");
+const menuItem2 = getEle(".headNav>li:nth-child(2) div");
+const menuItem3 = getEle(".headNav>li:last-child div");
+// 时间线和时间点
+const timeLine = getEle("#timeLine");
+const dots = getAll("#timeDot>li");
+let lineHeight = timeLine.offsetHeight;
+// 时间线和文字
+const textDiv1 = getEle("#text1");
+const textDiv2 = getEle("#text2");
+const textDiv3 = getEle("#text3");
+const textDiv4 = getEle("#text4");
+//时间线计时器
+let timeLineTimer = null;
+let contentTimer = null;
+// 按钮
+const btn0 = getEle("#btnBox input:first-child");
+const btn1 = getEle("#btnBox input:nth-child(2)");
+const btn2 = getEle("#btnBox input:nth-child(3)");
+const btn3 = getEle("#btnBox input:nth-child(4)");
+const btn4 = getEle("#btnBox input:last-child");
+//实例化对象
+const animationObj = {
+    imgBar: "#imgGroup",
+    imgBarWidth: "2560",
+    man: "#mainLeft",
+    manEachWidth: "20",
+    manTotalWidth: "600",
+};
+var aboutMeObj = new Animation(animationObj);
+
+//语言选择框事件
+btn0.addEventListener("click", () => {
+    if (floatTitle.className == "floatTitleMin" || floatTitle.className == "floatTitleMin ftHidden") {
+        floatTitle.className = "floatTitleMin ftDisplay";
+    } else {
+        floatTitle.className = "floatTitleMin ftHidden";
+    }
+}, false);
+//监听点击事件, 开启动画
+btn1.addEventListener("click", () => {
+    if (imgGroup.style.transition === "all 1s ease 0s") {
+        return;
+    } else {
+        aboutMeObj.manAnimation();
+        aboutMeObj.bgAnimation();
+        timeLineAnimationMobile();
+        for (let i = 0; i < lanDivs.length; i++) {
+            lanDivs[i].style.left = "5%";
+            lanDivs[i].style.textAlign = "left";
+        };
+        floatTitle.className = "floatTitleMin";
+        btn0.style.display = "block";
+    }
+}, false);
+//监听点击事件, 停止动画
+btn2.addEventListener("click", () => {
+    clearAllTimer();
+}, false);
+//还原事件
+btn3.addEventListener("click", () => {
+    aboutMeObj.initialization();
+}, false);
+//刷新事件
+btn4.addEventListener("click", () => {
+    location.reload()
+}, false);
+
+//背景人物动画对象
+function Animation(obj) {
     this.imgBar = obj.imgBar;
     this.imgBarWidth = obj.imgBarWidth;
     this.imgOffset = obj.imgOffset || 0;
-
     this.man = obj.man;
     this.manOffset = obj.manOffset || 0;
     this.manEachWidth = obj.manEachWidth;
     this.manTotalWidth = obj.manTotalWidth;
     this.manMs = obj.manMs || 50;
-
     this.manTimer = null;
     this.bgTimer = null;
 }
-
-Animation.prototype.bgAnimation = function() { //背景动画方法
+//背景动画方法
+Animation.prototype.bgAnimation = function() {
     clearTimeout(this.bgTimer);
     const self = this;
     const imgBar = document.querySelector(this.imgBar);
@@ -31,8 +102,8 @@ Animation.prototype.bgAnimation = function() { //背景动画方法
         }, 5);
     })()
 }
-
-Animation.prototype.manAnimation = function() { //人物动画方法
+//人物动画方法
+Animation.prototype.manAnimation = function() {
     clearTimeout(this.manTimer);
     const self = this;
     const man = document.querySelector(this.man);
@@ -46,12 +117,9 @@ Animation.prototype.manAnimation = function() { //人物动画方法
         }, self.manMs);
     })();
 }
-
+//动画还原方法
 Animation.prototype.initialization = function() {
-    clearTimeout(aboutMeObj.manTimer);
-    clearTimeout(aboutMeObj.bgTimer);
-    clearTimeout(timeLineTimer);
-    clearInterval(contentTimer);
+    clearAllTimer();
     const man = document.querySelector(this.man);
     const imgBar = document.querySelector(this.imgBar);
     this.imgOffset = 0;
@@ -62,8 +130,8 @@ Animation.prototype.initialization = function() {
         imgBar.style.transition = "all 0s linear 0s";
     }, false)
 }
-
-menu.addEventListener("click", () => { //头部菜单动画
+//头部菜单动画
+menu.addEventListener("click", () => {
     if (menuList.className === "activedMenu") {
         for (let i = 0; i < menuBars.length; i++) {
             menuBars[i].className = "menuBarsOff";
@@ -78,11 +146,10 @@ menu.addEventListener("click", () => { //头部菜单动画
         menu.className = "clickMenu";
     }
 }, false);
-
-
-let lineHeight = timeLine.offsetHeight;
-function timeLineAnimationMobile() { //时间线动画函数   
-    (function timeLineAni() { //时间轴动画函数
+//时间线动画函数
+function timeLineAnimationMobile() {
+    //时间轴动画函数
+    (function timeLineAni() {
         clearTimeout(timeLineTimer);
         timeLineTimer = setTimeout(() => {
             lineHeight += 1;
@@ -94,8 +161,9 @@ function timeLineAnimationMobile() { //时间线动画函数
             }
         }, 50);
     })();
-
-    (function contentAni() { //文本框和时间点根据时间轴长度分别淡出和显示
+    //文本框和时间点根据时间轴长度分别淡出和显示
+    (function contentAni() {
+        clearInterval(contentTimer);
         dots[0].style.display = "block";
         textDiv1.className = "text";
         contentTimer = setInterval(() => {
@@ -119,4 +187,11 @@ function timeLineAnimationMobile() { //时间线动画函数
             }
         }, 30);
     })();
+}
+
+function clearAllTimer() {
+    clearTimeout(aboutMeObj.manTimer);
+    clearTimeout(aboutMeObj.bgTimer);
+    clearTimeout(timeLineTimer);
+    clearInterval(contentTimer);
 }

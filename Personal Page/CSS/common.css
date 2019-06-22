@@ -7,7 +7,7 @@
 
 #header {
     min-width: 640px;
-    height: 100px;
+    height: 80px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -16,26 +16,27 @@
 }
 
 #header .logo {
-    height: 60px;
+    height: 50px;
     border-radius: 5px 20px 5px 20px;
     background-color: #87c0cd;
-    font-size: 28px;
+    font-size: 25px;
     color: white;
     cursor: pointer;
 }
 
 .logo .logoDown {
-    margin-top: -5px;
-    margin-left: 22px;
+    margin-top: -8px;
+    margin-left: 20px;
 }
 
-.headNav{
+.headNav {
     width: auto;
 }
+
 .headNav>li {
     float: left;
     margin-left: 59px;
-    font-size: 23px;
+    font-size: 20px;
     border-bottom: 3px solid transparent;
 }
 
@@ -54,16 +55,16 @@
     margin-right: 5%;
 }
 
-@media only screen and (width: 768px) and (height: 1024px){
+@media only screen and (width: 768px) and (height: 1024px) {
     #content {
-    margin-left: 0;
-    margin-right: 0;
-}
+        margin-left: 0;
+        margin-right: 0;
+    }
 }
 
-@media only screen and (width: 1024px) and (height: 1366px){
+@media only screen and (width: 1024px) and (height: 1366px) {
     #content {
-    margin-left: 0;
-    margin-right: 0;
-}
+        margin-left: 0;
+        margin-right: 0;
+    }
 }
