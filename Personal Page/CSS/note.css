@@ -72,8 +72,10 @@ a {
     border-color: grey;
 }
 
-.titleBox>ul>li:hover {
-    background-color: #eeeeee;
+@media not screen and (max-device-width: 425px) {
+    .titleBox>ul>li:hover {
+        background-color: #eeeeee;
+    }
 }
 
 /* 浮动导航向上div */
@@ -201,9 +203,9 @@ a {
     color: #666666;
 }
 
-/* #artiSelection>ul>li:hover {
+#artiSelection>ul>li:hover {
     color: #1989C0;
-} */
+}
 
 #bottom {
     height: 80px;
