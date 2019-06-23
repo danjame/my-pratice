@@ -1,3 +1,7 @@
+#header{
+    min-width: 640px;
+}
+
 #content {
     background-color: #fabc60;
 }

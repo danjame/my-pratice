@@ -1,11 +1,26 @@
-const titleUp = document.querySelector(".titleBox>ul>li:first-child");
-const titleMid = document.querySelector(".titleBox>ul>li:nth-child(2)");
-const titleDown = document.querySelector(".titleBox>ul>li:last-child");
+//浮动导航
+const titleUp = getEle(".titleBox>ul>li:first-child");
+const titleMid = getEle(".titleBox>ul>li:nth-child(2)");
+const titleDown = getEle(".titleBox>ul>li:last-child");
 
-const arrowUp = document.querySelector(".titleBox>ul>li:first-child div:last-child");
-const arrowDown = document.querySelector(".titleBox>ul>li:last-child div:last-child");
-
-const artiSelection = document.querySelector("#artiSelection");
+//箭头
+const arrowUp = getEle(".titleBox>ul>li:first-child div:last-child");
+const arrowDown = getEle(".titleBox>ul>li:last-child div:last-child");
+//浏览器高度
+let clientHeight = document.documentElement.clientHeight;
+//浮动导航适应手机
+if (window.matchMedia("(max-device-width:425px)").matches) {
+    autoTitleBox();
+}
+//浮动导航定位
+function autoTitleBox() {
+	const artiSelection = getEle("#artiSelection");
+	const titleBox = getEle(".titleBox");
+	const arrowDownBox = getEle(".titleBox>ul>li:last-child");
+    titleBox.style.top = `${clientHeight-titleBox.offsetHeight}px`;
+    artiSelection.style.top = `${clientHeight-artiSelection.offsetHeight-arrowDownBox.offsetHeight}px`;
+    artiSelection.style.right = `${titleBox.offsetWidth}px`;
+};
 
 titleUp.addEventListener("mouseover", function() {
     arrowUp.style.borderBottomColor = "#eeeeee";
@@ -24,17 +39,17 @@ titleDown.addEventListener("mouseout", function() {
 }, false);
 
 titleMid.addEventListener("mouseover", function() {
-    artiSelection.style.display = "block";
+    artiSelection.style.visibility = "visible";
 }, false);
 
 titleMid.addEventListener("mouseout", function() {
-    artiSelection.style.display = "none";
+    artiSelection.style.visibility = "hidden";
 }, false);
 
 artiSelection.addEventListener("mouseover", function() {
-    artiSelection.style.display = "block";
+    artiSelection.style.visibility = "visible";
 }, false);
 
 artiSelection.addEventListener("mouseout", function() {
-    artiSelection.style.display = "none";
+    artiSelection.style.visibility = "hidden";
 }, false);

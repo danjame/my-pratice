@@ -1,3 +1,7 @@
+const menuItem1 = getEle(".headNav>li:first-child div");
+const menuItem2 = getEle(".headNav>li:nth-child(2) div");
+const menuItem3 = getEle(".headNav>li:last-child div");
+
 const lanDivs = getAll("#myLanguage>div");
 const floatTitle = getEle("#content>ul:last-child");
 const floatTitles = getAll("#content>ul:last-child>li");
@@ -25,19 +29,19 @@ floatTitle.onclick = () => {
         lanDivs[index].className = "lan"; //语言栏动画
         switch (index) { //动画文字内容变更
             case 0:
-                floatText.innerHTML = "<p>Becoming a </br> Web Programmer.</p>";
+                floatText.innerHTML = "<p>Becoming</br> Web Programmer.</p>";
                 toEn();
                 break;
             case 1:
-                floatText.innerHTML = "<p>Haciendome un</br> Programador Web.</p>";
+                floatText.innerHTML = "<p>Haciendome</br> Programador Web.</p>";
                 toEs();
                 break;
             case 2:
-                floatText.innerHTML = "<p>A tornar-me um</br> Programador Web.</p>";
+                floatText.innerHTML = "<p>A tornar-me</br> Programador Web.</p>";
                 toPt();
                 break;
             case 3:
-                floatText.innerHTML = "<p>Deviens un </br> Programmeur Web.</p>";
+                floatText.innerHTML = "<p>Deviens</br> Programmeur Web.</p>";
                 toFr();
                 break;
         }
@@ -55,7 +59,7 @@ function toEn() {
     text3.innerHTML = "China United Engineering Corporation.</br>Interpretation and translation.";
     text4.innerHTML = "University of Porto.</br>Master in PLE of FLUP.";
     menuItem1.innerText = "ABOUT ME";
-    menuItem2.innerHTML = "NOTE";
+    menuItem2.innerHTML = "NOTES";
     menuItem3.innerHTML = "MY PROJECTS";
 }
 //西班牙语
@@ -71,7 +75,7 @@ function toEs() {
     text4.innerHTML = "Universidad de Porto.</br>Master en PLE de FLUP.";
 
     menuItem1.innerHTML = "SOBRE MI";
-    menuItem2.innerHTML = "NOTA";
+    menuItem2.innerHTML = "NOTAS";
     menuItem3.innerHTML = "MIS PROJECTOS";
 }
 //葡萄牙语
@@ -87,7 +91,7 @@ function toPt() {
     text4.innerHTML = "Universidade do Porto.</br>Mestrado em PLE na FLUP.";
 
     menuItem1.innerHTML = "SOBRE MIM";
-    menuItem2.innerHTML = "APONTAMENTO";
+    menuItem2.innerHTML = "NOTAS";
     menuItem3.innerHTML = "MEUS PROJETOS";
 }
 //法语

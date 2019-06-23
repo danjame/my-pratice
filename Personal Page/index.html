@@ -4,28 +4,46 @@
 <head>
     <meta charset="UTF-8">
     <title>Danjun Xie</title>
-    <link rel="stylesheet" href="CSS/common.css">
-    <link rel="stylesheet" href="CSS/index.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" media="screen and (max-device-width: 425px)" href="CSS/mobile/commonMobile.css" type="text/css" />
+    <link rel="stylesheet" media="not screen and (max-device-width: 425px)" href="CSS/common.css" type="text/css" />
+    <link rel="stylesheet" href="CSS/index.css" type="text/css">
     <style>
-    .headNav li:first-child a {
+        .headNav>li:first-child>a {
         color: #87c0cd;
     }
     </style>
+    <script type="text/javascript" src="JS/GetDOM.js"></script>
 </head>
 
 <body>
     <div id="page">
         <div id="header">
-            <div class="logo" onclick="location.reload()">
+            <div class="logo" onclick="window.location.href=('index.html')">
                 <div class="logoTop">Dan</div>
                 <div class="logoDown">Jun</div>
             </div>
             <div>
-                <ul class="headNav">
-                    <li><a href="index.html">关于</a></li>
-                    <li><a href="note.html">笔记</a></li>
-                    <li><a href="https://github.com/Danjame/MonGit" target="_blank">作品</a></li>
-                </ul>
+                <div>
+                    <ul class="headNav">
+                        <li><a href="index.html">
+                                <div>关于</div>
+                            </a></li>
+                        <li><a href="note.html">
+                                <div>笔记</div>
+                            </a></li>
+                        <li><a href="https://github.com/Danjame/MonGit" target="_blank">
+                                <div>作品</div>
+                            </a></li>
+                    </ul>
+                </div>
+                <span id="menu" class="unclickMenu">
+                    <em></em>
+                    <span class="menuBarsOff"></span>
+                    <span class="menuBarsOff"></span>
+                    <span class="menuBarsOff"></span>
+                    <em></em>
+                </span>
             </div>
         </div>
         <div id="content">
@@ -44,90 +62,78 @@
                 </div>
                 <div id="slideBar">
                     <div class="slideOne">
-                        <div class="meText">
+                        <div>
+                            <h2>吾</h2>
+                            <p>吾谢氏人士也，</br>身矮貌陋，中庸无才，</p>
+                            <p>然好编程之技艺，</br>尤为前端之知。</p>
+                            <p>鄙人深知西学为用，</br>今处葡萄牙国，为任葡语译者。</p>
+                            <p>自幼拙而不敏，故勤学补拙，</br>今以Vue.js和Node.js而习之。</p>
+                            <p>入前端之学半载有余，</br>初出茅庐，遂成此作。</p>
+                            <p>迎同道能士，吾从而师也。</p>
+                        </div>
+                        <div class="signature">
+                            <div><img src="img/LUNABAR.png" alt=""></div>
+                            <p>A Front-end Developer</p>
                             <div>
-                                <h2>吾</h2>
-                                <p>吾谢氏人士也，</br>身矮貌陋，中庸无才，</p>
-                                <p>然好编程之技艺，</br>尤为前端之知。</p>
-                                <p>鄙人深知西学为用，</br>今处葡萄牙国，为任葡语译者。</p>
-                                <p>自幼拙而不敏，故勤学补拙，</br>今以Vue.js和Node.js而习之。</p>
-                                <p>入前端之学半载有余，</br>初出茅庐，遂成此作。</p>
-                                <p>迎同道能士，吾从而师也。</p>
-                            </div>
-                            <div>
-                                <div class="signature">
-                                    <img src="img/LUNABAR.png" alt="">
-                                    <p>A Front-end Developer</p>
-                                    <div>
-                                        <button onclick="window.location.href=('animation.html')">More</button>
-                                    </div>
-                                </div>
+                                <button onclick="window.location.href=('animation.html')">More</button>
                             </div>
                         </div>
                     </div>
                     <div class="slideTwo">
-                        <div class="meText">
+                        <div>
+                            <h2>历练</h2>
+                            <p>2010-2014:</br>吉林外国语大学 西班牙语专业</p>
+                            <p>2012-2013:</br>西班牙圣地亚哥德孔波斯特拉大学 交流项目</p>
+                            <p>2014-2015:</br>哥伦比亚 G3燃煤火电站 西班牙语翻译</p>
+                            <p>2015-2017:</br>葡萄牙波尔图大学 葡语作为第二语言</p>
+                            <p>2017-今:</br>中资葡企 鞋材制造业 打杂人员</p>
+                        </div>
+                        <div>
                             <div>
-                                <h2>历练</h2>
-                                <p>2010-2014:</br>吉林外国语大学 西班牙语专业</p>
-                                <p>2012-2013:</br>西班牙圣地亚哥德孔波斯特拉大学 交流项目</p>
-                                <p>2014-2015:</br>哥伦比亚 G3燃煤火电站 西班牙语翻译</p>
-                                <p>2015-2017:</br>葡萄牙波尔图大学 葡语作为第二语言</p>
-                                <p>2017-今:</br>中资葡企 鞋材制造业 行政和业务助理</p>
+                                <h3>法术</h3>
+                                <p>JavaScript</p>
+                                <p>CSS3</p>
+                                <p>HTML5</p>
+                                <p>Vue.js</p>
+                                <p>Node.js</p>
                             </div>
                             <div>
-                                <div>
-                                    <h3>法术</h3>
-                                    <p>JavaScript</p>
-                                    <p>CSS3</p>
-                                    <p>HTML5</p>
-                                    <p>Vue.js</p>
-                                    <p>Node.js</p>
-                                </div>
-                                <div>
-                                    <h3>技能</h3>
-                                    <p>英语 CET6</p>
-                                    <p>西班牙语 DELE B2</p>
-                                    <p>葡萄牙语 CAPLE C1</p>
-                                    <p>法语 B1</p>
-                                </div>
+                                <h3>技能</h3>
+                                <p>英语 CET6</p>
+                                <p>西班牙语 DELE B2</p>
+                                <p>葡萄牙语 CAPLE C1</p>
+                                <p>法语 B1</p>
                             </div>
                         </div>
                     </div>
                     <div class="slideThree">
-                        <div class="meText">
-                            <div>
-                                <h2>如何找到我</h2>
-                                <p>邮箱:</br>Danjamexie@gmail.com</p>
-                                <p>电话:</br>+351 932165732</p>
-                                <p>脸书:</br>Danjame Xie</p>
-                                <p>微信:</br>Jorge1501</p>
-                            </div>
-                            <div>
-                                <h3>Github</h3>
-                                <a href="https://github.com/Danjame/MonGit" target="_blank">https://github.com/Danjame/MonGit</a>
-                            </div>
+                        <div>
+                            <h2>如何找到我</h2>
+                            <p>邮箱:</br>danjamexie@gmail.com</p>
+                            <p>电话:</br>+351 932165732</p>
+                            <p>脸书:</br>danjame Xie</p>
+                            <p>微信:</br>jorge1501</p>
+                        </div>
+                        <div>
+                            <h3>Github</h3>
+                            <a href="https://github.com/Danjame/MonGit" target="_blank">https://github.com/Danjame/MonGit</a>
                         </div>
                     </div>
                     <div class="slideOne">
-                        <div class="meText">
+                        <div>
+                            <h2>吾</h2>
+                            <p>吾谢氏人士也，</br>身矮貌陋，中庸无才，</p>
+                            <p>然好编程之技艺，</br>尤为前端之知。</p>
+                            <p>鄙人深知西学为用，</br>今处葡萄牙国，为任葡语译者。</p>
+                            <p>自幼拙而不敏，故勤学补拙，</br>今以Vue.js和Node.js而习之。</p>
+                            <p>入前端之学半载有余，</br>初出茅庐，遂成此作。</p>
+                            <p>迎同道能士，吾从而师也。</p>
+                        </div>
+                        <div class="signature">
+                            <div><img src="img/LUNABAR.png" alt=""></div>
+                            <p>A Front-end Developer</p>
                             <div>
-                                <h2>吾</h2>
-                                <p>吾谢氏人士也，</br>身矮貌陋，中庸无才。</p>
-                                <p>而好编程之技艺，</br>尤为前端之知。</p>
-                                <p>草民深知西学为用，</br>今处葡萄牙国，为任葡语译者。</p>
-                                <p>自幼拙而不敏，故勤学补拙，</br>今以Vue.js和Node.js而习之。</p>
-                                <p>入前端之学半载有余，</br>初出茅庐，遂成此作。</p>
-                                <p>迎同道能士，吾从而师也。</p>
-                            </div>
-                            <div>
-                                <div class="signature">
-                                    <img src="img/LUNABAR.png" alt="">
-                                    <p>A Front-end Developer</p>
-                                    <div>
-                                        <button onclick="window.location.href=('animation.html')">More</button>
-                                    </div>
-                                </div>
+                                <button onclick="window.location.href=('animation.html')">More</button>
                             </div>
                         </div>
                     </div>
@@ -135,13 +141,13 @@
             </div>
         </div>
     </div>
-    <script src="JS/index.js"></script>
+    <script type="text/javascript" src="JS/mobile/commonMobile.js"></script>
+    <script type="text/javascript" src="JS/index.js"></script>
     <script>
-    const slideObj = { //实例化对象
+    //实例化对象
+    const slideObj = {
         container: "#slideBox",
         barNode: "#slideBar",
-        eachHeight: 700,
-        iniPosition: 0,
         totalNum: 3,
         dotsFather: ".contentNav",
         dotNodes: ".contentNav>li",

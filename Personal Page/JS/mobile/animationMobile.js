@@ -1,10 +1,3 @@
-// 头部菜单
-const menu = getEle("#header #menu");
-const menuList = getEle("#header div:last-child div:first-child");
-const menuBars = getAll("#header #menu>span");
-const menuItem1 = getEle(".headNav>li:first-child div");
-const menuItem2 = getEle(".headNav>li:nth-child(2) div");
-const menuItem3 = getEle(".headNav>li:last-child div");
 // 时间线和时间点
 const timeLine = getEle("#timeLine");
 const dots = getAll("#timeDot>li");
@@ -130,22 +123,6 @@ Animation.prototype.initialization = function() {
         imgBar.style.transition = "all 0s linear 0s";
     }, false)
 }
-//头部菜单动画
-menu.addEventListener("click", () => {
-    if (menuList.className === "activedMenu") {
-        for (let i = 0; i < menuBars.length; i++) {
-            menuBars[i].className = "menuBarsOff";
-        };
-        menuList.className = "unactivedMenu";
-        menu.className = "unclickMenu";
-    } else {
-        for (let i = 0; i < menuBars.length; i++) {
-            menuBars[i].className = "menuBarsOn";
-        };
-        menuList.className = "activedMenu";
-        menu.className = "clickMenu";
-    }
-}, false);
 //时间线动画函数
 function timeLineAnimationMobile() {
     //时间轴动画函数

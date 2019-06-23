@@ -1,16 +1,21 @@
 #slideBox {
-    height: 700px;
     position: relative;
     overflow: hidden;
 }
 
 .navBox {
     width: 8%;
-    height: 700px;
     position: absolute;
     margin-left: 92%;
-    background-color: rgba(222, 222, 222, 0.2);
+    background-color: rgba(222, 222, 222, 0.3);
     z-index: 1;
+}
+
+@media only screen and (max-width: 700px) {
+    .navBox{
+        width: 15%;
+        margin-left: 85%;
+    }
 }
 
 .contentNav {
@@ -35,7 +40,7 @@
     height: 70px;
     line-height: 70px;
     background-color: black;
-    opacity: 0.4;
+    opacity: 0.3;
 }
 
 @keyframes navDotAhead {
@@ -77,36 +82,75 @@
     position: absolute;
 }
 
-.slideOne,
-.slideTwo,
-.slideThree {
-    height: 700px;
-}
-
 .slideOne {
-    background-color: #f1f4df;
-}
-
-.meText {
-    height: 700px;
     display: flex;
     align-items: center;
     justify-content: space-around;
-    font-size: 1.5em;
+    font-size: 24px;
     color: #666666;
+    background-color: #f1f4df;
+}
+
+@media only screen and (max-width: 1000px) {
+    .slideOne {
+        font-size: 20px;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    .slideOne {
+        font-size: 15px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .slideOne {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+@media only screen and (max-height: 530px) {
+    .slideOne {
+        font-size: 10px;
+    }
+}
+
+@media only screen and (max-height: 400px) {
+    .slideOne {
+        font-size: 10px;
+    }
 }
 
 .signature {
-    position: absolute;
-    margin-left: -25%;
-    margin-top: -8%;
-}
-
-.signature p, .signature div{
     text-align: center;
 }
 
-.slideOne .meText button {
+@media only screen and (max-width: 1000px) {
+    .signature img {
+        width: 300px;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    .signature img {
+        width: 250px;
+    }
+}
+
+@media only screen and (max-height: 530px) {
+    .signature img {
+        width: 180px;
+    }
+}
+
+@media only screen and (max-height: 400px) {
+    .signature img {
+        width: 130px;
+    }
+}
+
+.slideOne .signature button {
     width: 95px;
     height: 35px;
     margin-top: 10%;
@@ -118,27 +162,107 @@
     cursor: pointer;
 }
 
-.slideOne .meText button:hover {
+@media only screen and (max-width: 700px) {
+    .slideOne .signature button {
+        width: 76px;
+        height: 28px;
+    }
+}
+
+@media only screen and (max-height: 400px) {
+    .slideOne .signature button {
+        width: 60.8px;
+        height: 22.4px;
+    }
+}
+
+.slideOne .signature button:hover {
     background-color: #226089;
 }
 
 .slideTwo {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
     background-color: #87c0cd;
-}
-
-.slideTwo .meText{
     color: white;
+    font-size: 24px;
 }
 
-.slideTwo .meText>div:last-child{
-    height: 700px;
+@media only screen and (max-width: 1000px) {
+    .slideTwo {
+        font-size: 20px;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    .slideTwo {
+        font-size: 15px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .slideTwo {
+        font-size: 15px;
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+@media only screen and (max-height: 400px) {
+    .slideTwo {
+        font-size: 11px;
+    }
+}
+
+.slideTwo>div:last-child {
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
 }
 
+@media only screen and (max-width: 600px) {
+    .slideTwo>div:last-child {
+        height: auto;
+        width: 100%;
+        flex-direction: row-reverse;
+        justify-content: space-around;
+    }
+}
+
 .slideThree {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
     background-color: #a2a8d3;
+    font-size: 24px;
+}
+
+@media only screen and (max-width: 1000px) {
+    .slideThree {
+        font-size: 20px;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    .slideThree {
+        font-size: 15px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .slideThree {
+        font-size: 15px;
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+@media only screen and (max-height: 400px) {
+    .slideThree {
+        font-size: 11px;
+    }
 }
 
 .slideThree a {

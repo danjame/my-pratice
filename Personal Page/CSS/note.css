@@ -2,13 +2,22 @@ a {
     text-decoration: none;
 }
 
-#container {
-    min-width: 640px;
+#header {
+    width: 98%;
+    position: fixed;
+    margin-left: 1%;
+    margin-right: 1%;
+    z-index: 1;
+    border-bottom: 1px solid #d8d8d8;
+}
+
+#content {
+    position: absolute;
+    top: 48px;
 }
 
 #content>div:first-child {
     height: 10px;
-    border-top: 2px solid #e8e8e8;
 }
 
 #content .textBox {
@@ -17,11 +26,41 @@ a {
     margin-right: auto;
 }
 
+@media only screen and (max-width: 1000px) {
+    #content .textBox {
+        width: 75%;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    #content .textBox {
+        width: 80%;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    #content .textBox {
+        width: 85%;
+    }
+}
+
+@media only screen and (max-device-width: 425px) {
+    #content .textBox {
+        width: 90%;
+    }
+}
+
 #content .titleBox {
     position: fixed;
     right: 60px;
     margin-top: 100px;
     background-color: white;
+}
+
+@media only screen and (max-width: 850px) {
+    #content .titleBox {
+        right: 0;
+    }
 }
 
 .titleBox>ul>li {
@@ -37,10 +76,12 @@ a {
     background-color: #eeeeee;
 }
 
+/* 浮动导航向上div */
 .titleBox>ul>li:first-child {
     cursor: pointer;
 }
 
+/* 浮动导航中间div */
 .titleBox>ul>li:nth-child(2) {
     height: 60px;
     display: flex;
@@ -49,15 +90,18 @@ a {
     align-items: center;
 }
 
+/* 浮动导航向下div */
 .titleBox>ul>li:last-child {
     border-bottom: 1px solid grey;
     cursor: pointer;
 }
 
+/* 浮动导航向上箭头 */
 .titleBox>ul>li:first-child div:first-child {
     width: 0;
     height: 0;
-    margin-left: 9px;
+    margin-right: auto;
+    margin-left: auto;
     margin-top: 1px;
     border: 16px solid transparent;
     border-bottom: 16px solid #1989C0;
@@ -66,16 +110,19 @@ a {
 .titleBox>ul>li:first-child div:last-child {
     width: 0;
     height: 0;
-    margin-left: 9px;
+    margin-right: auto;
+    margin-left: auto;
     margin-top: -29px;
     border: 16px solid transparent;
     border-bottom: 16px solid white;
 }
 
+/* 浮动导航向下箭头 */
 .titleBox>ul>li:last-child div:first-child {
     width: 0;
     height: 0;
-    margin-left: 9px;
+    margin-right: auto;
+    margin-left: auto;
     margin-top: 17px;
     border: 16px solid transparent;
     border-top: 16px solid #1989C0;
@@ -84,12 +131,14 @@ a {
 .titleBox>ul>li:last-child div:last-child {
     width: 0;
     height: 0;
-    margin-left: 9px;
+    margin-right: auto;
+    margin-left: auto;
     margin-top: -35px;
     border: 16px solid transparent;
-    border-top: 16px solid white;  
+    border-top: 16px solid white;
 }
 
+/* 浮动导航中间div原点 */
 .titleBox>ul>li:nth-child(2) div {
     width: 6px;
     height: 6px;
@@ -104,24 +153,57 @@ a {
     background-color: transparent;
 }
 
+@media only screen and (max-device-width: 425px) {
+    #content .titleBox {
+        right: 0;
+        margin-top: auto;
+        background-color: rgb(255, 255, 255, 0.6);
+    }
+
+    .titleBox>ul>li {
+        border-color: transparent;
+    }
+
+    /* 浮动导航向下div */
+    .titleBox>ul>li:last-child {
+        border-color: transparent;
+    }
+}
+
+/* 浮动标题 */
 #artiSelection {
     position: fixed;
     right: 110px;
     margin-top: 151px;
     border: 1px solid grey;
     padding: 15px;
-    background-color: #eeeeee;
-    display: none;
+    background-color: white;
+    visibility: hidden;
     cursor: pointer;
+    box-sizing: border-box;
+}
+
+@media only screen and (max-width: 850px) {
+    #artiSelection {
+        right: 50px;
+    }
+}
+
+@media only screen and (max-device-width: 425px) {
+    #artiSelection {
+        height: auto;
+        right: 20%;
+        margin: auto;
+    }
 }
 
 #artiSelection>ul>li {
     color: #666666;
 }
 
-#artiSelection>ul>li:hover {
+/* #artiSelection>ul>li:hover {
     color: #1989C0;
-}
+} */
 
 #bottom {
     height: 80px;

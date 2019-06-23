@@ -1,16 +1,36 @@
-(function autoNavPosition() {
-    const contentNav = document.querySelector(".contentNav");
-    const contentNavAni = document.querySelector(".navBox>ul:last-child")
-    contentNav.style.marginTop = `${(700-contentNav.offsetHeight)/2}px`;
+const header = getEle("#header");
+const slideBox = getEle("#slideBox");
+const eachSlide = getAll("#slideBar>div");
+const navBox = getEle(".navBox");
+const contentNav = document.querySelector(".contentNav");
+const contentNavAni = document.querySelector(".navBox>ul:last-child");
+let clientHeight = document.documentElement.clientHeight;
+
+autoAdjust();
+//自适应函数
+function autoAdjust() {
+    //轮播导航自适应
+    contentNav.style.marginTop = `${(clientHeight-header.offsetHeight-contentNav.offsetHeight)/2}px`;
+    //每张幻灯片高度自适应
+    for (let i = 0; i < eachSlide.length; i++) {
+        eachSlide[i].style.height = `${clientHeight-header.offsetHeight}px`;
+    }
+    //幻灯片div与导航div高度自适应
+    slideBox.style.height = navBox.style.height = `${clientHeight-header.offsetHeight}px`;
+    //轮播副本导航自适应
     contentNavAni.style.marginTop = `${contentNav.style.marginTop}`;
-})();
+}
+
+window.addEventListener("resize", () => {
+    clientHeight = document.documentElement.clientHeight;
+    autoAdjust();
+}, false);
 
 function SlideImg(obj) { //定义构造函数
     this.container = obj.container;
     this.barNode = obj.barNode; //图片组节点
-    this.eachHeight = obj.eachHeight; //每张图片高度
     this.totalNum = obj.totalNum; //图片数
-    this.iniPosition = obj.iniPosition; //图片组初始x坐标
+    this.iniPosition = obj.iniPosition || 0; //图片组初始x坐标
     this.dotsFather = obj.dotsFather; //图片点父元素节点
     this.dotNodes = obj.dotNodes; //图片点
     this.dotNodesAni = obj.dotNodesAni; // 图片点动画层
@@ -34,19 +54,19 @@ function SlideImg(obj) { //定义构造函数
     this.slideEngine(); //停止与启动轮播控制方法
     this.dotsEvent(); //图片点控制方法
 };
-
-SlideImg.prototype.slideAnimation = function() { //单张图片动画方法
+//单张图片动画方法
+SlideImg.prototype.slideAnimation = function() {
     const slideBar = document.querySelector(this.barNode);
-    const eachHeight = this.eachHeight;
     const iniPosition = this.iniPosition;
     const speed = this.speed;
     let index = this.index;
-
     clearInterval(this.slideTimer);
-    this.slideTimer = setInterval( //单张图片动画定时器
+    //单张图片动画定时器
+    this.slideTimer = setInterval(
         () => {
-            let targetPosition = index * -eachHeight + iniPosition;
-            let currentPosition = slideBar.offsetTop
+            console.log(slideBar.style.top);
+            let targetPosition = index * (-clientHeight + header.offsetHeight) + iniPosition;
+            let currentPosition = slideBar.offsetTop;
             let step = (targetPosition - currentPosition) / speed;
             if (!step) {
                 clearInterval(this.slideTimer);
@@ -55,19 +75,21 @@ SlideImg.prototype.slideAnimation = function() { //单张图片动画方法
             step > 0 ? step = Math.ceil(step) : step = Math.floor(step);
             currentPosition += step;
             slideBar.style.top = `${currentPosition}px`;
+            console.log(slideBar.style.top);
         }, 1)
-    this.dotsAnimation(); //图片点动画方法
+    //图片点动画方法
+    this.dotsAnimation();
 };
-
-SlideImg.prototype.reStore = function() { //轮播首尾过度方法
+//轮播首尾过度方法
+SlideImg.prototype.reStore = function() {
     const slideBar = document.querySelector(this.barNode);
     if (this.index >= this.totalNum + 1) {
         this.index = 1;
         slideBar.style.top = `${this.iniPosition}px`;
     }
 };
-
-SlideImg.prototype.autoSlide = function() { //全局动画初始化方法
+//全局动画初始化方法
+SlideImg.prototype.autoSlide = function() {
     const self = this;
 
     function iniTimer() {
@@ -80,20 +102,20 @@ SlideImg.prototype.autoSlide = function() { //全局动画初始化方法
     }
     iniTimer();
 };
-
-SlideImg.prototype.slideEngine = function() { //停止与启动轮播控制方法
+//停止与启动轮播控制方法
+SlideImg.prototype.slideEngine = function() {
     const self = this;
     const container = document.querySelector(this.container);
-    container.addEventListener(this.stopEvent, function() { //停止轮播事件
+    container.addEventListener(this.stopEvent, function() {
         clearTimeout(self.iniTimer);
     }, false);
 
-    container.addEventListener(this.startEvent, function() { //启动轮播事件
+    container.addEventListener(this.startEvent, function() {
         self.autoSlide();
     }, false);
 };
-
-SlideImg.prototype.dotsEvent = function() { //图片点控制方法
+//图片点控制方法
+SlideImg.prototype.dotsEvent = function() {
     const self = this;
     const dotNodes = document.querySelectorAll(this.dotNodes);
     const dotsFather = document.querySelector(this.dotsFather);
@@ -108,8 +130,8 @@ SlideImg.prototype.dotsEvent = function() { //图片点控制方法
         }
     }, false);
 };
-
-SlideImg.prototype.dotsAnimation = function() { //图片点动画方法
+//图片点动画方法
+SlideImg.prototype.dotsAnimation = function() {
     const dotNodesAni = document.querySelectorAll(this.dotNodesAni);
     for (let i = 0; i < dotNodesAni.length; i++) {
         if (dotNodesAni[i].className === this.dotActived) {

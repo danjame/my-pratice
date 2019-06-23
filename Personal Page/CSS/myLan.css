@@ -47,12 +47,34 @@
     color: #1989C0;
 }
 
+@media only screen and (width: 1024px) and (height: 1366px) {
+    #floatText {
+        left: 7%;
+        top: 90px;
+        font-size: 30px;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    #floatText {
+        left: 7%;
+        top: 83px;
+        font-size: 16px;
+    }
+}
+
+@media only screen and (width: 768px) and (height: 1024px) {
+    #floatText {
+        top: 90px;
+        font-size: 25px;
+    }
+}
+
 .floatTitle {
     position: absolute;
     margin-top: -560px;
     font-size: 56px;
     color: white;
-
 }
 
 @media only screen and (max-width: 1300px) {

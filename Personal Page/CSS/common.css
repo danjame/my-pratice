@@ -5,14 +5,19 @@
     font-family: Arial;
 }
 
+#page {
+    min-width: 426px;
+    height: auto;
+}
+
 #header {
-    min-width: 640px;
     height: 80px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-left: 5%;
     margin-right: 5%;
+    background-color: white;
 }
 
 #header .logo {
@@ -38,6 +43,13 @@
     margin-left: 59px;
     font-size: 20px;
     border-bottom: 3px solid transparent;
+}
+
+@media only screen and (max-width: 1000px) {
+    .headNav>li {
+        margin-left: 59px;
+        font-size: 18px;
+    }
 }
 
 .headNav>li:hover {

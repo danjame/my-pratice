@@ -4,13 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Danjun Xie</title>
-    <link rel="stylesheet" href="CSS/common.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" media="screen and (max-device-width: 425px)" href="CSS/mobile/commonMobile.css" type="text/css" />
+    <link rel="stylesheet" media="not screen and (max-device-width: 425px)" href="CSS/common.css" type="text/css" />
     <link rel="stylesheet" href="CSS/note.css">
     <style>
-    .headNav li:nth-child(2) a {
+        .headNav li:nth-child(2) a {
         color: #87c0cd;
     }
     </style>
+    <script type="text/javascript" src="JS/GetDOM.js"></script>
 </head>
 
 <body>
@@ -21,18 +24,33 @@
                 <div class="logoDown">Jun</div>
             </div>
             <div>
-                <ul class="headNav">
-                    <li><a href="index.html">关于</a></li>
-                    <li><a href="index.html">笔记</a></li>
-                    <li><a href="https://github.com/Danjame/MonGit" target="_blank">作品</a></li>
-                </ul>
+                <div>
+                    <ul class="headNav">
+                        <li><a href="index.html">
+                                <div>关于</div>
+                            </a></li>
+                        <li><a href="note.html">
+                                <div>笔记</div>
+                            </a></li>
+                        <li><a href="https://github.com/Danjame/MonGit" target="_blank">
+                                <div>作品</div>
+                            </a></li>
+                    </ul>
+                </div>
+                <span id="menu" class="unclickMenu">
+                    <em></em>
+                    <span class="menuBarsOff"></span>
+                    <span class="menuBarsOff"></span>
+                    <span class="menuBarsOff"></span>
+                    <em></em>
+                </span>
             </div>
         </div>
         <div id="content">
-            <div></div>
+            <div id="head"></div>
             <div class="titleBox">
                 <ul>
-                    <li onclick="window.location.href = '#header'">
+                    <li onclick="window.location.href = '#head'">
                         <div></div>
                         <div></div>
                     </li>
@@ -43,7 +61,7 @@
                         <div></div>
                         <div class="blank"></div>
                     </li>
-                    <li onclick="window.location.href = '#bottom'">
+                    <li onclick="window.location.href = '#foot'">
                         <div></div>
                         <div></div>
                     </li>
@@ -119,11 +137,12 @@
                     <p>git push origin master</p>
                     <p>成功执行后会显示几行数据，最后以 master -> master 结束。</p>
                 </div>
-                <div id="bottom"></div>
+                <div id="foot"></div>
             </div>
         </div>
     </div>
-    <script src="JS/note.js"></script>
+    <script type="text/javascript" src="JS/mobile/commonMobile.js"></script>
+    <script type="text/javascript" src="JS/note.js"></script>
 </body>
 
 </html>

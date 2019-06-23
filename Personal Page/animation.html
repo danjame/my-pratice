@@ -5,12 +5,18 @@
     <meta charset="UTF-8">
     <title>Danjun Xie</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <link rel="stylesheet" media="screen and (max-device-width: 414px)" href="CSS/mobile/commonMobile.css" type="text/css" />
-    <link rel="stylesheet" media="screen and (max-device-width: 414px)" href="CSS/mobile/animationMobile.css" type="text/css" />
-    <link rel="stylesheet" media="screen and (max-device-width: 414px)" href="CSS/mobile/myLanMobile.css" type="text/css" />
-    <link rel="stylesheet" media="screen and (min-width: 415px)" href="CSS/common.css" type="text/css" />
-    <link rel="stylesheet" media="screen and (min-width: 415px)" href="CSS/animation.css" type="text/css" />
-    <link rel="stylesheet" media="screen and (min-width: 415px)" href="CSS/myLan.css" type="text/css" />
+    <link rel="stylesheet" media="screen and (max-device-width: 425px)" href="CSS/mobile/commonMobile.css" type="text/css" />
+    <link rel="stylesheet" media="screen and (max-device-width: 425px)" href="CSS/mobile/animationMobile.css" type="text/css" />
+    <link rel="stylesheet" media="screen and (max-device-width: 425px)" href="CSS/mobile/myLanMobile.css" type="text/css" />
+    <link rel="stylesheet" media="not screen and (max-device-width: 425px)" href="CSS/common.css" type="text/css" />
+    <link rel="stylesheet" media="not screen and (max-device-width: 425px)" href="CSS/animation.css" type="text/css" />
+    <link rel="stylesheet" media="not screen and (max-device-width: 425px)" href="CSS/myLan.css" type="text/css" />
+    <style rel="stylesheet">
+        .headNav>li:first-child>a {
+        color: #87c0cd;
+    }
+    </style>
+    <script type="text/javascript" src="JS/GetDOM.js"></script>
 </head>
 
 <body>
@@ -135,7 +141,7 @@
                 </div>
             </div>
             <div id="floatText">
-                <p class="floatTextAni">Becoming a</br>
+                <p class="floatTextAni">Becoming</br>
                     Web Programmer.</p>
             </div>
             <ul class="floatTitle">
@@ -146,22 +152,14 @@
             </ul>
         </div>
     </div>
-    <script id="script"></script>
+    <script type="text/javascript" src="JS/mobile/commonMobile.js"></script>
+    <script id="animationScript" type = "text/javascript"></script>
     <script type="text/javascript">
-    function getEle(el) {
-        return document.querySelector(el);
-    };
-
-    function getAll(el) {
-        return document.querySelectorAll(el);
-    }
-    const script = getEle("#script");
-    if (window.matchMedia("(max-width:414px)").matches) { //移动端浏览器 
-        script.src = "JS/mobile/animationMobile.js";
+    if (window.matchMedia("(max-device-width:425px)").matches) {
+        getEle("#animationScript").src = "JS/mobile/animationMobile.js";
     } else {
-        script.src = "JS/animation.js";
+        getEle("#animationScript").src = "JS/animation.js";
     }
-    script.type = "text/javascript";
     </script>
     <script type="text/javascript" src="JS/animationLan.js"></script>
 </body>

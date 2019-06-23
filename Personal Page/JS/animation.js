@@ -106,19 +106,6 @@ function forTablet() {
     imgGroup.style.width = `${eachImg.offsetWidth * imgNum}px`;
     container.style.width = bgBox.style.width = `${screenWidth}px`;
 };
-//背景动画函数（平板适配）
-function bgAnimationTablet(distance, ms) {
-    clearTimeout(bgTimer);
-    bgTimer = setTimeout(() => {
-        offset -= distance;
-        if (offset < -imgGroup.offsetWidth + screenWidth) {
-            clearTimeout(bgTimer);
-        } else {
-            imgGroup.style.transform = `translate3d(${offset}px, 0, 0)`;
-            bgAnimationTablet(distance, ms);
-        }
-    }, ms);
-};
 //背景动画函数
 function bgAnimation(distance, ms) {
     clearTimeout(bgTimer);
@@ -129,6 +116,19 @@ function bgAnimation(distance, ms) {
         } else {
             imgGroup.style.transform = `translate3d(${offset}px, 0, 0)`;
             bgAnimation(distance, ms);
+        }
+    }, ms);
+};
+//背景动画函数（平板适配）
+function bgAnimationTablet(distance, ms) {
+    clearTimeout(bgTimer);
+    bgTimer = setTimeout(() => {
+        offset -= distance;
+        if (offset < -imgGroup.offsetWidth + screenWidth) {
+            clearTimeout(bgTimer);
+        } else {
+            imgGroup.style.transform = `translate3d(${offset}px, 0, 0)`;
+            bgAnimationTablet(distance, ms);
         }
     }, ms);
 };
