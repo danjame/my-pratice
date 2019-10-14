@@ -61,7 +61,6 @@ slideBar.addEventListener("transitionend", () => { //监听动画结束事件, �
     if (imgIndex >= barChildren.length - 3) {
         imgIndex = 0;
         animation();
-        return;
     }
 });
 
@@ -88,12 +87,13 @@ nextButton.onclick = () => { //下一张
 prevButton.onclick = () => { //上一张
     imgIndex--;
     if (imgIndex < 0) {
-        imgIndex = barChildren.length - 4;
+        imgIndex = 4;
         transform(slideBar, -2000, 0, 0);
         transition(slideBar, 0); //第一张切回最后一张 待实现
     }
     bothTrans();
     dotsAni();
+
 };
 
 (function clickDots() { //点击圆点事件

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>User List</title>
+    <style>
+        .title {
+        text-align: center;
+        font-size: 30px;
+    }
+
+    table {
+        border-collapse: collapse;
+        border: none;
+        margin: 0 auto;
+    }
+
+    td, th{
+        border: solid 1px;
+        width: 80px;
+    }
+    </style>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Sex</th>
+            <th>Nacionality</th>
+            <th>Profession</th>
+            <th></th>
+        </tr>
+        <tr id="addUser">
+            <td><input type="text"></td>
+            <td><input type="text"></td>
+            <td><input type="text"></td>
+            <td><input type="text"></td>
+            <td><input type="text"></td>
+            <td><button id="btn1">Add</button></td>
+        </tr>
+    </table>
+    <div class="title">User List</div>
+    <table id="userList">
+        <tr>
+            <th>Number</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Sex</th>
+            <th>Nacionality</th>
+            <th>Profession</th>
+            <th>Edit</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>Jack</td>
+            <td>18</td>
+            <td>M</td>
+            <td>China</td>
+            <td>Student</td>
+            <td><button>Delete</button></td>
+        </tr>
+    </table>
+    <script>
+    function creatEle(ele) {
+        return document.createElement(ele);
+    }
+
+    function getEle(ele) {
+        return document.querySelector(ele);
+    }
+
+    function getEles(eles) {
+        return document.querySelectorAll(eles);
+    }
+
+    var allTr = getEles('#userList tr');
+    var btns = getEles('#userList button');
+
+    getEle("#btn1").onclick = function() {
+        let newData = getEles("#addUser td input");
+        let newTr = creatEle('tr');
+        let newNum = creatEle('td');
+        allTr = getEles('#userList tr');
+        newNum.innerText = allTr.length;
+        newTr.appendChild(newNum);
+        for (let i = 0; i < newData.length; i++) {
+            let td = creatEle('td');
+            td.innerText = newData[i].value;
+            newTr.appendChild(td);
+        }
+        let newBtd = creatEle('td')
+        let newBtn = creatEle('button');
+        newBtn.innerText = 'Delete';
+        newBtd.appendChild(newBtn);
+        newTr.appendChild(newBtd);
+        userList.appendChild(newTr);
+
+        remove();
+    }
+
+    function remove() {
+        allTr = getEles('#userList tr');
+        btns = getEles('#userList button');
+        for (let i = 0; i < btns.length; i++) {
+            btns[i].onclick = () => {
+                allTr[i + 1].parentNode.removeChild(allTr[i + 1]);
+
+            }
+        }
+    }
+
+    remove();
+    </script>
+</body>
+
+</html>
