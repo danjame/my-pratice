@@ -11,14 +11,15 @@
     }
 
     table {
+        margin: 0 auto;
         border-collapse: collapse;
         border: none;
-        margin: 0 auto;
     }
 
     td, th{
+        width: 100px;
         border: solid 1px;
-        width: 80px;
+        text-align: center;
     }
     </style>
 </head>
@@ -39,7 +40,7 @@
             <td><input type="text"></td>
             <td><input type="text"></td>
             <td><input type="text"></td>
-            <td><button id="btn1">Add</button></td>
+            <td><button id="btn1">Add User</button></td>
         </tr>
     </table>
     <div class="title">User List</div>
@@ -48,7 +49,7 @@
             <th>Number</th>
             <th>Name</th>
             <th>Age</th>
-            <th>Sex</th>
+            <th>Gender (M/F)</th>
             <th>Nacionality</th>
             <th>Profession</th>
             <th>Edit</th>
@@ -79,11 +80,50 @@
     var allTr = getEles('#userList tr');
     var btns = getEles('#userList button');
 
-    getEle("#btn1").onclick = function() {
-        let newData = getEles("#addUser td input");
+    getEle('#btn1').onclick = function() {
+        let newData = getEles('#addUser td input');
+        //信息判断
+        for (let i = 0; i < newData.length; i++) {
+            if (newData[i].value == '') {
+                alert("Please complete the information!");
+                return;
+            }
+        }
+        if (isNaN(newData[0].value)) {
+            if (newData[1].value >= 1 && newData[1].value <= 120) {
+                if (newData[2].value == 'M' || newData[2].value == 'F') {
+                    if (isNaN(newData[3].value)) {
+                        if (isNaN(newData[4].value)) {
+                            addData();
+                        } else {
+                            alert("Please input the correct profession!");
+                            return;
+                        }
+                    } else {
+                        alert("Please input the correct nacionality!");
+                        return;
+                    }
+                } else {
+                    alert("Please input the correct gender!");
+                    return;
+                }
+            } else {
+                alert("Please input the correct age!");
+                return;
+            }
+        } else {
+            alert("The name should not be number!");
+            return;
+        };
+    }
+
+    //增添信息
+    function addData() {
+        allTr = getEles('#userList tr');
+        let userList = getEle('#userList');
+        let newData = getEles('#addUser td input');
         let newTr = creatEle('tr');
         let newNum = creatEle('td');
-        allTr = getEles('#userList tr');
         newNum.innerText = allTr.length;
         newTr.appendChild(newNum);
         for (let i = 0; i < newData.length; i++) {
@@ -96,23 +136,31 @@
         newBtn.innerText = 'Delete';
         newBtd.appendChild(newBtn);
         newTr.appendChild(newBtd);
-        userList.appendChild(newTr);
 
+        userList.appendChild(newTr);
         remove();
     }
 
+    //删除行
     function remove() {
         allTr = getEles('#userList tr');
         btns = getEles('#userList button');
         for (let i = 0; i < btns.length; i++) {
             btns[i].onclick = () => {
                 allTr[i + 1].parentNode.removeChild(allTr[i + 1]);
-
+                sort();
             }
         }
     }
 
-    remove();
+    // 重新排序
+    function sort() {
+        allTr = getEles('#userList tr');
+        for (let i = 1; i < allTr.length; i++) {
+            allTr[i].firstElementChild.innerText = i;
+        };
+        remove();
+    }
     </script>
 </body>
 
