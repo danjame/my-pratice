@@ -12,7 +12,8 @@ let UIComponent = (() => {
 
         incSum: ".budget__income--value",
         expSum: ".budget__expenses--value",
-        summary: ".budget__value"
+        summary: ".budget__value",
+        budgetPercent: ".budget__expenses--percentage"
     }
 
     return {
@@ -24,6 +25,11 @@ let UIComponent = (() => {
                 amount: document.querySelector(allDoms.amount).value
             }
         },
+        //清除输入内容
+        clearInput() {
+            document.querySelector(allDoms.desc).value = "";
+            document.querySelector(allDoms.amount).value = "";
+        },
         // 获取节点classname
         getAllDoms() {
             return allDoms;
@@ -31,13 +37,12 @@ let UIComponent = (() => {
         //添加元素
         addToList(type, newItem) {
             let parentWrap, itemHtml;
-            if (type === "exp") {
-                parentWrap = document.querySelector(allDoms.expenseWrap);
-                itemHtml = `<div class="item clearfix" id="expense-${newItem.id}">
+            if (type === "inc") {
+                parentWrap = document.querySelector(allDoms.incomeWrap);
+                itemHtml = `<div class="item clearfix" id="income-${newItem.id}">
                                 <div class="item__description">${newItem.desc}</div>
                                 <div class="right clearfix">
-                                    <div class="item__value">- ${newItem.value}</div>
-                                    <div class="item__percentage">21%</div>
+                                    <div class="item__value">+ ${newItem.value}</div>
                                     <div class="item__delete">
                                         <button class="item__delete--btn">
                                         <i class="ion-ios-close-outline"></i>
@@ -45,12 +50,13 @@ let UIComponent = (() => {
                                     </div>
                                 </div>
                             </div>`
-            } else if (type === "inc") {
-                parentWrap = document.querySelector(allDoms.incomeWrap);
-                itemHtml = `<div class="item clearfix" id="income-${newItem.id}">
+            } else if (type === "exp") {
+                parentWrap = document.querySelector(allDoms.expenseWrap);
+                itemHtml = `<div class="item clearfix" id="expense-${newItem.id}">
                                 <div class="item__description">${newItem.desc}</div>
                                 <div class="right clearfix">
-                                    <div class="item__value">+ ${newItem.value}</div>
+                                    <div class="item__value">- ${newItem.value}</div>
+                                    <div class="item__percentage">${newItem.percent}%</div>
                                     <div class="item__delete">
                                         <button class="item__delete--btn">
                                         <i class="ion-ios-close-outline"></i>
@@ -67,10 +73,11 @@ let UIComponent = (() => {
             itemEle.parentNode.removeChild(itemEle);
         },
         //展示概要
-        displaySummary(totalInc, totalExpe, summary) {
-            document.querySelector(allDoms.incSum).innerHTML = totalInc;
-            document.querySelector(allDoms.expSum).innerHTML = totalExpe;
-            document.querySelector(allDoms.summary).innerHTML = summary;
+        displaySummary(totalInc, totalExpe, summary, percent) {
+            document.querySelector(allDoms.incSum).innerHTML = `+ ${totalInc}`;
+            document.querySelector(allDoms.expSum).innerHTML = `- ${totalExpe}`;
+            document.querySelector(allDoms.summary).innerHTML = `+ ${summary}`;
+            document.querySelector(allDoms.budgetPercent).innerHTML = `${percent}%`;
         },
     }
 })();
@@ -79,13 +86,13 @@ let UIComponent = (() => {
 //计算组件
 let ComputeComponent = (() => {
     //构造函数
-    function Expense(id, desc, value) {
+    function Income(id, desc, value) {
         this.id = id;
         this.desc = desc;
         this.value = value;
     };
 
-    function Income(id, desc, value) {
+    function Expense(id, desc, value) {
         this.id = id;
         this.desc = desc;
         this.value = value;
@@ -93,19 +100,19 @@ let ComputeComponent = (() => {
     //数据
     let data = {
         allItems: {
-            exp: [],
             inc: [],
+            exp: []
         },
         totalAmount: {
-            exp: 0,
-            inc: 0
+            inc: 0,
+            exp: 0
         }
     };
 
     return {
         //增加项
         addItem(type, desc, value) {
-            let newItem, id;
+            let newItem, id, percentage
 
             if (data.allItems[type].length !== 0) {
                 id = data.allItems[type][data.allItems[type].length - 1].id + 1;
@@ -113,10 +120,12 @@ let ComputeComponent = (() => {
                 id = 0;
             }
 
-            if (type === "exp") {
-                newItem = new Expense(id, desc, value);
-            } else if (type === "inc") {
+            if (type === "inc") {
                 newItem = new Income(id, desc, value);
+            } else if (type === "exp") {
+                newItem = new Expense(id, desc, value);
+                percentage = Math.round(newItem.value / data.totalAmount.inc * 100);
+                newItem.percent = percentage;
             }
             data.allItems[type].push(newItem);
             return newItem;
@@ -142,11 +151,11 @@ let ComputeComponent = (() => {
         //计算总额
         calculateTotal(type) {
             let sum = 0;
-            if (type === "exp") {
+            if (type === "inc") {
                 data.allItems[type].forEach((item) => {
                     sum += parseInt(item.value);
                 })
-            } else if (type === "inc") {
+            } else if (type === "exp") {
                 data.allItems[type].forEach((item) => {
                     sum += parseInt(item.value);
                 })
@@ -154,10 +163,17 @@ let ComputeComponent = (() => {
             data.totalAmount[type] = sum;
         },
         calculateSum() {
+            let percent;
+            if (isNaN(Math.round(data.totalAmount.exp / data.totalAmount.inc * 100))) {
+                percent = "";
+            } else {
+                percent = Math.round(data.totalAmount.exp / data.totalAmount.inc * 100);
+            }
             return {
                 totalInc: data.totalAmount.inc,
                 totalExpe: data.totalAmount.exp,
                 summary: data.totalAmount.inc - data.totalAmount.exp,
+                percent,
             }
         },
         getData() {
@@ -181,9 +197,9 @@ let linkage = ((UIComponent, ComputeComponent) => {
             ComputeComponent.calculateTotal(inputValues.type);
             UIComponent.addToList(inputValues.type, addNewItem);
 
-            let summary = ComputeComponent.calculateSum();
-            UIComponent.displaySummary(summary.totalInc, summary.totalExpe, summary.summary);
-
+            let updataSum = ComputeComponent.calculateSum();
+            UIComponent.displaySummary(updataSum.totalInc, updataSum.totalExpe, updataSum.summary, updataSum.percent);
+            UIComponent.clearInput();
             console.log(ComputeComponent.getData());
 
         }, false)
@@ -199,8 +215,8 @@ let linkage = ((UIComponent, ComputeComponent) => {
                 UIComponent.deleteFromList(nodeID);
                 ComputeComponent.calculateTotal(type);
 
-                let summary = ComputeComponent.calculateSum();
-                UIComponent.displaySummary(summary.totalInc, summary.totalExpe, summary.summary);
+                let updataSum = ComputeComponent.calculateSum();
+                UIComponent.displaySummary(updataSum.totalInc, updataSum.totalExpe, updataSum.summary, updataSum.percent);
 
 
                 console.log(ComputeComponent.getData());
