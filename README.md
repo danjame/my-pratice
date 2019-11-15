@@ -1,1 +1,1 @@
-# MonGit
+# JavaScript Exercise
