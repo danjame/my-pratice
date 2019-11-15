@@ -1,6 +1,6 @@
 //UI组件
 let UIComponent = (() => {
-//UI节点classname
+    //UI节点classname
     let allDoms = {
         type: ".add__type",
         desc: ".add__description",
@@ -8,7 +8,11 @@ let UIComponent = (() => {
         addBtn: ".add__btn",
         incomeWrap: ".income__list",
         expenseWrap: ".expenses__list",
-        btnParent: ".container"
+        btnParent: ".container",
+
+        incSum: ".budget__income--value",
+        expSum: ".budget__expenses--value",
+        summary: ".budget__value"
     }
 
     return {
@@ -58,18 +62,23 @@ let UIComponent = (() => {
             parentWrap.insertAdjacentHTML("beforeend", itemHtml);
         },
         //删除元素
-        deleteFromList(nodeID){
+        deleteFromList(nodeID) {
             let itemEle = document.querySelector(`#${nodeID}`);
             itemEle.parentNode.removeChild(itemEle);
-        }
+        },
+        //展示概要
+        displaySummary(totalInc, totalExpe, summary) {
+            document.querySelector(allDoms.incSum).innerHTML = totalInc;
+            document.querySelector(allDoms.expSum).innerHTML = totalExpe;
+            document.querySelector(allDoms.summary).innerHTML = summary;
+        },
     }
-
 })();
 
 
 //计算组件
 let ComputeComponent = (() => {
-//构造函数
+    //构造函数
     function Expense(id, desc, value) {
         this.id = id;
         this.desc = desc;
@@ -81,7 +90,7 @@ let ComputeComponent = (() => {
         this.desc = desc;
         this.value = value;
     };
-//数据
+    //数据
     let data = {
         allItems: {
             exp: [],
@@ -113,19 +122,19 @@ let ComputeComponent = (() => {
             return newItem;
         },
         //删除项
-        deleteItem(type, id){
+        deleteItem(type, id) {
             let targeData, index;
 
-            data.allItems[type].forEach((item)=>{
-                if (item.id == id){
-                   targeData = item;
-                }else{
+            data.allItems[type].forEach((item) => {
+                if (item.id == id) {
+                    targeData = item;
+                } else {
                     return;
                 }
             })
 
-            if(data.allItems[type].indexOf(targeData)!==-1){
-               index = data.allItems[type].indexOf(targeData);
+            if (data.allItems[type].indexOf(targeData) !== -1) {
+                index = data.allItems[type].indexOf(targeData);
                 data.allItems[type].splice(index, 1);
             }
 
@@ -144,6 +153,16 @@ let ComputeComponent = (() => {
             }
             data.totalAmount[type] = sum;
         },
+        calculateSum() {
+            return {
+                totalInc: data.totalAmount.inc,
+                totalExpe: data.totalAmount.exp,
+                summary: data.totalAmount.inc - data.totalAmount.exp,
+            }
+        },
+        getData() {
+            return data
+        }
     }
 
 })()
@@ -154,35 +173,41 @@ let linkage = ((UIComponent, ComputeComponent) => {
 
     let setListeners = () => {
         let doms = UIComponent.getAllDoms();
-
+        //添加项事件
         document.querySelector(doms.addBtn).addEventListener("click", () => {
             let inputValues = UIComponent.getInput();
             let addNewItem = ComputeComponent.addItem(inputValues.type, inputValues.desc, inputValues.amount);
-            
+
             ComputeComponent.calculateTotal(inputValues.type);
             UIComponent.addToList(inputValues.type, addNewItem);
 
-        }, false)
+            let summary = ComputeComponent.calculateSum();
+            UIComponent.displaySummary(summary.totalInc, summary.totalExpe, summary.summary);
 
-        document.querySelector(doms.btnParent).addEventListener("click", (event)=>{
+            console.log(ComputeComponent.getData());
+
+        }, false)
+        //删除项事件
+        document.querySelector(doms.btnParent).addEventListener("click", (event) => {
             let target = event.target;
-            // console.log(target);
-            if(target.nodeName.toLowerCase() == 'i'){
+            if (target.nodeName.toLowerCase() === "i") {
                 let nodeID = target.parentNode.parentNode.parentNode.parentNode.id;
                 let id = nodeID.split("-")[1];
-                let type = nodeID.split("-")[0].substring(0,3);
-                // ComputeComponent.deleteItem(type, id);
-                // UIComponent.deleteFromList(nodeID);
+                let type = nodeID.split("-")[0].substring(0, 3);
+
+                ComputeComponent.deleteItem(type, id);
+                UIComponent.deleteFromList(nodeID);
+                ComputeComponent.calculateTotal(type);
+
+                let summary = ComputeComponent.calculateSum();
+                UIComponent.displaySummary(summary.totalInc, summary.totalExpe, summary.summary);
+
+
+                console.log(ComputeComponent.getData());
             }
         })
     }
 
-
-
     setListeners();
-
-
-
-
 
 })(UIComponent, ComputeComponent)
