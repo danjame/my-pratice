@@ -7,6 +7,7 @@ let UIComponent = (() => {
         addBtn: ".add__btn",
         incomeWrap: ".income__list",
         expenseWrap: ".expenses__list",
+        btnParent: ".container"
     }
 
     return {
@@ -21,10 +22,10 @@ let UIComponent = (() => {
             return allDoms;
         },
         addToList(type, newItem) {
-            let parentWrap, itemHtml
+            let parentWrap, itemHtml;
 
             if (type === "exp") {
-                parentWrap = document.querySelector(expenseWrap);
+                parentWrap = document.querySelector(allDoms.expenseWrap);
                 itemHtml = `<div class="item clearfix" id="expense-${newItem.id}">
                                 <div class="item__description">${newItem.desc}</div>
                                 <div class="right clearfix">
@@ -37,9 +38,8 @@ let UIComponent = (() => {
                                     </div>
                                 </div>
                             </div>`
-
             } else if (type === "inc") {
-                parentWrap = document.querySelector(incomeWrap);
+                parentWrap = document.querySelector(allDoms.incomeWrap);
                 itemHtml = `<div class="item clearfix" id="income-${newItem.id}">
                                 <div class="item__description">${newItem.desc}</div>
                                 <div class="right clearfix">
@@ -51,9 +51,13 @@ let UIComponent = (() => {
                                     </div>
                                 </div>
                             </div>`
-            }
+            };
             parentWrap.insertAdjacentHTML("beforeend", itemHtml);
         },
+        deleteFromList(node){
+            let itemNode = document.querySelector(node);
+            itemNode.parentNode.removeChild(itemNode);
+        }
     }
 
 })();
@@ -103,6 +107,25 @@ let ComputeComponent = (() => {
             data.allItems[type].push(newItem);
             return newItem;
         },
+
+        deleteItem(type, id){
+            let targeData, index;
+
+            data.allItems[type].forEach((item)=>{
+                if (item.id == id){
+                    targeData = item;
+                }else{
+                    return;
+                }
+            })
+
+            if(data.allItems[type].indexOf(targeData)!==-1){
+                index = data.allItems[type].indexOf(targeData);
+                data.allItems[type].splice(index, 1);
+            }
+
+        },
+
         calculateTotal(type) {
             let sum = 0;
             if (type === "exp") {
@@ -132,10 +155,20 @@ let linkage = ((UIComponent, ComputeComponent) => {
             let addNewItem = ComputeComponent.addItem(inputValues.type, inputValues.desc, inputValues.amount);
             
             ComputeComponent.calculateTotal(inputValues.type);
-            UIComponent.addToList(addNewItem);
+            UIComponent.addToList(inputValues.type, addNewItem);
 
         }, false)
+
+        document.querySelector(doms.btnParent).addEventListener("click", (event)=>{
+            let target = event.target;
+            // console.log(target);
+            if(target.nodeName.toLowerCase() == 'i'){
+                console.log(target);
+            }
+        })
     }
+
+
 
     setListeners();
 
