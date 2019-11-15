@@ -1,5 +1,6 @@
+//UI组件
 let UIComponent = (() => {
-
+//UI节点classname
     let allDoms = {
         type: ".add__type",
         desc: ".add__description",
@@ -11,6 +12,7 @@ let UIComponent = (() => {
     }
 
     return {
+        // 获取输入内容
         getInput() {
             return {
                 type: document.querySelector(allDoms.type).value,
@@ -18,12 +20,13 @@ let UIComponent = (() => {
                 amount: document.querySelector(allDoms.amount).value
             }
         },
+        // 获取节点classname
         getAllDoms() {
             return allDoms;
         },
+        //添加元素
         addToList(type, newItem) {
             let parentWrap, itemHtml;
-
             if (type === "exp") {
                 parentWrap = document.querySelector(allDoms.expenseWrap);
                 itemHtml = `<div class="item clearfix" id="expense-${newItem.id}">
@@ -54,18 +57,19 @@ let UIComponent = (() => {
             };
             parentWrap.insertAdjacentHTML("beforeend", itemHtml);
         },
-        deleteFromList(node){
-            let itemNode = document.querySelector(node);
-            itemNode.parentNode.removeChild(itemNode);
+        //删除元素
+        deleteFromList(nodeID){
+            let itemEle = document.querySelector(`#${nodeID}`);
+            itemEle.parentNode.removeChild(itemEle);
         }
     }
 
 })();
 
 
-
+//计算组件
 let ComputeComponent = (() => {
-
+//构造函数
     function Expense(id, desc, value) {
         this.id = id;
         this.desc = desc;
@@ -77,7 +81,7 @@ let ComputeComponent = (() => {
         this.desc = desc;
         this.value = value;
     };
-
+//数据
     let data = {
         allItems: {
             exp: [],
@@ -90,6 +94,7 @@ let ComputeComponent = (() => {
     };
 
     return {
+        //增加项
         addItem(type, desc, value) {
             let newItem, id;
 
@@ -107,25 +112,25 @@ let ComputeComponent = (() => {
             data.allItems[type].push(newItem);
             return newItem;
         },
-
+        //删除项
         deleteItem(type, id){
             let targeData, index;
 
             data.allItems[type].forEach((item)=>{
                 if (item.id == id){
-                    targeData = item;
+                   targeData = item;
                 }else{
                     return;
                 }
             })
 
             if(data.allItems[type].indexOf(targeData)!==-1){
-                index = data.allItems[type].indexOf(targeData);
+               index = data.allItems[type].indexOf(targeData);
                 data.allItems[type].splice(index, 1);
             }
 
         },
-
+        //计算总额
         calculateTotal(type) {
             let sum = 0;
             if (type === "exp") {
@@ -144,7 +149,7 @@ let ComputeComponent = (() => {
 })()
 
 
-
+//联动组件
 let linkage = ((UIComponent, ComputeComponent) => {
 
     let setListeners = () => {
@@ -163,7 +168,11 @@ let linkage = ((UIComponent, ComputeComponent) => {
             let target = event.target;
             // console.log(target);
             if(target.nodeName.toLowerCase() == 'i'){
-                console.log(target);
+                let nodeID = target.parentNode.parentNode.parentNode.parentNode.id;
+                let id = nodeID.split("-")[1];
+                let type = nodeID.split("-")[0].substring(0,3);
+                // ComputeComponent.deleteItem(type, id);
+                // UIComponent.deleteFromList(nodeID);
             }
         })
     }
