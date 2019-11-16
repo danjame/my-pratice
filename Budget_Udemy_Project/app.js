@@ -13,7 +13,10 @@ let UIComponent = (() => {
         incSum: ".budget__income--value",
         expSum: ".budget__expenses--value",
         summary: ".budget__value",
-        budgetPercent: ".budget__expenses--percentage"
+        budgetPercent: ".budget__expenses--percentage",
+
+        monthWrap: ".budget__title--month",
+        percentWrap: ".item__percentage"
     }
 
     return {
@@ -42,7 +45,7 @@ let UIComponent = (() => {
                 itemHtml = `<div class="item clearfix" id="income-${newItem.id}">
                                 <div class="item__description">${newItem.desc}</div>
                                 <div class="right clearfix">
-                                    <div class="item__value">+ ${newItem.value}</div>
+                                    <div class="item__value">${newItem.value}</div>
                                     <div class="item__delete">
                                         <button class="item__delete--btn">
                                         <i class="ion-ios-close-outline"></i>
@@ -55,8 +58,8 @@ let UIComponent = (() => {
                 itemHtml = `<div class="item clearfix" id="expense-${newItem.id}">
                                 <div class="item__description">${newItem.desc}</div>
                                 <div class="right clearfix">
-                                    <div class="item__value">- ${newItem.value}</div>
-                                    <div class="item__percentage">${newItem.percent}%</div>
+                                    <div class="item__value">${newItem.value}</div>
+                                    <div class="item__percentage"></div>
                                     <div class="item__delete">
                                         <button class="item__delete--btn">
                                         <i class="ion-ios-close-outline"></i>
@@ -76,9 +79,17 @@ let UIComponent = (() => {
         displaySummary(totalInc, totalExpe, summary, percent) {
             document.querySelector(allDoms.incSum).innerHTML = `+ ${totalInc}`;
             document.querySelector(allDoms.expSum).innerHTML = `- ${totalExpe}`;
-            document.querySelector(allDoms.summary).innerHTML = `+ ${summary}`;
-            document.querySelector(allDoms.budgetPercent).innerHTML = `${percent}%`;
+            document.querySelector(allDoms.summary).innerHTML = `${summary}`;
+            document.querySelector(allDoms.budgetPercent).innerHTML = `${percent}`;
         },
+        //展示年月
+        displayDate() {
+            const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            const currentDate = new Date();
+            const currentMonth = months[currentDate.getMonth()];
+            const currentYear = currentDate.getFullYear();
+            document.querySelector(allDoms.monthWrap).innerHTML = `${currentMonth} ${currentYear}`;
+        }
     }
 })();
 
@@ -112,8 +123,7 @@ let ComputeComponent = (() => {
     return {
         //增加项
         addItem(type, desc, value) {
-            let newItem, id, percentage
-
+            let newItem, id;
             if (data.allItems[type].length !== 0) {
                 id = data.allItems[type][data.allItems[type].length - 1].id + 1;
             } else {
@@ -124,8 +134,6 @@ let ComputeComponent = (() => {
                 newItem = new Income(id, desc, value);
             } else if (type === "exp") {
                 newItem = new Expense(id, desc, value);
-                percentage = Math.round(newItem.value / data.totalAmount.inc * 100);
-                newItem.percent = percentage;
             }
             data.allItems[type].push(newItem);
             return newItem;
@@ -149,31 +157,45 @@ let ComputeComponent = (() => {
 
         },
         //计算总额
-        calculateTotal(type) {
+        calculateData(type) {
             let sum = 0;
             if (type === "inc") {
                 data.allItems[type].forEach((item) => {
-                    sum += parseInt(item.value);
+                    sum += Number(item.value);
                 })
             } else if (type === "exp") {
                 data.allItems[type].forEach((item) => {
-                    sum += parseInt(item.value);
+                    sum += Number(item.value);
                 })
             }
             data.totalAmount[type] = sum;
         },
-        calculateSum() {
-            let percent;
-            if (isNaN(Math.round(data.totalAmount.exp / data.totalAmount.inc * 100))) {
-                percent = "";
+        updataSum() {
+            let percent, ratio;
+            ratio = Math.round(data.totalAmount.exp / data.totalAmount.inc * 100);
+            if (isNaN(ratio) || ratio === Infinity) {
+                percent = "...";
             } else {
-                percent = Math.round(data.totalAmount.exp / data.totalAmount.inc * 100);
+                percent = `${ratio}%`;
             }
             return {
                 totalInc: data.totalAmount.inc,
                 totalExpe: data.totalAmount.exp,
-                summary: data.totalAmount.inc - data.totalAmount.exp,
+                available: data.totalAmount.inc - data.totalAmount.exp,
                 percent,
+            }
+        },
+        formatOutput(type, item) {
+            let value;
+            if (type == "inc") {
+                value = `+ ${item.value}`
+            } else if (type == "exp") {
+                value = `- ${item.value}`
+            }
+            return {
+                id: item.id,
+                desc: item.desc,
+                value,
             }
         },
         getData() {
@@ -186,21 +208,49 @@ let ComputeComponent = (() => {
 
 //联动组件
 let linkage = ((UIComponent, ComputeComponent) => {
+    let doms = UIComponent.getAllDoms();
+
+    let updataPercent = () => {
+        const data = ComputeComponent.getData();
+
+        let percentWraps = document.querySelectorAll(doms.percentWrap);
+        let percents = [];
+        data.allItems.exp.forEach(item => {
+            let each = Math.round(item.value / data.totalAmount.inc * 100);
+            if (isNaN(each) || each === Infinity) {
+                each = "...";
+            } else {
+                each = `${each}%`;
+            }
+            percents.push(each);
+        });
+        percents.forEach((item, index) => {
+            percentWraps[index].innerHTML = item;
+        })
+    }
 
     let setListeners = () => {
-        let doms = UIComponent.getAllDoms();
+
         //添加项事件
         document.querySelector(doms.addBtn).addEventListener("click", () => {
-            let inputValues = UIComponent.getInput();
-            let addNewItem = ComputeComponent.addItem(inputValues.type, inputValues.desc, inputValues.amount);
+            let values = UIComponent.getInput();
+            if (values.amount == 0 || values.amount == "" || values.desc == "") {
+                alert("Please complete the information!");
+            } else {
+                let newItem = ComputeComponent.addItem(values.type, values.desc, values.amount);
 
-            ComputeComponent.calculateTotal(inputValues.type);
-            UIComponent.addToList(inputValues.type, addNewItem);
+                ComputeComponent.calculateData(values.type);
+                let formalData = ComputeComponent.formatOutput(values.type, newItem);
 
-            let updataSum = ComputeComponent.calculateSum();
-            UIComponent.displaySummary(updataSum.totalInc, updataSum.totalExpe, updataSum.summary, updataSum.percent);
-            UIComponent.clearInput();
-            console.log(ComputeComponent.getData());
+                UIComponent.addToList(values.type, formalData);
+                updataPercent();
+
+                let upSum = ComputeComponent.updataSum();
+                UIComponent.displaySummary(upSum.totalInc, upSum.totalExpe, upSum.available, upSum.percent);
+                UIComponent.clearInput();
+
+            }
+
 
         }, false)
         //删除项事件
@@ -213,15 +263,15 @@ let linkage = ((UIComponent, ComputeComponent) => {
 
                 ComputeComponent.deleteItem(type, id);
                 UIComponent.deleteFromList(nodeID);
-                ComputeComponent.calculateTotal(type);
+                ComputeComponent.calculateData(type);
 
-                let updataSum = ComputeComponent.calculateSum();
+                let updataSum = ComputeComponent.updataSum();
                 UIComponent.displaySummary(updataSum.totalInc, updataSum.totalExpe, updataSum.summary, updataSum.percent);
-
-
-                console.log(ComputeComponent.getData());
+                updataPercent();
             }
         })
+
+        UIComponent.displayDate();
     }
 
     setListeners();
