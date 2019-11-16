@@ -17,7 +17,7 @@ let UIComponent = (() => {
 
         monthWrap: ".budget__title--month",
         percentWrap: ".item__percentage"
-    }
+    };
 
     return {
         // 获取输入内容
@@ -77,10 +77,10 @@ let UIComponent = (() => {
         },
         //展示概要
         displaySummary(totalInc, totalExpe, summary, percent) {
-            document.querySelector(allDoms.incSum).innerHTML = `+ ${totalInc}`;
-            document.querySelector(allDoms.expSum).innerHTML = `- ${totalExpe}`;
-            document.querySelector(allDoms.summary).innerHTML = `${summary}`;
-            document.querySelector(allDoms.budgetPercent).innerHTML = `${percent}`;
+            document.querySelector(allDoms.incSum).innerHTML = totalInc;
+            document.querySelector(allDoms.expSum).innerHTML = totalExpe;
+            document.querySelector(allDoms.summary).innerHTML = summary;
+            document.querySelector(allDoms.budgetPercent).innerHTML = percent;
         },
         //展示年月
         displayDate() {
@@ -154,7 +154,6 @@ let ComputeComponent = (() => {
                 index = data.allItems[type].indexOf(targeData);
                 data.allItems[type].splice(index, 1);
             }
-
         },
         //计算总额
         calculateData(type) {
@@ -179,9 +178,9 @@ let ComputeComponent = (() => {
                 percent = `${ratio}%`;
             }
             return {
-                totalInc: data.totalAmount.inc,
-                totalExpe: data.totalAmount.exp,
-                available: data.totalAmount.inc - data.totalAmount.exp,
+                totalInc: `+ ${data.totalAmount.inc}`,
+                totalExpe: `- ${data.totalAmount.exp}`,
+                available: (data.totalAmount.inc - data.totalAmount.exp).toFixed(2),
                 percent,
             }
         },
@@ -202,8 +201,7 @@ let ComputeComponent = (() => {
             return data
         }
     }
-
-})()
+})();
 
 
 //联动组件
@@ -212,7 +210,6 @@ let linkage = ((UIComponent, ComputeComponent) => {
 
     let updataPercent = () => {
         const data = ComputeComponent.getData();
-
         let percentWraps = document.querySelectorAll(doms.percentWrap);
         let percents = [];
         data.allItems.exp.forEach(item => {
@@ -227,53 +224,65 @@ let linkage = ((UIComponent, ComputeComponent) => {
         percents.forEach((item, index) => {
             percentWraps[index].innerHTML = item;
         })
-    }
+    };
+
+    let commonMethods = () => {
+        updataPercent();
+        let upSum = ComputeComponent.updataSum();
+        UIComponent.displaySummary(upSum.totalInc, upSum.totalExpe, upSum.available, upSum.percent);
+    };
+
+    let paramsForDelete = (target) => {
+        return {
+            nodeID: target.parentNode.parentNode.parentNode.parentNode.id,
+            id: this.nodeID.split("-")[1],
+            type: this.nodeID.split("-")[0].substring(0, 3)
+        }
+    };
 
     let setListeners = () => {
-
         //添加项事件
         document.querySelector(doms.addBtn).addEventListener("click", () => {
+            //获取输入框的值
             let values = UIComponent.getInput();
             if (values.amount == 0 || values.amount == "" || values.desc == "") {
                 alert("Please complete the information!");
             } else {
                 let newItem = ComputeComponent.addItem(values.type, values.desc, values.amount);
-
+                //数据计算
                 ComputeComponent.calculateData(values.type);
+                //格式数据
                 let formalData = ComputeComponent.formatOutput(values.type, newItem);
-
+                //添加项UI
                 UIComponent.addToList(values.type, formalData);
-                updataPercent();
-
-                let upSum = ComputeComponent.updataSum();
-                UIComponent.displaySummary(upSum.totalInc, upSum.totalExpe, upSum.available, upSum.percent);
+                //清除输入框
                 UIComponent.clearInput();
-
+                commonMethods();
             }
-
-
         }, false)
         //删除项事件
         document.querySelector(doms.btnParent).addEventListener("click", (event) => {
             let target = event.target;
             if (target.nodeName.toLowerCase() === "i") {
-                let nodeID = target.parentNode.parentNode.parentNode.parentNode.id;
-                let id = nodeID.split("-")[1];
-                let type = nodeID.split("-")[0].substring(0, 3);
-
+                let params = paramsForDelete(target);
+                //删除项数据
                 ComputeComponent.deleteItem(type, id);
+                //删除项UI
                 UIComponent.deleteFromList(nodeID);
+                //数据计算
                 ComputeComponent.calculateData(type);
-
-                let updataSum = ComputeComponent.updataSum();
-                UIComponent.displaySummary(updataSum.totalInc, updataSum.totalExpe, updataSum.summary, updataSum.percent);
-                updataPercent();
+                commonMethods();
             }
         })
+    };
 
-        UIComponent.displayDate();
+    return {
+        init() {
+            console.log("Success!")
+            UIComponent.displayDate();
+            setListeners();
+        }
     }
+})(UIComponent, ComputeComponent);
 
-    setListeners();
-
-})(UIComponent, ComputeComponent)
+linkage.init();
