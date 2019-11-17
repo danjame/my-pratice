@@ -1,5 +1,5 @@
 //UI组件
-let UIComponent = (() => {
+let View = (() => {
     //UI节点classname
     let allDoms = {
         type: ".add__type",
@@ -95,7 +95,7 @@ let UIComponent = (() => {
 
 
 //计算组件
-let ComputeComponent = (() => {
+let Model = (() => {
     //构造函数
     function Income(id, desc, value) {
         this.id = id;
@@ -205,11 +205,11 @@ let ComputeComponent = (() => {
 
 
 //联动组件
-let linkage = ((UIComponent, ComputeComponent) => {
-    let doms = UIComponent.getAllDoms();
+let Controller = ((View, Model) => {
+    let doms = View.getAllDoms();
 
     let updataPercent = () => {
-        const data = ComputeComponent.getData();
+        const data = Model.getData();
         let percentWraps = document.querySelectorAll(doms.percentWrap);
         let percents = [];
         data.allItems.exp.forEach(item => {
@@ -228,15 +228,16 @@ let linkage = ((UIComponent, ComputeComponent) => {
 
     let commonMethods = () => {
         updataPercent();
-        let upSum = ComputeComponent.updataSum();
-        UIComponent.displaySummary(upSum.totalInc, upSum.totalExpe, upSum.available, upSum.percent);
+        let upSum = Model.updataSum();
+        View.displaySummary(upSum.totalInc, upSum.totalExpe, upSum.available, upSum.percent);
     };
 
     let paramsForDelete = (target) => {
+        const nodeID = target.parentNode.parentNode.parentNode.parentNode.id;
         return {
-            nodeID: target.parentNode.parentNode.parentNode.parentNode.id,
-            id: this.nodeID.split("-")[1],
-            type: this.nodeID.split("-")[0].substring(0, 3)
+            nodeID,
+            id: nodeID.split("-")[1],
+            type: nodeID.split("-")[0].substring(0, 3)
         }
     };
 
@@ -244,19 +245,19 @@ let linkage = ((UIComponent, ComputeComponent) => {
         //添加项事件
         document.querySelector(doms.addBtn).addEventListener("click", () => {
             //获取输入框的值
-            let values = UIComponent.getInput();
+            let values = View.getInput();
             if (values.amount == 0 || values.amount == "" || values.desc == "") {
                 alert("Please complete the information!");
             } else {
-                let newItem = ComputeComponent.addItem(values.type, values.desc, values.amount);
+                let newItem = Model.addItem(values.type, values.desc, values.amount);
                 //数据计算
-                ComputeComponent.calculateData(values.type);
+                Model.calculateData(values.type);
                 //格式数据
-                let formalData = ComputeComponent.formatOutput(values.type, newItem);
+                let formalData = Model.formatOutput(values.type, newItem);
                 //添加项UI
-                UIComponent.addToList(values.type, formalData);
+                View.addToList(values.type, formalData);
                 //清除输入框
-                UIComponent.clearInput();
+                View.clearInput();
                 commonMethods();
             }
         }, false)
@@ -266,11 +267,11 @@ let linkage = ((UIComponent, ComputeComponent) => {
             if (target.nodeName.toLowerCase() === "i") {
                 let params = paramsForDelete(target);
                 //删除项数据
-                ComputeComponent.deleteItem(type, id);
+                Model.deleteItem(params.type, params.id);
                 //删除项UI
-                UIComponent.deleteFromList(nodeID);
+                View.deleteFromList(params.nodeID);
                 //数据计算
-                ComputeComponent.calculateData(type);
+                Model.calculateData(params.type);
                 commonMethods();
             }
         })
@@ -279,10 +280,10 @@ let linkage = ((UIComponent, ComputeComponent) => {
     return {
         init() {
             console.log("Success!")
-            UIComponent.displayDate();
+            View.displayDate();
             setListeners();
         }
     }
-})(UIComponent, ComputeComponent);
+})(View, Model);
 
-linkage.init();
+Controller.init();
