@@ -89,7 +89,14 @@ let View = (() => {
             const currentMonth = months[currentDate.getMonth()];
             const currentYear = currentDate.getFullYear();
             document.querySelector(allDoms.monthWrap).innerHTML = `${currentMonth} ${currentYear}`;
-        }
+        },
+        //改变输入框和按钮样式
+        switchInputStyle() {
+            const inputDoms = document.querySelectorAll(`${allDoms.type}, ${allDoms.desc}, ${allDoms.amount}`);
+            const btnDom = document.querySelector(allDoms.addBtn);
+            inputDoms.forEach(item=>item.classList.toggle("red-focus"));
+            btnDom.classList.toggle("red");
+        },
     }
 })();
 
@@ -169,6 +176,7 @@ let Model = (() => {
             }
             data.totalAmount[type] = sum;
         },
+        //更新可用余额
         updataSum() {
             let percent, ratio;
             ratio = Math.round(data.totalAmount.exp / data.totalAmount.inc * 100);
@@ -184,6 +192,7 @@ let Model = (() => {
                 percent,
             }
         },
+        //格式化输出数字
         formatOutput(type, item) {
             let value;
             if (type == "inc") {
@@ -275,6 +284,8 @@ let Controller = ((View, Model) => {
                 commonMethods();
             }
         })
+        //输入框和确定键style变换
+        document.querySelector(doms.type).addEventListener("change", View.switchInputStyle, false)
     };
 
     return {
