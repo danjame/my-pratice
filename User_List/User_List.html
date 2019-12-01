@@ -84,7 +84,7 @@
         let newData = getEles('#addUser td input');
         //信息判断
         for (let i = 0; i < newData.length; i++) {
-            if (newData[i].value == '') {
+            if (!newData[i].value) {
                 alert("Please complete the information!");
                 return;
             }

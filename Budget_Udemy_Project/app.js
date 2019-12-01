@@ -94,7 +94,7 @@ let View = (() => {
         switchInputStyle() {
             const inputDoms = document.querySelectorAll(`${allDoms.type}, ${allDoms.desc}, ${allDoms.amount}`);
             const btnDom = document.querySelector(allDoms.addBtn);
-            inputDoms.forEach(item=>item.classList.toggle("red-focus"));
+            inputDoms.forEach(item => item.classList.toggle("red-focus"));
             btnDom.classList.toggle("red");
         },
     }
@@ -131,7 +131,7 @@ let Model = (() => {
         //增加项
         addItem(type, desc, value) {
             let newItem, id;
-            if (data.allItems[type].length !== 0) {
+            if (!data.allItems[type].length) {
                 id = data.allItems[type][data.allItems[type].length - 1].id + 1;
             } else {
                 id = 0;
@@ -255,7 +255,7 @@ let Controller = ((View, Model) => {
         document.querySelector(doms.addBtn).addEventListener("click", () => {
             //获取输入框的值
             let values = View.getInput();
-            if (values.amount == 0 || values.amount == "" || values.desc == "") {
+            if (!values.amount && !values.desc) {
                 alert("Please complete the information!");
             } else {
                 let newItem = Model.addItem(values.type, values.desc, values.amount);
