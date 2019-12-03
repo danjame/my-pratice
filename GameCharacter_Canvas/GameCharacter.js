@@ -1,83 +1,111 @@
 class Character {
     constructor(hero) {
         this.ctx = document.querySelector(hero.canvasNode).getContext("2d");
-        this.image = new Image();
-        this.image.src = hero.imageSrc;
+        this.imageSrc = hero.imageSrc;
         this.imageCol = hero.imageCol;
         this.imageRow = hero.imageRow;
-        this.index = hero.index;
 
-        this.wardSpeed = hero.wardSpeed;
-        this.standSpeed = hero.standSpeed;
+        this.fwIndex = hero.fwIndex;
+        this.stIndex = hero.stIndex;
 
-        this.standStart = hero.standStart;
-        this.wardStart = hero.wardStart;
-        this.wardEnd = hero.wardEnd;
+        // this.fwSpeed = hero.fwSpeed;
+        this.stSpeed = hero.stSpeed;
+
+        this.stStart = hero.stStart;
+        this.fwStart = hero.fwStart;
+        this.fwEnd = hero.fwEnd;
 
         this.timer = null;
+
+        
+    }
+
+    loadImage() {
+        this.image = new Image();
+        this.image.onload = () => {
+            this.eachWidth = this.image.width / this.imageCol;
+            this.eachHeight = this.image.height / this.imageRow;
+            this.canCenterX = this.ctx.canvas.width / 2 - this.eachWidth / 2;
+            this.canCenterY = this.ctx.canvas.height / 2 - this.eachHeight / 2
+        }
+        this.image.src = this.imageSrc;
+    }
+
+    init() {
+        this.loadImage();
+
+        window.addEventListener("keypress", (event) => {
+            if (event.keyCode === 119) {
+                hero.forWard(3);
+            }
+        }, false)
+
+        window.addEventListener("keyup", (event) => {
+            if (event.keyCode === 87) {
+                hero.stand(3);
+                this.fwIndex = 4;
+            }
+        }, false)
     }
 
     forWard(actionRow) {
-        this.index = this.wardStart;
-        const eachWidth = this.image.width / this.imageCol;
-        const eachHeight = this.image.height / this.imageRow;
-        const canCenterX = this.ctx.canvas.width / 2 - eachWidth / 2;
-        const canCenterY = this.ctx.canvas.height / 2 - eachHeight / 2;
+        clearTimeout(this.timer);
+        this.fwIndex++;
 
-        const forWard = () => {
-            clearTimeout(this.timer);
-            this.timer = setTimeout(() => {
-                this.index++;
-                if (this.index >= this.wardEnd) {
-                    this.index = this.wardStart;
-                }
+        if (this.fwIndex >= this.fwEnd) {
+            this.fwIndex = this.fwStart;
+        }
 
-                this.ctx.clearRect(
-                    canCenterX, canCenterY,
-                    eachWidth, eachHeight
-                );
-                this.ctx.drawImage(
-                    this.image,
-                    eachWidth * this.index, eachHeight * actionRow,
-                    eachHeight, eachHeight,
-                    canCenterX, canCenterY,
-                    eachHeight, eachHeight
-                );
-                forWard();
-            }, this.wardSpeed)
-        };
-        forWard()
+        this.ctx.clearRect(
+            this.canCenterX, this.canCenterY,
+            this.eachWidth, this.eachHeight
+        );
+        this.ctx.drawImage(
+            this.image,
+            this.eachWidth * this.fwIndex, this.eachHeight * actionRow,
+            this.eachHeight, this.eachHeight,
+            this.canCenterX, this.canCenterY,
+            this.eachHeight, this.eachHeight
+        )
     }
 
     stand(actionRow) {
-        this.index = this.standStart;
-        const eachWidth = this.image.width / this.imageCol;
-        const eachHeight = this.image.height / this.imageRow;
-        const canCenterX = this.ctx.canvas.width / 2 - eachWidth / 2;
-        const canCenterY = this.ctx.canvas.height / 2 - eachHeight / 2;
+        this.index = this.stStart;
+
+        this.ctx.clearRect(
+            this.canCenterX, this.canCenterY,
+            this.eachWidth, this.eachHeight
+        );
+        this.ctx.drawImage(
+            this.image,
+            this.eachWidth * this.index, this.eachHeight * actionRow,
+            this.eachHeight, this.eachHeight,
+            this.canCenterX, this.canCenterY,
+            this.eachHeight, this.eachHeight
+        );
 
         const stand = () => {
             clearTimeout(this.timer);
             this.timer = setTimeout(() => {
-                this.index++;
-                if (this.index >= this.wardStart) {
-                    this.index = this.standStart;
+                this.stIndex++;
+                if (this.stIndex >= this.fwStart) {
+                    this.stIndex = this.stStart;
                 }
 
                 this.ctx.clearRect(
-                    canCenterX, canCenterY,
-                    eachWidth, eachHeight
+                    this.canCenterX, this.canCenterY,
+                    this.eachWidth, this.eachHeight
                 );
                 this.ctx.drawImage(
                     this.image,
-                    eachWidth * this.index, eachHeight * actionRow,
-                    eachHeight, eachHeight,
-                    canCenterX, canCenterY,
-                    eachHeight, eachHeight
+                    this.eachWidth * this.stIndex, this.eachHeight * actionRow,
+                    this.eachHeight, this.eachHeight,
+                    this.canCenterX, this.canCenterY,
+                    this.eachHeight, this.eachHeight
                 );
                 stand();
-            }, this.standSpeed)
-        };
+            }, this.stSpeed)
+        }
         stand()
     }
 };
@@ -85,17 +113,17 @@ class Character {
 const hero = new Character({
     canvasNode: "canvas",
     imageSrc: "css_sprites.png",
-    index: 4,
+    stIndex: 0,
     imageCol: 12,
     imageRow: 4,
 
-    wardSpeed: 100,
-    standSpeed: 300,
+    stSpeed: 300,
 
-    standStart: 0,
-    wardStart: 4,
-    wardEnd: 12
+    stStart: 0,
+    fwStart: 4,
+    fwEnd: 12,
+
+    fwIndex: 4
 })
-window.onload = () => {
-    hero.stand(2);
-}
+
+hero.init();
