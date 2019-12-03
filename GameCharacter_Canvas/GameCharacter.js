@@ -152,7 +152,6 @@ class Character {
         upWard();
     }
 
-
     downWardStand() {
         this.index = this.standStart;
         const eachWidth = this.image.width / this.imageCol;
@@ -185,8 +184,102 @@ class Character {
         downWardStand();
     }
 
+    rightWardStand() {
+        this.index = this.standStart;
+        const eachWidth = this.image.width / this.imageCol;
+        const eachHeight = this.image.height / this.imageRow;
+        const canCenterX = this.ctx.canvas.width / 2 - eachWidth / 2;
+        const canCenterY = this.ctx.canvas.height / 2 - eachHeight / 2;
 
-}
+        const rightWardStand = () => {
+            clearTimeout(this.timer);
+            this.timer = setTimeout(() => {
+                this.index++;
+                if (this.index >= this.wardStart) {
+                    this.index = this.standStart;
+                }
+
+                this.ctx.clearRect(
+                    canCenterX, canCenterY,
+                    eachWidth, eachHeight
+                );
+                this.ctx.drawImage(
+                    this.image,
+                    this.index * eachWidth, this.rightCol * eachHeight,
+                    eachHeight, eachHeight,
+                    canCenterX, canCenterY,
+                    eachHeight, eachHeight
+                );
+                rightWardStand();
+            }, this.standSpeed)
+        };
+        rightWardStand();
+    }
+
+    leftWardStand() {
+        this.index = this.standStart;
+        const eachWidth = this.image.width / this.imageCol;
+        const eachHeight = this.image.height / this.imageRow;
+        const canCenterX = this.ctx.canvas.width / 2 - eachWidth / 2;
+        const canCenterY = this.ctx.canvas.height / 2 - eachHeight / 2;
+
+        const leftWardStand = () => {
+            clearTimeout(this.timer);
+            this.timer = setTimeout(() => {
+                this.index++;
+                if (this.index >= this.wardStart) {
+                    this.index = this.standStart;
+                }
+
+                this.ctx.clearRect(
+                    canCenterX, canCenterY,
+                    eachWidth, eachHeight
+                );
+                this.ctx.drawImage(
+                    this.image,
+                    this.index * eachWidth, this.leftCol * eachHeight,
+                    eachHeight, eachHeight,
+                    canCenterX, canCenterY,
+                    eachHeight, eachHeight
+                );
+                leftWardStand();
+            }, this.standSpeed)
+        };
+        leftWardStand();
+    }
+
+    upWardStand() {
+        this.index = this.standStart;
+        const eachWidth = this.image.width / this.imageCol;
+        const eachHeight = this.image.height / this.imageRow;
+        const canCenterX = this.ctx.canvas.width / 2 - eachWidth / 2;
+        const canCenterY = this.ctx.canvas.height / 2 - eachHeight / 2;
+
+        const upWardStand = () => {
+            clearTimeout(this.timer);
+            this.timer = setTimeout(() => {
+                this.index++;
+                if (this.index >= this.wardStart) {
+                    this.index = this.standStart;
+                }
+
+                this.ctx.clearRect(
+                    canCenterX, canCenterY,
+                    eachWidth, eachHeight
+                );
+                this.ctx.drawImage(
+                    this.image,
+                    this.index * eachWidth, this.upCol * eachHeight,
+                    eachHeight, eachHeight,
+                    canCenterX, canCenterY,
+                    eachHeight, eachHeight
+                );
+                upWardStand();
+            }, this.standSpeed)
+        };
+        upWardStand();
+    }
+};
 
 const hero = new Character({
     canvasNode: "canvas",
@@ -196,5 +289,5 @@ const hero = new Character({
     imageRow: 4
 })
 window.onload = () => {
-    hero.upWard();
+    hero.rightWardStand();
 }
