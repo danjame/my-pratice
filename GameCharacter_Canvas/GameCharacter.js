@@ -98,16 +98,16 @@ class Character {
         window.addEventListener("keypress", (event) => {
             switch (event.keyCode) {
                 case 115: //S键向下115
-                    hero.forWard(0);
+                    this.forWard(0);
                     break;
                 case 100: //D键向右100
-                    hero.forWard(1);
+                    this.forWard(1);
                     break;
                 case 97: //A键向左97
-                    hero.forWard(2);
+                    this.forWard(2);
                     break;
                 case 119: //W键向上119
-                    hero.forWard(3);
+                    this.forWard(3);
                     break;
             }
         }, false);
@@ -116,20 +116,22 @@ class Character {
         window.addEventListener("keyup", (event) => {
             switch (event.keyCode) {
                 case 83: //向下83
-                    hero.stand(0);
+                    this.stand(0);
                     break;
                 case 68: //向右68
-                    hero.stand(1);
+                    this.stand(1);
                     break;
                 case 65: //向左65
-                    hero.stand(2);
+                    this.stand(2);
                     break;
                 case 87: //向上87
-                    hero.stand(3);
+                    this.stand(3);
                     break;
             }
             this.fwIndex = 4;
-        }, false)
+        }, false);
+        this.stand(0);
+        console.log("Character Ready! Control with WASD")
     }
 };
 
