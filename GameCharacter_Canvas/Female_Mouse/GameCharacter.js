@@ -1,6 +1,7 @@
 class Character {
     constructor(hero) {
-        this.ctx = document.querySelector(hero.canvasNode).getContext("2d");
+        this.canvas = document.querySelector(hero.canvasNode);
+        this.ctx = this.canvas.getContext("2d");
         this.imageSrc = hero.imageSrc;
         //图片的行列
         this.imageCol = hero.imageCol;
@@ -13,6 +14,7 @@ class Character {
         //走动起始于结束帧
         this.fwStart = hero.fwStart;
         this.fwEnd = hero.fwEnd;
+        this.fwSpeed = hero.fwSpeed;
         this.stSpeed = hero.stSpeed;
         this.timer = null;
     }
@@ -94,42 +96,20 @@ class Character {
 
     init() {
         this.loadImage();
-        //走动事件
-        window.addEventListener("keypress", (event) => {
-            switch (event.keyCode) {
-                case 119: //W键向上119
-                    this.forWard(0);
-                    break;
-                case 97: //A键向左97
-                    this.forWard(1);
-                    break;
-                case 100: //D键向右100
-                    this.forWard(2);
-                    break;
-                case 115: //S键向下115
-                    this.forWard(3);
-                    break;
-            }
-        }, false);
+        window.addEventListener('click', (e) => {
+            let rect = this.canvas.getBoundingClientRect();
+            let x = e.clientX - rect.left;
+            let y = e.clientY - rect.top;
+            console.log("x: " + x + " y: " + y);
+            console.log(!(x <= 0 || y <= 0 || x >= 752 || y >= 602));
+            if (!(x <= 0 || y <= 0 || x >= 752 || y >= 602)){
+                //向右
+                x - this.curPositionX>0;
+                y - this.curPositionY>0;
+                //向左
 
-        //站立事件
-        window.addEventListener("keyup", (event) => {
-            switch (event.keyCode) {
-                case 87: //向上87
-                    this.stand(0);
-                    break;
-                case 65: //向左65
-                    this.stand(1);
-                    break;
-                case 68: //向右68
-                    this.stand(2);
-                    break;
-                case 83: //向下83
-                    this.stand(3);
-                    break;
             }
-            this.fwIndex = 4;
-        }, false);
+        })
         this.stand(3);
         console.log("Character Ready! Control with the mouse.")
     }
@@ -145,7 +125,15 @@ const hero = new Character({
     stStart: 0,
     fwStart: 4,
     fwEnd: 12,
+    fwSpeed: 100,
     stSpeed: 300
 })
 
 hero.init();
+
+function getCursorPosition(canvas, event) {
+    var rect = canvas.getBoundingClientRect();
+    var x = event.clientX - rect.left;
+    var y = event.clientY - rect.top;
+    console.log("x: " + x + " y: " + y);
+}
