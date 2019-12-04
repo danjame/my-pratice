@@ -17,6 +17,9 @@ class Character {
         this.fwSpeed = hero.fwSpeed;
         this.stSpeed = hero.stSpeed;
         this.timer = null;
+
+        this.curPositionX = 369;
+        this.curPositionY = 390;
     }
 
     loadImage() {
@@ -31,7 +34,9 @@ class Character {
     }
 
     forWard(actionRow) {
-        clearTimeout(this.timer);
+        // const forWard = () => {
+        // clearTimeout(this.timer);
+        // this.timer = setTimeout(() => {
         this.fwIndex++;
         //判断走动帧位置
         if (this.fwIndex >= this.fwEnd) {
@@ -39,8 +44,7 @@ class Character {
         }
         //清除画布，否贼重影
         this.ctx.clearRect(
-            this.canCenterX, this.canCenterY,
-            this.eachWidth, this.eachHeight
+            0, 0, this.ctx.canvas.width, this.ctx.canvas.height
         );
         //绘制图片
         this.ctx.drawImage(
@@ -50,14 +54,17 @@ class Character {
             this.canCenterX, this.canCenterY,
             this.eachHeight, this.eachHeight
         )
+        // forWard();
+        // }, this.fwSpeed)
+        // }
+        // forWard();
     }
 
     stand(actionRow) {
         this.index = this.stStart;
         //立即初始化站立
         this.ctx.clearRect(
-            this.canCenterX, this.canCenterY,
-            this.eachWidth, this.eachHeight
+            0, 0, this.ctx.canvas.width, this.ctx.canvas.height
         );
         this.ctx.drawImage(
             this.image,
@@ -76,8 +83,7 @@ class Character {
                 }
                 //清除画布
                 this.ctx.clearRect(
-                    this.canCenterX, this.canCenterY,
-                    this.eachWidth, this.eachHeight
+                    0, 0, this.ctx.canvas.width, this.ctx.canvas.height
                 );
                 //绘制图片
                 this.ctx.drawImage(
@@ -94,20 +100,40 @@ class Character {
         stand()
     }
 
+    direction(offsetX, offsetY) {
+        //右上
+        if (offsetX > 0 && offsetY > 0) {
+            this.canCenterX = this.canCenterX - offsetX;
+            this.canCenterY = this.canCenterY - offsetY;
+            this.forWard(0);
+        } else if (offsetX > 0 && offsetY < 0) { //右下
+            this.canCenterX = this.canCenterX - offsetX;
+            this.canCenterY = this.canCenterY + offsetY;
+            this.forWard(0);
+        } else if (offsetX < 0 && offsetY > 0) { //左上
+            this.canCenterX = this.canCenterX + offsetX;
+            this.canCenterY = this.canCenterY - offsetY;
+            this.forWard(0);
+        } else if (offsetX < 0 && offsetY < 0) { //左下
+            this.canCenterX = this.canCenterX + offsetX;
+            this.canCenterY = this.canCenterY + offsetY;
+            this.forWard(0);
+        }
+        console.log(this.canCenterX);
+        console.log(this.canCenterY);
+    }
+
     init() {
         this.loadImage();
         window.addEventListener('click', (e) => {
             let rect = this.canvas.getBoundingClientRect();
             let x = e.clientX - rect.left;
             let y = e.clientY - rect.top;
-            console.log("x: " + x + " y: " + y);
-            console.log(!(x <= 0 || y <= 0 || x >= 752 || y >= 602));
-            if (!(x <= 0 || y <= 0 || x >= 752 || y >= 602)){
-                //向右
-                x - this.curPositionX>0;
-                y - this.curPositionY>0;
-                //向左
-
+            // console.log("x: " + x + " y: " + y);
+            if (!(x <= 0 || y <= 0 || x >= 752 || y >= 602)) {
+                let offsetX = this.curPositionX - x;
+                let offsetY = this.curPositionY - y;
+                this.direction(offsetX, offsetY)
             }
         })
         this.stand(3);
