@@ -131,7 +131,7 @@ class Character {
             this.fwIndex = 4;
         }, false);
         this.stand(3);
-        console.log("Character Ready! Control with WASD")
+        console.log("Character Ready! Control with the mouse.")
     }
 };
 
