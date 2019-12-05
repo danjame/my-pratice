@@ -48,12 +48,14 @@ class Character {
             0, 0, this.ctx.canvas.width, this.ctx.canvas.height
         );
         //绘制图片
+        console.log(this.canCenterX);
+        console.log(this.canCenterY);
         this.ctx.drawImage(
             this.image,
             this.eachWidth * this.fwIndex, this.eachHeight * actionRow,
-            this.eachHeight, this.eachHeight,
+            this.eachWidth, this.eachHeight,
             this.canCenterX, this.canCenterY,
-            this.eachHeight, this.eachHeight
+            this.eachWidth, this.eachHeight
         )
         // forWard();
         // }, this.fwSpeed)
@@ -70,9 +72,9 @@ class Character {
         this.ctx.drawImage(
             this.image,
             this.eachWidth * this.index, this.eachHeight * actionRow,
-            this.eachHeight, this.eachHeight,
+            this.eachWidth, this.eachHeight,
             this.canCenterX, this.canCenterY,
-            this.eachHeight, this.eachHeight
+            this.eachWidth, this.eachHeight
         );
         //站立动画定时器
         const stand = () => {
@@ -90,9 +92,9 @@ class Character {
                 this.ctx.drawImage(
                     this.image,
                     this.eachWidth * this.stIndex, this.eachHeight * actionRow,
-                    this.eachHeight, this.eachHeight,
+                    this.eachWidth, this.eachHeight,
                     this.canCenterX, this.canCenterY,
-                    this.eachHeight, this.eachHeight
+                    this.eachWidth, this.eachHeight
                 );
                 stand();
             }, this.stSpeed)
@@ -102,24 +104,43 @@ class Character {
     }
 
     direction(offsetX, offsetY) {
-        //右上
+        //左上
+        const targetX = this.canCenterX - Math.abs(offsetX);
+        const targetY = this.canCenterY - Math.abs(offsetY);
         if (offsetX > 0 && offsetY > 0) {
-            this.canCenterX = this.canCenterX - Math.abs(offsetX);
-            this.canCenterY = this.canCenterY - Math.abs(offsetY);
-            this.forWard(0);
-        } else if (offsetX > 0 && offsetY < 0) { //右下
-            this.canCenterX = this.canCenterX - Math.abs(offsetX);
-            this.canCenterY = this.canCenterY + Math.abs(offsetY);
-            this.forWard(0);
-        } else if (offsetX < 0 && offsetY > 0) { //左上
-            this.canCenterX = this.canCenterX + Math.abs(offsetX);
-            this.canCenterY = this.canCenterY - Math.abs(offsetY);
-            this.forWard(0);
-        } else if (offsetX < 0 && offsetY < 0) { //左下
-            this.canCenterX = this.canCenterX + Math.abs(offsetX);
-            this.canCenterY = this.canCenterY + Math.abs(offsetY);
-            this.forWard(0);
-        }
+            const run = () => {
+                clearTimeout(this.timer);
+                this.timer = setTimeout(() => {
+                    if (this.canCenterX > targetX) {
+                        this.canCenterX -= 5;
+                    }
+                    if (this.canCenterY > targetY) {
+                        this.canCenterY -= 5;
+                    }
+                    if (this.canCenterX <= targetX && this.canCenterY <= targetY) {
+                        clearTimeout(this.timer);
+                        this.stand(1);
+                        return;
+                    }
+                    this.forWard(1);
+                    run();
+                }, 100)
+            }
+            run();
+        } 
+        // else if (offsetX > 0 && offsetY < 0) { //右下
+        //     this.canCenterX = this.canCenterX - Math.abs(offsetX);
+        //     this.canCenterY = this.canCenterY + Math.abs(offsetY);
+        //     this.forWard(0);
+        // } else if (offsetX < 0 && offsetY > 0) { //左上
+        //     this.canCenterX = this.canCenterX + Math.abs(offsetX);
+        //     this.canCenterY = this.canCenterY - Math.abs(offsetY);
+        //     this.forWard(0);
+        // } else if (offsetX < 0 && offsetY < 0) { //左下
+        //     this.canCenterX = this.canCenterX + Math.abs(offsetX);
+        //     this.canCenterY = this.canCenterY + Math.abs(offsetY);
+        //     this.forWard(0);
+        // }
     }
 
     init() {
@@ -135,7 +156,7 @@ class Character {
             if (!(x <= 0 || y <= 0 || x >= 752 || y >= 602)) {
                 let offsetX = this.canCenterX + this.stepPointX - x;
                 let offsetY = this.canCenterY + this.stepPointY - y;
-                console.log(offsetX, offsetY)
+                // console.log(offsetX, offsetY)
                 this.direction(offsetX, offsetY)
             }
         })
