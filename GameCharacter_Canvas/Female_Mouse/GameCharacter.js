@@ -18,8 +18,8 @@ class Character {
         this.stSpeed = hero.stSpeed;
         this.timer = null;
 
-        this.curPositionX = 369;
-        this.curPositionY = 390;
+        this.stepPointX = 244;
+        this.stepPointY = 290;
     }
 
     loadImage() {
@@ -31,6 +31,7 @@ class Character {
             this.canCenterY = this.ctx.canvas.height / 2 - this.eachHeight / 2
         }
         this.image.src = this.imageSrc;
+
     }
 
     forWard(actionRow) {
@@ -103,36 +104,38 @@ class Character {
     direction(offsetX, offsetY) {
         //右上
         if (offsetX > 0 && offsetY > 0) {
-            this.canCenterX = this.canCenterX - offsetX;
-            this.canCenterY = this.canCenterY - offsetY;
+            this.canCenterX = this.canCenterX - Math.abs(offsetX);
+            this.canCenterY = this.canCenterY - Math.abs(offsetY);
             this.forWard(0);
         } else if (offsetX > 0 && offsetY < 0) { //右下
-            this.canCenterX = this.canCenterX - offsetX;
-            this.canCenterY = this.canCenterY + offsetY;
+            this.canCenterX = this.canCenterX - Math.abs(offsetX);
+            this.canCenterY = this.canCenterY + Math.abs(offsetY);
             this.forWard(0);
         } else if (offsetX < 0 && offsetY > 0) { //左上
-            this.canCenterX = this.canCenterX + offsetX;
-            this.canCenterY = this.canCenterY - offsetY;
+            this.canCenterX = this.canCenterX + Math.abs(offsetX);
+            this.canCenterY = this.canCenterY - Math.abs(offsetY);
             this.forWard(0);
         } else if (offsetX < 0 && offsetY < 0) { //左下
-            this.canCenterX = this.canCenterX + offsetX;
-            this.canCenterY = this.canCenterY + offsetY;
+            this.canCenterX = this.canCenterX + Math.abs(offsetX);
+            this.canCenterY = this.canCenterY + Math.abs(offsetY);
             this.forWard(0);
         }
-        console.log(this.canCenterX);
-        console.log(this.canCenterY);
     }
 
     init() {
         this.loadImage();
+
         window.addEventListener('click', (e) => {
             let rect = this.canvas.getBoundingClientRect();
             let x = e.clientX - rect.left;
             let y = e.clientY - rect.top;
+
+            console.log(this.canCenterX, this.canCenterY);
             // console.log("x: " + x + " y: " + y);
             if (!(x <= 0 || y <= 0 || x >= 752 || y >= 602)) {
-                let offsetX = this.curPositionX - x;
-                let offsetY = this.curPositionY - y;
+                let offsetX = this.canCenterX + this.stepPointX - x;
+                let offsetY = this.canCenterY + this.stepPointY - y;
+                console.log(offsetX, offsetY)
                 this.direction(offsetX, offsetY)
             }
         })
