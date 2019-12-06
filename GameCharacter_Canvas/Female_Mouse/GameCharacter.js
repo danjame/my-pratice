@@ -16,6 +16,7 @@ class Character {
         this.fwEnd = hero.fwEnd;
         this.fwSpeed = hero.fwSpeed;
         this.stSpeed = hero.stSpeed;
+        this.fwStep = hero.fwStep;
         this.timer = null;
 
         this.stepPointX = 244;
@@ -34,10 +35,7 @@ class Character {
 
     }
 
-    forWard(actionRow) {
-        // const forWard = () => {
-        // clearTimeout(this.timer);
-        // this.timer = setTimeout(() => {
+    forWard(direction) {
         this.fwIndex++;
         //判断走动帧位置
         if (this.fwIndex >= this.fwEnd) {
@@ -48,22 +46,16 @@ class Character {
             0, 0, this.ctx.canvas.width, this.ctx.canvas.height
         );
         //绘制图片
-        // console.log(this.canCenterX);
-        // console.log(this.canCenterY);
         this.ctx.drawImage(
             this.image,
-            this.eachWidth * this.fwIndex, this.eachHeight * actionRow,
+            this.eachWidth * this.fwIndex, this.eachHeight * direction,
             this.eachWidth, this.eachHeight,
             this.canCenterX, this.canCenterY,
             this.eachWidth, this.eachHeight
         )
-        // forWard();
-        // }, this.fwSpeed)
-        // }
-        // forWard();
     }
 
-    stand(actionRow) {
+    stand(direction) {
         this.index = this.stStart;
         //立即初始化站立
         this.ctx.clearRect(
@@ -71,7 +63,7 @@ class Character {
         );
         this.ctx.drawImage(
             this.image,
-            this.eachWidth * this.index, this.eachHeight * actionRow,
+            this.eachWidth * this.index, this.eachHeight * direction,
             this.eachWidth, this.eachHeight,
             this.canCenterX, this.canCenterY,
             this.eachWidth, this.eachHeight
@@ -91,7 +83,7 @@ class Character {
                 //绘制图片
                 this.ctx.drawImage(
                     this.image,
-                    this.eachWidth * this.stIndex, this.eachHeight * actionRow,
+                    this.eachWidth * this.stIndex, this.eachHeight * direction,
                     this.eachWidth, this.eachHeight,
                     this.canCenterX, this.canCenterY,
                     this.eachWidth, this.eachHeight
@@ -104,19 +96,18 @@ class Character {
     }
 
     direction(offsetX, offsetY) {
-        // console.log(targetX, targetY);
-        if (offsetX > 0 && offsetY > 0) { //左上
-            console.log("左上");
+        if (offsetX >= 0 && offsetY >= 0) { //左上
+            console.log("Top Left");
             const targetX = this.canCenterX - Math.abs(offsetX);
             const targetY = this.canCenterY - Math.abs(offsetY);
-            const run = () => {
+            const move = () => {
                 clearTimeout(this.timer);
                 this.timer = setTimeout(() => {
                     if (this.canCenterX > targetX) {
-                        this.canCenterX -= 8;
+                        this.canCenterX -= this.fwStep;
                     }
                     if (this.canCenterY > targetY) {
-                        this.canCenterY -= 8;
+                        this.canCenterY -= this.fwStep;
                     }
                     if (Math.abs(offsetX) > Math.abs(offsetY)) {
                         if (this.canCenterX <= targetX && this.canCenterY <= targetY) {
@@ -125,7 +116,7 @@ class Character {
                             return;
                         }
                         this.forWard(1);
-                        run();
+                        move();
                     } else if (Math.abs(offsetX) < Math.abs(offsetY)) {
                         if (this.canCenterX <= targetX && this.canCenterY <= targetY) {
                             clearTimeout(this.timer);
@@ -133,23 +124,23 @@ class Character {
                             return;
                         }
                         this.forWard(0);
-                        run();
+                        move();
                     }
-                }, 20)
+                }, this.fwSpeed)
             }
-            run();
-        } else if (offsetX > 0 && offsetY < 0) { //左下
-            console.log("左下");
+            move();
+        } else if (offsetX >= 0 && offsetY <= 0) { //左下
+            console.log("Bottom Left");
             const targetX = this.canCenterX - Math.abs(offsetX);
             const targetY = this.canCenterY + Math.abs(offsetY);
-            const run = () => {
+            const move = () => {
                 clearTimeout(this.timer);
                 this.timer = setTimeout(() => {
                     if (this.canCenterX > targetX) {
-                        this.canCenterX -= 8;
+                        this.canCenterX -= this.fwStep;
                     }
                     if (this.canCenterY < targetY) {
-                        this.canCenterY += 8;
+                        this.canCenterY += this.fwStep;
                     }
                     if (Math.abs(offsetX) > Math.abs(offsetY)) {
                         if (this.canCenterX <= targetX && this.canCenterY >= targetY) {
@@ -158,7 +149,7 @@ class Character {
                             return;
                         }
                         this.forWard(1);
-                        run();
+                        move();
                     } else if (Math.abs(offsetX) < Math.abs(offsetY)) {
                         if (this.canCenterX <= targetX && this.canCenterY >= targetY) {
                             clearTimeout(this.timer);
@@ -166,29 +157,23 @@ class Character {
                             return;
                         }
                         this.forWard(3);
-                        run();
+                        move();
                     }
-                    // if (this.canCenterX <= targetX && this.canCenterY >= targetY) {
-                    //     clearTimeout(this.timer);
-                    //     this.stand(1);
-                    //     return;
-                    // }
-                    // this.forWard(1);
-                    // run();
-                }, 20)
+                }, this.fwSpeed)
             }
-            run();
-        } else if (offsetX < 0 && offsetY > 0) { //右上
+            move();
+        } else if (offsetX <= 0 && offsetY >= 0) { //右上
+            console.log("Top Right");
             const targetX = this.canCenterX + Math.abs(offsetX);
             const targetY = this.canCenterY - Math.abs(offsetY);
-            const run = () => {
+            const move = () => {
                 clearTimeout(this.timer);
                 this.timer = setTimeout(() => {
                     if (this.canCenterX < targetX) {
-                        this.canCenterX += 8;
+                        this.canCenterX += this.fwStep;
                     }
                     if (this.canCenterY > targetY) {
-                        this.canCenterY -= 8;
+                        this.canCenterY -= this.fwStep;
                     }
                     if (Math.abs(offsetX) > Math.abs(offsetY)) {
                         if (this.canCenterX >= targetX && this.canCenterY <= targetY) {
@@ -197,7 +182,7 @@ class Character {
                             return;
                         }
                         this.forWard(2);
-                        run();
+                        move();
                     } else if (Math.abs(offsetX) < Math.abs(offsetY)) {
                         if (this.canCenterX >= targetX && this.canCenterY <= targetY) {
                             clearTimeout(this.timer);
@@ -205,29 +190,23 @@ class Character {
                             return;
                         }
                         this.forWard(0);
-                        run();
+                        move();
                     }
-                    // if (this.canCenterX >= targetX && this.canCenterY <= targetY) {
-                    //     clearTimeout(this.timer);
-                    //     this.stand(2);
-                    //     return;
-                    // }
-                    // this.forWard(2);
-                    // run();
-                }, 20)
+                }, this.fwSpeed)
             }
-            run();
-        } else if (offsetX < 0 && offsetY < 0) { //右下
+            move();
+        } else if (offsetX <= 0 && offsetY <= 0) { //右下
+            console.log("Bottom Right");
             const targetX = this.canCenterX + Math.abs(offsetX);
             const targetY = this.canCenterY + Math.abs(offsetY);
-            const run = () => {
+            const move = () => {
                 clearTimeout(this.timer);
                 this.timer = setTimeout(() => {
                     if (this.canCenterX < targetX) {
-                        this.canCenterX += 8;
+                        this.canCenterX += this.fwStep;
                     }
                     if (this.canCenterY < targetY) {
-                        this.canCenterY += 8;
+                        this.canCenterY += this.fwStep;
                     }
                     if (Math.abs(offsetX) > Math.abs(offsetY)) {
                         if (this.canCenterX >= targetX && this.canCenterY >= targetY) {
@@ -236,7 +215,7 @@ class Character {
                             return;
                         }
                         this.forWard(2);
-                        run();
+                        move();
                     } else if (Math.abs(offsetX) < Math.abs(offsetY)) {
                         if (this.canCenterX >= targetX && this.canCenterY >= targetY) {
                             clearTimeout(this.timer);
@@ -244,18 +223,11 @@ class Character {
                             return;
                         }
                         this.forWard(3);
-                        run()
+                        move();
                     }
-                    // if (this.canCenterX >= targetX && this.canCenterY >= targetY) {
-                    //     clearTimeout(this.timer);
-                    //     this.stand(3);
-                    //     return;
-                    // }
-                    // this.forWard(3);
-                    // run();
-                }, 20)
+                }, this.fwSpeed)
             }
-            run();
+            move();
         }
     }
 
@@ -266,15 +238,10 @@ class Character {
             let rect = this.canvas.getBoundingClientRect();
             let x = e.clientX - rect.left;
             let y = e.clientY - rect.top;
-            // console.log(x);
-            // console.log(y);
 
-            console.log(this.canCenterX, this.canCenterY);
-            // console.log("x: " + x + " y: " + y);
             if (!(x <= 0 || y <= 0 || x >= 752 || y >= 602)) {
                 let offsetX = this.canCenterX + this.stepPointX - x;
                 let offsetY = this.canCenterY + this.stepPointY - y;
-                console.log(offsetX, offsetY)
                 this.direction(offsetX, offsetY)
             }
         })
@@ -290,18 +257,14 @@ const hero = new Character({
     imageRow: 4,
     fwIndex: 4,
     stIndex: 0,
+
     stStart: 0,
     fwStart: 4,
     fwEnd: 12,
-    fwSpeed: 100,
-    stSpeed: 300
+    stSpeed: 300,
+
+    fwSpeed: 50,
+    fwStep: 8
 })
 
 hero.init();
-
-function getCursorPosition(canvas, event) {
-    var rect = canvas.getBoundingClientRect();
-    var x = event.clientX - rect.left;
-    var y = event.clientY - rect.top;
-    console.log("x: " + x + " y: " + y);
-}
