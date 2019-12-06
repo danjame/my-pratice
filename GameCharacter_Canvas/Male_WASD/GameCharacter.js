@@ -28,7 +28,7 @@ class Character {
         this.image.src = this.imageSrc;
     }
 
-    forWard(actionRow) {
+    forWard(direction) {
         clearTimeout(this.timer);
         this.fwIndex++;
         //判断走动帧位置
@@ -43,14 +43,14 @@ class Character {
         //绘制图片
         this.ctx.drawImage(
             this.image,
-            this.eachWidth * this.fwIndex, this.eachHeight * actionRow,
-            this.eachHeight, this.eachHeight,
+            this.eachWidth * this.fwIndex, this.eachHeight * direction,
+            this.eachWidth, this.eachHeight,
             this.canCenterX, this.canCenterY,
-            this.eachHeight, this.eachHeight
+            this.eachWidth, this.eachHeight
         )
     }
 
-    stand(actionRow) {
+    stand(direction) {
         this.index = this.stStart;
         //立即初始化站立
         this.ctx.clearRect(
@@ -59,10 +59,10 @@ class Character {
         );
         this.ctx.drawImage(
             this.image,
-            this.eachWidth * this.index, this.eachHeight * actionRow,
-            this.eachHeight, this.eachHeight,
+            this.eachWidth * this.index, this.eachHeight * direction,
+            this.eachWidth, this.eachHeight,
             this.canCenterX, this.canCenterY,
-            this.eachHeight, this.eachHeight
+            this.eachWidth, this.eachHeight
         );
         //站立动画定时器
         const stand = () => {
@@ -80,10 +80,10 @@ class Character {
                 //绘制图片
                 this.ctx.drawImage(
                     this.image,
-                    this.eachWidth * this.stIndex, this.eachHeight * actionRow,
-                    this.eachHeight, this.eachHeight,
+                    this.eachWidth * this.stIndex, this.eachHeight * direction,
+                    this.eachWidth, this.eachHeight,
                     this.canCenterX, this.canCenterY,
-                    this.eachHeight, this.eachHeight
+                    this.eachWidth, this.eachHeight
                 );
                 stand();
             }, this.stSpeed)
