@@ -1,4 +1,4 @@
-# JavaScript Exercise and Demo
+# JavaScript Exercise and Demos
 ## Layouts
 ### 1. Flex
 ### 2. Float
@@ -8,10 +8,10 @@
 ## Tab
 Simple tab demo.
 ## Carousel
-### 1.Picture Swith with animation
-### 2.Picture Swith with JS animation
-### 3.Picture Swith with CSS animation
-### 4.built with Object-oriented
+### 1. Picture Swith with animation
+### 2. Picture Swith with JS animation
+### 3. Picture Swith with CSS animation
+### 4. built with Object-oriented
 ## Frozen Table
 Table with frozen head and frozen first column, like excel.
 ## Animation
