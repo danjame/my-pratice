@@ -6,8 +6,8 @@ class Character {
         this.imageCol = hero.imageCol;
         this.imageRow = hero.imageRow;
         //走动与站立动画帧下标
-        this.fwIndex = hero.fwIndex;
-        this.stIndex = hero.stIndex;
+        this.fwIndex = hero.fwIndex || 4;
+        this.stIndex = hero.stIndex || 0;
         //站立起始帧
         this.stStart = hero.stStart;
         //走动起始于结束帧
@@ -51,7 +51,6 @@ class Character {
     }
 
     stand(direction) {
-        this.index = this.stStart;
         //立即初始化站立
         this.ctx.clearRect(
             this.canCenterX, this.canCenterY,
@@ -59,7 +58,7 @@ class Character {
         );
         this.ctx.drawImage(
             this.image,
-            this.eachWidth * this.index, this.eachHeight * direction,
+            this.eachWidth * this.stStart, this.eachHeight * direction,
             this.eachWidth, this.eachHeight,
             this.canCenterX, this.canCenterY,
             this.eachWidth, this.eachHeight
@@ -96,6 +95,8 @@ class Character {
         this.loadImage();
         //走动事件
         window.addEventListener("keypress", (event) => {
+            //复原站立index
+            this.stIndex = this.stStart;
             switch (event.keyCode) {
                 case 119: //W键向上119
                     this.forWard(0);
@@ -114,6 +115,8 @@ class Character {
 
         //站立事件
         window.addEventListener("keyup", (event) => {
+            //复原走路index
+            this.fwIndex = this.fwStart;
             switch (event.keyCode) {
                 case 87: //向上87
                     this.stand(0);
@@ -128,7 +131,6 @@ class Character {
                     this.stand(3);
                     break;
             }
-            this.fwIndex = 4;
         }, false);
         this.stand(3);
         console.log("Character Ready! Control with WASD.")
@@ -140,8 +142,6 @@ const hero = new Character({
     imageSrc: "css_sprites.png",
     imageCol: 12,
     imageRow: 4,
-    fwIndex: 4,
-    stIndex: 0,
     stStart: 0,
     fwStart: 4,
     fwEnd: 12,
