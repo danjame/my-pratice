@@ -6,14 +6,15 @@ class Character {
         //图片的行列
         this.imageCol = hero.imageCol;
         this.imageRow = hero.imageRow;
-        //走动与站立动画帧下标
-        this.fwIndex = hero.fwIndex || 4;
-        this.stIndex = hero.stIndex || 0;
         //站立起始帧
         this.stStart = hero.stStart;
         //走动起始于结束帧
         this.fwStart = hero.fwStart;
         this.fwEnd = hero.fwEnd;
+        //走动与站立动画帧下标
+        this.fwIndex = this.fwStart;
+        this.stIndex = this.stStart;
+
         this.fwSpeed = hero.fwSpeed;
         this.stSpeed = hero.stSpeed;
         this.fwStep = hero.fwStep;
@@ -36,7 +37,6 @@ class Character {
     }
 
     forWard(direction) {
-        this.fwIndex++;
         //判断走动帧位置
         if (this.fwIndex >= this.fwEnd) {
             this.fwIndex = this.fwStart;
@@ -52,7 +52,8 @@ class Character {
             this.eachWidth, this.eachHeight,
             this.canCenterX, this.canCenterY,
             this.eachWidth, this.eachHeight
-        )
+        );
+        this.fwIndex++;
     }
 
     stand(direction) {
@@ -62,7 +63,7 @@ class Character {
         );
         this.ctx.drawImage(
             this.image,
-            this.eachWidth * this.stStart, this.eachHeight * direction,
+            this.eachWidth * this.stIndex, this.eachHeight * direction,
             this.eachWidth, this.eachHeight,
             this.canCenterX, this.canCenterY,
             this.eachWidth, this.eachHeight
@@ -115,7 +116,6 @@ class Character {
                             return;
                         }
                         this.forWard(1);
-                        move();
                     } else if (Math.abs(offsetX) < Math.abs(offsetY)) {
                         if (this.canCenterX <= targetX && this.canCenterY <= targetY) {
                             clearTimeout(this.timer);
@@ -123,8 +123,8 @@ class Character {
                             return;
                         }
                         this.forWard(0);
-                        move();
                     }
+                    move();
                 }, this.fwSpeed)
             }
             move();
@@ -148,7 +148,6 @@ class Character {
                             return;
                         }
                         this.forWard(1);
-                        move();
                     } else if (Math.abs(offsetX) < Math.abs(offsetY)) {
                         if (this.canCenterX <= targetX && this.canCenterY >= targetY) {
                             clearTimeout(this.timer);
@@ -156,8 +155,8 @@ class Character {
                             return;
                         }
                         this.forWard(3);
-                        move();
                     }
+                    move();
                 }, this.fwSpeed)
             }
             move();
@@ -181,7 +180,6 @@ class Character {
                             return;
                         }
                         this.forWard(2);
-                        move();
                     } else if (Math.abs(offsetX) < Math.abs(offsetY)) {
                         if (this.canCenterX >= targetX && this.canCenterY <= targetY) {
                             clearTimeout(this.timer);
@@ -189,8 +187,8 @@ class Character {
                             return;
                         }
                         this.forWard(0);
-                        move();
                     }
+                    move();
                 }, this.fwSpeed)
             }
             move();
@@ -214,7 +212,6 @@ class Character {
                             return;
                         }
                         this.forWard(2);
-                        move();
                     } else if (Math.abs(offsetX) < Math.abs(offsetY)) {
                         if (this.canCenterX >= targetX && this.canCenterY >= targetY) {
                             clearTimeout(this.timer);
@@ -222,8 +219,8 @@ class Character {
                             return;
                         }
                         this.forWard(3);
-                        move();
                     }
+                    move();
                 }, this.fwSpeed)
             }
             move();
@@ -239,9 +236,9 @@ class Character {
             let y = e.clientY - rect.top;
 
             if (!(x <= 0 || y <= 0 || x >= 752 || y >= 602)) {
-                clearTimeout(this.timer);
                 let offsetX = this.canCenterX + this.stepPointX - x;
                 let offsetY = this.canCenterY + this.stepPointY - y;
+                this.fwIndex = this.fwStart;
                 this.direction(offsetX, offsetY);
             }
         })
