@@ -7,8 +7,8 @@ class Character {
         this.imageCol = hero.imageCol;
         this.imageRow = hero.imageRow;
         //走动与站立动画帧下标
-        this.fwIndex = hero.fwIndex;
-        this.stIndex = hero.stIndex;
+        this.fwIndex = hero.fwIndex || 4;
+        this.stIndex = hero.stIndex || 0;
         //站立起始帧
         this.stStart = hero.stStart;
         //走动起始于结束帧
@@ -56,14 +56,13 @@ class Character {
     }
 
     stand(direction) {
-        this.index = this.stStart;
         //立即初始化站立
         this.ctx.clearRect(
             0, 0, this.ctx.canvas.width, this.ctx.canvas.height
         );
         this.ctx.drawImage(
             this.image,
-            this.eachWidth * this.index, this.eachHeight * direction,
+            this.eachWidth * this.stStart, this.eachHeight * direction,
             this.eachWidth, this.eachHeight,
             this.canCenterX, this.canCenterY,
             this.eachWidth, this.eachHeight
@@ -240,9 +239,10 @@ class Character {
             let y = e.clientY - rect.top;
 
             if (!(x <= 0 || y <= 0 || x >= 752 || y >= 602)) {
+                clearTimeout(this.timer);
                 let offsetX = this.canCenterX + this.stepPointX - x;
                 let offsetY = this.canCenterY + this.stepPointY - y;
-                this.direction(offsetX, offsetY)
+                this.direction(offsetX, offsetY);
             }
         })
         this.stand(3);
@@ -255,14 +255,11 @@ const hero = new Character({
     imageSrc: "css_sprites.png",
     imageCol: 12,
     imageRow: 4,
-    fwIndex: 4,
-    stIndex: 0,
 
     stStart: 0,
     fwStart: 4,
     fwEnd: 12,
     stSpeed: 300,
-
     fwSpeed: 50,
     fwStep: 8
 })
