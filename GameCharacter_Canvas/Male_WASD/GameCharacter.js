@@ -5,14 +5,14 @@ class Character {
         //图片的行列
         this.imageCol = hero.imageCol;
         this.imageRow = hero.imageRow;
-        //走动与站立动画帧下标
-        this.fwIndex = hero.fwIndex || 4;
-        this.stIndex = hero.stIndex || 0;
         //站立起始帧
         this.stStart = hero.stStart;
         //走动起始于结束帧
         this.fwStart = hero.fwStart;
         this.fwEnd = hero.fwEnd;
+        //走动与站立动画帧下标
+        this.fwIndex = this.fwStart;
+        this.stIndex = this.stStart;
         this.stSpeed = hero.stSpeed;
         this.timer = null;
     }
@@ -29,7 +29,6 @@ class Character {
     }
 
     forWard(direction) {
-        this.fwIndex++;
         //判断走动帧位置
         if (this.fwIndex >= this.fwEnd) {
             this.fwIndex = this.fwStart;
@@ -46,7 +45,8 @@ class Character {
             this.eachWidth, this.eachHeight,
             this.canCenterX, this.canCenterY,
             this.eachWidth, this.eachHeight
-        )
+        );
+        this.fwIndex++;
     }
 
     stand(direction) {
@@ -57,7 +57,7 @@ class Character {
         );
         this.ctx.drawImage(
             this.image,
-            this.eachWidth * this.stStart, this.eachHeight * direction,
+            this.eachWidth * this.stIndex, this.eachHeight * direction,
             this.eachWidth, this.eachHeight,
             this.canCenterX, this.canCenterY,
             this.eachWidth, this.eachHeight
@@ -95,8 +95,6 @@ class Character {
         //走动事件
         window.addEventListener("keypress", (event) => {
             clearTimeout(this.timer);
-            //复原站立index
-            this.stIndex = this.stStart;
             switch (event.keyCode) {
                 case 119: //W键向上119
                     this.forWard(0);
@@ -143,6 +141,7 @@ const hero = new Character({
     imageCol: 12,
     imageRow: 4,
     stStart: 0,
+
     fwStart: 4,
     fwEnd: 12,
     stSpeed: 300
