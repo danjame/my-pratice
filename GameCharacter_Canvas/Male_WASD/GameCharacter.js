@@ -29,7 +29,6 @@ class Character {
     }
 
     forWard(direction) {
-        clearTimeout(this.timer);
         this.fwIndex++;
         //判断走动帧位置
         if (this.fwIndex >= this.fwEnd) {
@@ -95,6 +94,7 @@ class Character {
         this.loadImage();
         //走动事件
         window.addEventListener("keypress", (event) => {
+            clearTimeout(this.timer);
             //复原站立index
             this.stIndex = this.stStart;
             switch (event.keyCode) {
