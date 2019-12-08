@@ -14,14 +14,16 @@ class Character {
         //走动与站立动画帧下标
         this.fwIndex = this.fwStart;
         this.stIndex = this.stStart;
-
+        //动作速率
         this.fwSpeed = hero.fwSpeed;
         this.stSpeed = hero.stSpeed;
         this.fwStep = hero.fwStep;
         this.timer = null;
-
+        //人物脚底坐标
         this.stepPointX = 244;
         this.stepPointY = 290;
+        //方向（初始化向下）
+        this.direction = hero.direction || 3;
     }
 
     loadImage() {
@@ -95,7 +97,7 @@ class Character {
         stand()
     }
 
-    direction(offsetX, offsetY) {
+    direHandler(offsetX, offsetY) {
         if (offsetX >= 0 && offsetY >= 0) { //左上
             console.log("Top Left");
             const targetX = this.canCenterX - Math.abs(offsetX);
@@ -110,19 +112,21 @@ class Character {
                         this.canCenterY -= this.fwStep;
                     }
                     if (Math.abs(offsetX) > Math.abs(offsetY)) {
+                        this.direction = 1;
                         if (this.canCenterX <= targetX && this.canCenterY <= targetY) {
                             clearTimeout(this.timer);
-                            this.stand(1);
+                            this.stand(this.direction);
                             return;
                         }
-                        this.forWard(1);
+                        this.forWard(this.direction);
                     } else if (Math.abs(offsetX) < Math.abs(offsetY)) {
+                        this.direction = 0;
                         if (this.canCenterX <= targetX && this.canCenterY <= targetY) {
                             clearTimeout(this.timer);
-                            this.stand(0);
+                            this.stand(this.direction);
                             return;
                         }
-                        this.forWard(0);
+                        this.forWard(this.direction);
                     }
                     move();
                 }, this.fwSpeed)
@@ -142,19 +146,21 @@ class Character {
                         this.canCenterY += this.fwStep;
                     }
                     if (Math.abs(offsetX) > Math.abs(offsetY)) {
+                        this.direction = 1;
                         if (this.canCenterX <= targetX && this.canCenterY >= targetY) {
                             clearTimeout(this.timer);
-                            this.stand(1);
+                            this.stand(this.direction);
                             return;
                         }
-                        this.forWard(1);
+                        this.forWard(this.direction);
                     } else if (Math.abs(offsetX) < Math.abs(offsetY)) {
+                        this.direction = 3;
                         if (this.canCenterX <= targetX && this.canCenterY >= targetY) {
                             clearTimeout(this.timer);
-                            this.stand(3);
+                            this.stand(this.direction);
                             return;
                         }
-                        this.forWard(3);
+                        this.forWard(this.direction);
                     }
                     move();
                 }, this.fwSpeed)
@@ -174,19 +180,21 @@ class Character {
                         this.canCenterY -= this.fwStep;
                     }
                     if (Math.abs(offsetX) > Math.abs(offsetY)) {
+                        this.direction = 2;
                         if (this.canCenterX >= targetX && this.canCenterY <= targetY) {
                             clearTimeout(this.timer);
-                            this.stand(2);
+                            this.stand(this.direction);
                             return;
                         }
-                        this.forWard(2);
+                        this.forWard(this.direction);
                     } else if (Math.abs(offsetX) < Math.abs(offsetY)) {
+                        this.direction = 0;
                         if (this.canCenterX >= targetX && this.canCenterY <= targetY) {
                             clearTimeout(this.timer);
-                            this.stand(0);
+                            this.stand(this.direction);
                             return;
                         }
-                        this.forWard(0);
+                        this.forWard(this.direction);
                     }
                     move();
                 }, this.fwSpeed)
@@ -206,19 +214,21 @@ class Character {
                         this.canCenterY += this.fwStep;
                     }
                     if (Math.abs(offsetX) > Math.abs(offsetY)) {
+                        this.direction = 2;
                         if (this.canCenterX >= targetX && this.canCenterY >= targetY) {
                             clearTimeout(this.timer);
-                            this.stand(2);
+                            this.stand(this.direction);
                             return;
                         }
-                        this.forWard(2);
+                        this.forWard(this.direction);
                     } else if (Math.abs(offsetX) < Math.abs(offsetY)) {
+                        this.direction = 3;
                         if (this.canCenterX >= targetX && this.canCenterY >= targetY) {
                             clearTimeout(this.timer);
-                            this.stand(3);
+                            this.stand(this.direction);
                             return;
                         }
-                        this.forWard(3);
+                        this.forWard(this.direction);
                     }
                     move();
                 }, this.fwSpeed)
@@ -229,7 +239,6 @@ class Character {
 
     init() {
         this.loadImage();
-
         window.addEventListener('click', (e) => {
             let rect = this.canvas.getBoundingClientRect();
             let x = e.clientX - rect.left;
@@ -239,10 +248,10 @@ class Character {
                 let offsetX = this.canCenterX + this.stepPointX - x;
                 let offsetY = this.canCenterY + this.stepPointY - y;
                 this.fwIndex = this.fwStart;
-                this.direction(offsetX, offsetY);
+                this.direHandler(offsetX, offsetY);
             }
         })
-        this.stand(3);
+        this.stand(this.direction);
         console.log("Character Ready! Control with the mouse.")
     }
 };
@@ -252,7 +261,6 @@ const hero = new Character({
     imageSrc: "css_sprites.png",
     imageCol: 12,
     imageRow: 4,
-
     stStart: 0,
     fwStart: 4,
     fwEnd: 12,
