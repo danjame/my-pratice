@@ -25,3 +25,5 @@ Budget App built with modules, a project in Udemy course.
 Controlled with keybord WASD, character without any offset.
 ### 2. Female Character
 Controlled with mouse, the character moves to the clicked coordinates.
+### 3. Female Character
+Moves to left and right, controlled with keybord AD, attack with J and jump with K.
