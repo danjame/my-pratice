@@ -5,31 +5,27 @@ class Character {
         //图片的行列
         this.imageCol = hero.imageCol;
         this.imageRow = hero.imageRow;
-        //站立起始帧
+        //动作起始帧
         this.stStart = hero.stStart;
-        //走动起始于结束帧
         this.fwStart = hero.fwStart;
         this.fwEnd = hero.fwEnd;
-        //走动与站立动画帧下标
+        this.atStart = hero.atStart;
+        this.atEnd = this.imageCol;
+        //动作动画帧下标
         this.fwIndex = this.fwStart;
         this.stIndex = this.stStart;
         this.jpIndex = this.fwEnd;
-
-
-        this.atStart = hero.atStart;
-        this.atEnd = this.imageCol;
-
         this.atIndex = this.atStart;
-
+        //动作速率
         this.stSpeed = hero.stSpeed;
         this.jpSpeed = hero.jpSpeed;
         this.atSpeed = hero.atSpeed;
         this.step = hero.step;
         this.jpDistance = hero.jpDistance;
         this.timer = null;
+        this.moveTimer = null;
 
         this.direction = 1;
-        this.moveTimer = null;
     }
 
     loadImage() {
@@ -115,7 +111,6 @@ class Character {
         );
         //站立动画定时器
         const jump = () => {
-            // clearTimeout(this.timer);
             this.moveTimer = setTimeout(() => {
                 this.jpIndex++;
                 if (this.jpIndex >= this.atStart) {
@@ -160,7 +155,7 @@ class Character {
             clearTimeout(this.timer);
             this.moveTimer = setTimeout(() => {
                 this.atIndex++;
-                console.log(this.atIndex);
+                // console.log(this.atIndex);
                 if (this.atIndex >= this.atEnd) {
                     this.atIndex = this.atStart;
                     this.stand(direction);
@@ -188,53 +183,44 @@ class Character {
 
     init() {
         this.loadImage();
-        //走动事件
+        //走动
         window.addEventListener("keypress", (event) => {
-            //清除站立定时
-            clearTimeout(this.timer);
             if (!this.moveTimer) {
-                switch (event.keyCode) {
-                    case 97: //A键向左97
-                        this.direction = 0;
-                        this.forWard(this.direction);
-                        this.canCenterX -= this.step;
-                        break;
-                    case 100: //D键向右100
-                        this.direction = 1;
-                        this.forWard(this.direction);
-                        this.canCenterX += this.step;
-                        break;
+                if (event.keyCode === 97) {
+                    //A键向左97
+                    clearTimeout(this.timer);
+                    this.direction = 0;
+                    this.forWard(this.direction);
+                    this.canCenterX -= this.step;
+                } else if (event.keyCode === 100) {
+                    //D键向右100
+                    clearTimeout(this.timer);
+                    this.direction = 1;
+                    this.forWard(this.direction);
+                    this.canCenterX += this.step;
                 }
             }
-
         }, false);
-
+        //跳跃和攻击
         window.addEventListener("keydown", (event) => {
-            clearTimeout(this.timer);
             if (!this.moveTimer) {
-                switch (event.keyCode) {
-                    case 74: //J键74
-                        this.attack(this.direction);
-                        break;
-                    case 75: //K键75
-                        this.jump(this.direction);
-                        break;
+                //J键74,K键75
+                if (event.keyCode === 74) {
+                    clearTimeout(this.timer);
+                    this.attack(this.direction);
+                } else if (event.keyCode === 75) {
+                    clearTimeout(this.timer);
+                    this.jump(this.direction);
                 }
             }
         }, false)
-
-        //站立事件
+        //站立
         window.addEventListener("keyup", (event) => {
             //复原走动index
             this.fwIndex = this.fwStart;
             if (!this.moveTimer) {
-                switch (event.keyCode) {
-                    case 65: //向左65
-                        this.stand(this.direction);
-                        break;
-                    case 68: //向右68
-                        this.stand(this.direction);
-                        break;
+                if (event.keyCode === 65 || event.keyCode === 68 || event.keyCode === 74 || event.keyCode === 75) {
+                    this.stand(this.direction);
                 }
             }
         }, false);
@@ -251,14 +237,13 @@ const hero = new Character({
     stStart: 0,
     fwStart: 4,
     fwEnd: 12,
-
     atStart: 23,
 
     stSpeed: 300,
     jpSpeed: 120,
     atSpeed: 120,
     step: 20,
-    jpDistance: 10
+    jpDistance: 15
 })
 
 hero.init();
