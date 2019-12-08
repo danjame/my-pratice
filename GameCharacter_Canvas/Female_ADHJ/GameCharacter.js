@@ -5,16 +5,31 @@ class Character {
         //图片的行列
         this.imageCol = hero.imageCol;
         this.imageRow = hero.imageRow;
-        //走动与站立动画帧下标
-        this.fwIndex = hero.fwIndex;
-        this.stIndex = hero.stIndex;
         //站立起始帧
         this.stStart = hero.stStart;
         //走动起始于结束帧
         this.fwStart = hero.fwStart;
         this.fwEnd = hero.fwEnd;
+        //走动与站立动画帧下标
+        this.fwIndex = this.fwStart;
+        this.stIndex = this.stStart;
+        this.jpIndex = this.fwEnd;
+
+
+        this.atStart = hero.atStart;
+        this.atEnd = this.imageCol;
+
+        this.atIndex = this.atStart;
+
         this.stSpeed = hero.stSpeed;
+        this.jpSpeed = hero.jpSpeed;
+        this.atSpeed = hero.atSpeed;
+        this.step = hero.step;
+        this.jpDistance = hero.jpDistance;
         this.timer = null;
+
+        this.direction = 1;
+        this.moveTimer = null;
     }
 
     loadImage() {
@@ -29,12 +44,10 @@ class Character {
     }
 
     forWard(direction) {
-        clearTimeout(this.timer);
-        this.fwIndex++;
         //判断走动帧位置
         if (this.fwIndex >= this.fwEnd) {
             this.fwIndex = this.fwStart;
-        }
+        };
         //清除画布，否贼重影
         this.ctx.clearRect(
             0, 0, this.ctx.canvas.width, this.ctx.canvas.height
@@ -46,7 +59,8 @@ class Character {
             this.eachWidth, this.eachHeight,
             this.canCenterX, this.canCenterY,
             this.eachWidth, this.eachHeight
-        )
+        );
+        this.fwIndex++;
     }
 
     stand(direction) {
@@ -56,7 +70,7 @@ class Character {
         );
         this.ctx.drawImage(
             this.image,
-            this.eachWidth * this.stStart, this.eachHeight * direction,
+            this.eachWidth * 0, this.eachHeight * direction,
             this.eachWidth, this.eachHeight,
             this.canCenterX, this.canCenterY,
             this.eachWidth, this.eachHeight
@@ -68,7 +82,7 @@ class Character {
                 this.stIndex++;
                 if (this.stIndex >= this.fwStart) {
                     this.stIndex = this.stStart;
-                }
+                };
                 //清除画布
                 this.ctx.clearRect(
                     0, 0, this.ctx.canvas.width, this.ctx.canvas.height
@@ -85,51 +99,166 @@ class Character {
             }, this.stSpeed)
         }
         //初始化站立方法
-        stand()
+        stand();
+    }
+
+    jump(direction) {
+        this.ctx.clearRect(
+            0, 0, this.ctx.canvas.width, this.ctx.canvas.height
+        );
+        this.ctx.drawImage(
+            this.image,
+            this.eachWidth * this.jpIndex, this.eachHeight * direction,
+            this.eachWidth, this.eachHeight,
+            this.canCenterX, this.canCenterY,
+            this.eachWidth, this.eachHeight
+        );
+        //站立动画定时器
+        const jump = () => {
+            // clearTimeout(this.timer);
+            this.moveTimer = setTimeout(() => {
+                this.jpIndex++;
+                if (this.jpIndex >= this.atStart) {
+                    this.jpIndex = this.fwEnd;
+                    this.stand(direction);
+                    this.moveTimer = null;
+                    return;
+                }
+                this.direction === 0 ? this.canCenterX -= this.jpDistance : this.canCenterX += this.jpDistance;
+                //清除画布
+                this.ctx.clearRect(
+                    0, 0, this.ctx.canvas.width, this.ctx.canvas.height
+                );
+                //绘制图片
+                this.ctx.drawImage(
+                    this.image,
+                    this.eachWidth * this.jpIndex, this.eachHeight * direction,
+                    this.eachWidth, this.eachHeight,
+                    this.canCenterX, this.canCenterY,
+                    this.eachWidth, this.eachHeight
+                );
+                jump();
+            }, this.jpSpeed)
+        };
+        //初始化站立方法
+        jump();
+    }
+
+    attack(direction) {
+        this.ctx.clearRect(
+            0, 0, this.ctx.canvas.width, this.ctx.canvas.height
+        );
+        this.ctx.drawImage(
+            this.image,
+            this.eachWidth * this.atIndex, this.eachHeight * direction,
+            this.eachWidth, this.eachHeight,
+            this.canCenterX, this.canCenterY,
+            this.eachWidth, this.eachHeight
+        );
+        //站立动画定时器
+        const attack = () => {
+            clearTimeout(this.timer);
+            this.moveTimer = setTimeout(() => {
+                this.atIndex++;
+                console.log(this.atIndex);
+                if (this.atIndex >= this.atEnd) {
+                    this.atIndex = this.atStart;
+                    this.stand(direction);
+                    this.moveTimer = null;
+                    return;
+                }
+                //清除画布
+                this.ctx.clearRect(
+                    0, 0, this.ctx.canvas.width, this.ctx.canvas.height
+                );
+                //绘制图片
+                this.ctx.drawImage(
+                    this.image,
+                    this.eachWidth * this.atIndex, this.eachHeight * direction,
+                    this.eachWidth, this.eachHeight,
+                    this.canCenterX, this.canCenterY,
+                    this.eachWidth, this.eachHeight
+                );
+                attack();
+            }, this.atSpeed)
+        };
+        //初始化站立方法
+        attack();
     }
 
     init() {
         this.loadImage();
         //走动事件
         window.addEventListener("keypress", (event) => {
-            switch (event.keyCode) {
-                case 97: //A键向左97
-                    this.forWard(0);
-                    break;
-                case 100: //D键向右100
-                    this.forWard(1);
-                    break;
+            //清除站立定时
+            clearTimeout(this.timer);
+            if (!this.moveTimer) {
+                switch (event.keyCode) {
+                    case 97: //A键向左97
+                        this.direction = 0;
+                        this.forWard(this.direction);
+                        this.canCenterX -= this.step;
+                        break;
+                    case 100: //D键向右100
+                        this.direction = 1;
+                        this.forWard(this.direction);
+                        this.canCenterX += this.step;
+                        break;
+                }
             }
+
         }, false);
+
+        window.addEventListener("keydown", (event) => {
+            clearTimeout(this.timer);
+            if (!this.moveTimer) {
+                switch (event.keyCode) {
+                    case 74: //J键74
+                        this.attack(this.direction);
+                        break;
+                    case 75: //K键75
+                        this.jump(this.direction);
+                        break;
+                }
+            }
+        }, false)
 
         //站立事件
         window.addEventListener("keyup", (event) => {
-            switch (event.keyCode) {
-                case 65: //向左65
-                    this.stand(0);
-                    break;
-                case 68: //向右68
-                    this.stand(1);
-                    break;
+            //复原走动index
+            this.fwIndex = this.fwStart;
+            if (!this.moveTimer) {
+                switch (event.keyCode) {
+                    case 65: //向左65
+                        this.stand(this.direction);
+                        break;
+                    case 68: //向右68
+                        this.stand(this.direction);
+                        break;
+                }
             }
-            this.fwIndex = 4;
         }, false);
-        this.stand(0);
-        console.log("Character Ready! Control with WASD.")
+        this.stand(this.direction);
+        console.log("Character Ready! Move with AD, attack with J and jump with K.")
     }
 };
 
 const hero = new Character({
     canvasNode: "canvas",
     imageSrc: "css_sprites.png",
-    imageCol: 30,
+    imageCol: 31,
     imageRow: 2,
-    fwIndex: 4,
-    stIndex: 0,
     stStart: 0,
     fwStart: 4,
     fwEnd: 12,
-    stSpeed: 300
+
+    atStart: 23,
+
+    stSpeed: 300,
+    jpSpeed: 120,
+    atSpeed: 120,
+    step: 20,
+    jpDistance: 10
 })
 
 hero.init();
