@@ -14,6 +14,8 @@ class Character {
         this.fwIndex = this.fwStart;
         this.stIndex = this.stStart;
         this.stSpeed = hero.stSpeed;
+        //方向（初始化向下）
+        this.direction = hero.direction || 3;
         this.timer = null;
     }
 
@@ -94,43 +96,37 @@ class Character {
         this.loadImage();
         //走动事件
         window.addEventListener("keypress", (event) => {
-            clearTimeout(this.timer);
             switch (event.keyCode) {
                 case 119: //W键向上119
-                    this.forWard(0);
+                    clearTimeout(this.timer);
+                    this.direction = 0;
+                    this.forWard(this.direction);
                     break;
                 case 97: //A键向左97
-                    this.forWard(1);
+                    clearTimeout(this.timer);
+                    this.direction = 1;
+                    this.forWard(this.direction);
                     break;
                 case 100: //D键向右100
-                    this.forWard(2);
+                    clearTimeout(this.timer);
+                    this.direction = 2;
+                    this.forWard(this.direction);
                     break;
                 case 115: //S键向下115
-                    this.forWard(3);
+                    clearTimeout(this.timer);
+                    this.direction = 3;
+                    this.forWard(this.direction);
                     break;
-            }
+            };
         }, false);
 
         //站立事件
         window.addEventListener("keyup", (event) => {
             //复原走路index
             this.fwIndex = this.fwStart;
-            switch (event.keyCode) {
-                case 87: //向上87
-                    this.stand(0);
-                    break;
-                case 65: //向左65
-                    this.stand(1);
-                    break;
-                case 68: //向右68
-                    this.stand(2);
-                    break;
-                case 83: //向下83
-                    this.stand(3);
-                    break;
-            }
+            this.stand(this.direction);
         }, false);
-        this.stand(3);
+        this.stand(this.direction);this.
         console.log("Character Ready! Control with WASD.")
     }
 };
@@ -141,7 +137,6 @@ const hero = new Character({
     imageCol: 12,
     imageRow: 4,
     stStart: 0,
-
     fwStart: 4,
     fwEnd: 12,
     stSpeed: 300
