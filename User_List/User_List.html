@@ -67,15 +67,15 @@
     <script>
     function creatEle(ele) {
         return document.createElement(ele);
-    }
+    };
 
     function getEle(ele) {
         return document.querySelector(ele);
-    }
+    };
 
     function getEles(eles) {
         return document.querySelectorAll(eles);
-    }
+    };
 
     var allTr = getEles('#userList tr');
     var btns = getEles('#userList button');
@@ -114,8 +114,12 @@
         } else {
             alert("The name should not be number!");
             return;
-        };
-    }
+        }
+        //清空输入框
+        newData.forEach(function(item) {
+            item.value = "";
+        })
+    };
 
     //增添信息
     function addData() {
@@ -139,7 +143,7 @@
 
         userList.appendChild(newTr);
         remove();
-    }
+    };
 
     //删除行
     function remove() {
@@ -151,7 +155,7 @@
                 sort();
             }
         }
-    }
+    };
 
     // 重新排序
     function sort() {
@@ -160,7 +164,7 @@
             allTr[i].firstElementChild.innerText = i;
         };
         remove();
-    }
+    };
     </script>
 </body>
 
