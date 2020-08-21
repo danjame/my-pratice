@@ -1,0 +1,59 @@
+body{
+    margin: 0 auto;
+    width: 800px;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+button{
+    border: none;
+    background-color: transparent;
+    outline: none;
+}
+
+.head{
+    padding: 20px;
+    text-align: center;
+    font-size: 28px;
+}
+
+.btn{
+    width: 100px;
+}
+
+.sortWrapper{
+    display: flex;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.sortTitle{
+    width: 200px;
+    text-align: center;
+}
+
+.uni{
+    display: flex;
+}
+
+.rank, .name, .desc, .delete{
+    padding: 10px;
+    flex-shrink: 0;
+}
+
+.rank{
+    width: 50px;
+}
+
+.name{
+    width: 100px
+}
+
+.desc{
+    width:500px;
+}
+
